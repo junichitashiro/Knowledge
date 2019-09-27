@@ -48,14 +48,14 @@ vagrant init local-centos7
 ## Vagrantfileの編集  
 * 作成されたVagrantfileの下記の行をコメントインして保存する
 * ブラウザから下記アドレスを指定するとWEBサーバとしてアクセスできるようになる
-```bash
+```Shell
 # config.vm.network "private_network", ip: "192.168.33.10"
 ```
 
 ## ホストOSとゲストOSのフォルダを共有する設定（任意）  
 * ホスト端末の"share"フォルダとゲスト端末の"/tmp/share"フォルダを共有する設定  
 なお[create: true]はフォルダがなかった場合作成するオプション
-```bash
+```Shell
 config.vm.synced_folder "./share", "/tmp/share", owner: "vagrant", group: "vagrant" , create: true
 ```
 
@@ -87,7 +87,7 @@ TCPポート：22
 
 ***
 ## Vagrantコマンドの一部抜粋  
-```bash
+```Shell
 vagrant up                  # Boxの起動
 vagrant halt                # Boxのシャットダウン
 vagrant suspend             # Boxの一時停止
