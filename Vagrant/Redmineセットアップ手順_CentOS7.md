@@ -5,7 +5,7 @@
 ***
 ## CentOSの設定  
 * SELinuxの無効化
-```Shell
+```bash
 vi /etc/sysconfig/selinux
 # --------------------------------------------------
 # SELINUX=disable
@@ -13,11 +13,11 @@ vi /etc/sysconfig/selinux
 ```
 
 * 再起動して確認する
-```Shell
+```bash
 getenforce  # Disabled になっていること
 ```
 * firewalldでHTTPを許可する
-```Shell
+```bash
 firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --reload
 firewall-cmd --zone=public --list-services
@@ -26,34 +26,34 @@ firewall-cmd --zone=public --list-services
 ***
 ## 各種パッケージのインストール
 * 開発ツール
-```Shell
+```bash
 yum -y groupinstall "Development Tools"
 ```
 
 * Ruby/Passenger
-```Shell
+```bash
 yum -y install openssl-devel readline-devel zlib-devel curl-devel libyaml-devel libffi-devel
 ```
 
 * PostgreSQLとヘッダファイル
-```Shell
+```bash
 yum -y install postgresql-server postgresql-devel
 ```
 
 * Apacheとヘッダファイル
-```Shell
+```bash
 yum -y install httpd httpd-devel
 ```
 
 * ImageMagickと日本語フォント
-```Shell
+```bash
 yum -y install ImageMagick ImageMagick-devel ipa-pgothic-fonts
 ```
 
 ***
 ## Rubyのインストール  
 * rbenvのインストール
-```Shell
+```bash
 cd /usr/local
 sudo git clone https://github.com/rbenv/rbenv.git rbenv
 sudo mkdir /usr/local/rbenv/shims
@@ -61,7 +61,7 @@ sudo mkdir /usr/local/rbenv/versions
 ```
 
 * rbenvのパスを通す
-```Shell
+```bash
 echo 'export RBENV_ROOT=/usr/local/rbenv' | sudo tee -a  /etc/profile.d/rbenv.sh
 echo 'export PATH="$RBENV_ROOT/bin:$PATH"' | sudo tee -a  /etc/profile.d/rbenv.sh
 echo 'eval "$(rbenv init -)"' | sudo tee -a  /etc/profile.d/rbenv.sh
@@ -69,7 +69,7 @@ source /etc/profile.d/rbenv.sh
 ```
 
 * ファイルの編集
-```Shell
+```bash
 sudo vi
 # --------------------------------------------------
 # 下記のように既存の行をコメントアウトして以下の2行追加する
@@ -80,18 +80,18 @@ Defaults    env_keep += "RBENV_ROOT"
 ```
 
 * rbenvにruby-installプラグインを追加する
-```Shell
+```bash
 git clone https://github.com/rbenv/ruby-build.git  rbenv/plugins/ruby-build
 sudo rbenv/plugins/ruby-build/install.sh
 ```
 
 * インストール可能なRuby一覧を確認
-```Shell
+```bash
 rbenv install -l | grep 2.4
 ```
 
 * rbenvを使ってRubyをインストール
-```Shell
+```bash
 sudo rbenv install 2.4.4
 sudo rbenv rehash
 sudo rbenv global 2.4.4
@@ -101,20 +101,20 @@ ruby -v # バージョンが表示される
 ***
 ## gemの管理をするbundlerをインストール  
 * ※後続処理でエラーとなったため回避策としてバージョンを指定している
-```Shell
+```bash
 gem install -v 1.5.0 bundler
 ```
 
 ***
 ## PostgreSQLのインストール  
 * 初期設定
-```Shell
+```bash
 postgresql-setup initdb
 # Initializing database ... OK
 ```
 
 * 設定ファイルの編集
-```Shell
+```bash
 vi /var/lib/pgsql/data/pg_hba.conf
 # --------------------------------------------------
 # 以下の2行を追加
@@ -125,13 +125,13 @@ host    redmine         redmine         ::1/128                 md5
 ```
 
 * 自動起動の設定
-```Shell
+```bash
 systemctl start postgresql.service
 systemctl enable postgresql.service
 ```
 
 * Redmine用のユーザの追加とDB作成
-```Shell
+```bash
 cd /var/lib/pgsql
 sudo -u postgres createuser -P redmine
 新しいロールのためのパスワード: # パスワードを入力
@@ -142,13 +142,13 @@ sudo -u postgres createdb -E UTF-8 -l ja_JP.UTF-8 -O redmine -T template0 redmin
 ***
 ## Redmineのインストール  
 * Redmineのsvnからチェックアウト
-```Shell
+```bash
 svn co https://svn.redmine.org/redmine/branches/3.4-stable /var/lib/redmine
 ```
 
 * DB設定ファイルdatabase.ymlの作成
 * デフォルトファイルをコピーして設定ファイルを編集する
-```Shell
+```bash
 cd /var/lib/redmine/config
 touch database.yml
 vi database.yml
@@ -167,12 +167,12 @@ production:
 ***
 ## 設定ファイルconfiguration.ymlの作成  
 * メール通知用のサーバやファイルのアップロード先をこのファイル内で設定できるが今回は使用しないのでデフォルのまま
-```Shell
+```bash
 cp configuration.yml.example configuration.yml
 ```
 
 * gemパッケージのインストール
-```Shell
+```bash
 cd /var/lib/redmine/
 bundle install --without development test --path vendor/bundle
 ```
@@ -180,12 +180,12 @@ bundle install --without development test --path vendor/bundle
 ***
 ## Redmineの初期設定  
 * セッション改ざん防止用の秘密鍵作成
-```Shell
+```bash
 bundle exec rake generate_secret_token
 ```
 
 * DBテーブルを作成しデフォルトデータを登録する
-```Shell
+```bash
 RAILS_ENV=production bundle exec rake db:migrate
 RAILS_ENV=production REDMINE_LANG=ja bundle exec rake redmine:load_default_data
 ```
@@ -194,12 +194,12 @@ RAILS_ENV=production REDMINE_LANG=ja bundle exec rake redmine:load_default_data
 ## Passengerのインストール  
 * Phusion Passengerをインストール
 * Apache上でRedmineなどのRailsアプリを動かすために使われる
-```Shell
+```bash
 gem install passenger
 ```
 
 * Apache用モジュールを追加し設定確認
-```Shell
+```bash
 passenger-install-apache2-module --auto --languages ruby
 passenger-install-apache2-module --snippet
 # --------------------------------------------------
@@ -213,7 +213,7 @@ LoadModule passenger_module /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/
 ```
 
 * ApacheにRedmine用設定ファイルを追加
-```Shell
+```bash
 vi /etc/httpd/conf.d/redmine.conf
 # --------------------------------------------------
 <Directory "/var/lib/redmine/public">
@@ -229,20 +229,20 @@ LoadModule passenger_module /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/
 ```
 
 * 自動起動の設定と起動
-```Shell
+```bash
 systemctl start httpd.service
 systemctl enable httpd.service
 ```
 
 * PassengerでRedmineが実行できるようPermission変更
-```Shell
+```bash
 chown -R apache:apache /var/lib/redmine
 ```
 
 ***
 ## Redmineのアドレス変更  
 * http://<IPアドレス>/redmine でアクセス出来るようにするためRedmineをサブディレクトリ運用にする
-```Shell
+```bash
 vi /etc/httpd/conf.d/redmine.conf
 # --------------------------------------------------
 # 以下を追記する
@@ -255,13 +255,13 @@ Alias /redmine /var/lib/redmine/public
 ```
 
 * 設定が正しいかチェック
-```Shell
+```bash
 service httpd configtest
 # Syntax OK
 ```
 
 * ApacheのListenアドレス/ポートを変更
-```Shell
+```bash
 vi /etc/httpd/conf/httpd.conf
 # --------------------------------------------------
 # 以下に設定する
@@ -272,7 +272,7 @@ Listen 192.168.33.10:80
 ```
 
 * Apacheの再起動
-```Shell
+```bash
 systemctl restart httpd
 systemctl status httpd
 ```
