@@ -39,6 +39,11 @@ cd vm_setup/
 ./centos7_initial_setup.sh
 ```
 
+* システムを最新化
+```bash
+sudo yum -y update
+```
+
 ***
 ## centos7_initial_setup.shの実行内容
 ***
