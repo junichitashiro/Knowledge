@@ -1,7 +1,9 @@
 ## CentOS7の環境構築手順  
+* vagrant アカウントで実施
+* 各種パッケージのバージョンはメモ作成時に動作確認した安定版
 ***
-## Gitのセットアップ  
-* 古いバージョンのGitを削除
+## Gitのセットアップ準備  
+* 古いバージョンの削除と開発用パッケージのインストール
 ```bash
 sudo yum -y remove git
 sudo yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker autoconf
@@ -9,7 +11,7 @@ sudo yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-deve
 
 * 新しいバージョンのGitをインストール
 ```bash
-# 必要なバージョンを確認すること
+# Gitの取得　必要なバージョンを指定すること
 wget https://www.kernel.org/pub/software/scm/git/git-2.23.0.tar.gz
 # 取得したファイルの展開
 tar vfx git-2.23.0.tar.gz
@@ -40,12 +42,6 @@ cd vm_setup/
 ***
 ## centos7_initial_setup.shの実行内容
 ***
-##  システムのアップデート  
-* 既存のパッケージを再進化する
-```bash
-sudo yum -y update
-```
-
 ## ホスト名の変更  
 * /etc/hostnameを上書きする
 ```bash
@@ -143,4 +139,11 @@ sudo systemctl enable httpd.service
 * shellにログインしなおす
 ```bash
 exec $SHELL -l
+```
+
+***
+##  システムのアップデート  
+* 既存のパッケージを最新化する
+```bash
+sudo yum -y update
 ```

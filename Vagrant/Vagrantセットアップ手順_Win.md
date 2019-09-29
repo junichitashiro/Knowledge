@@ -30,12 +30,15 @@ cd local-centos7
 ## Boxを追加  
 * 下記のBox公開ページへアクセス  
 [http://www.vagrantbox.es/]  
-対象となるBoxのURLをコピーしておく
+対象となるBoxのURLをコピーするかBoxファイルをダウンロードしておく
+
+* [https://www.dropbox.com/s/7u194d6reyr1loe/vagrant-centos-7.2.box?dl=0]  
+ここでは上記URLからダウンロードしたBoxをローカルに配置して実行している
 
 * Boxの追加  
-vagrant box add [Box名] [コピーしたBoxのURL]
+vagrant box add [Box名] [コピーしたBoxのURLまはたパス]
 ```bat
-vagrant box add local-centos7 [コピーしたBoxのURL]
+vagrant box add local-centos7 vagrant-centos-7.2.box
 ```
 * Boxの初期化  
 vagrant init [Box名]  
