@@ -35,13 +35,20 @@ git clone https://github.com/junichitashiro/vm_setup.git
 
 * セットアップシェルを実行する
 ```bash
-cd vm_setup/
+cd vm_setup
 ./centos7_initial_setup.sh
 ```
 
 * システムを最新化
 ```bash
 sudo yum -y update
+```
+
+* 鍵の不一致で最新化できない場合鍵を取得しなおす
+```bash
+curl -L https://yum.puppetlabs.com/RPM-GPG-KEY-puppet -o /tmp/RPM-GPG-KEY-puppet
+gpg --with-fingerprint "/tmp/RPM-GPG-KEY-puppet"
+sudo cp /tmp/RPM-GPG-KEY-puppet /etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs-PC1
 ```
 
 ***
@@ -70,7 +77,7 @@ hostname
 
 ***
 ## システムの表記を日本語にする  
-* 日本語用のutf8設定をlocaleに追加する  
+* 日本語用のutf8設定をlocaleに追加する
 コマンドは『localectl -f "文字コード" -i "設定元となるlocaleファイル"』
 
 ```bash
@@ -144,11 +151,4 @@ sudo systemctl enable httpd.service
 * shellにログインしなおす
 ```bash
 exec $SHELL -l
-```
-
-***
-##  システムのアップデート  
-* 既存のパッケージを最新化する
-```bash
-sudo yum -y update
 ```
