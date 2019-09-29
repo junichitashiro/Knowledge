@@ -3,28 +3,41 @@
 * 作業はrootで実行する
 
 ***
-## CentOSの設定  
-* SELinuxの無効化
+## SELinuxの無効化  
+* SELINUX の設定を enforcing , permissiveから disabled に変更する
 ```bash
 vi /etc/sysconfig/selinux
 # --------------------------------------------------
-# SELINUX=disable
+SELINUX=disabled
 # --------------------------------------------------
 ```
 
-* 再起動して確認する
+* 再起動
 ```bash
-getenforce  # Disabled になっていること
+reboot
 ```
+
+* 確認コマンド
+```bash
+# Disabled が表示されること
+getenforce
+```
+
 * firewalldでHTTPを許可する
 ```bash
 firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --reload
+```
+
+* 確認コマンド
+```bash
+# http が含まれていること
 firewall-cmd --zone=public --list-services
 ```
 
+
 ***
-## 各種パッケージのインストール
+## 各種パッケージのインストール  
 * 開発ツール
 ```bash
 yum -y groupinstall "Development Tools"
@@ -33,6 +46,11 @@ yum -y groupinstall "Development Tools"
 * Ruby/Passenger
 ```bash
 yum -y install openssl-devel readline-devel zlib-devel curl-devel libyaml-devel libffi-devel
+```
+
+* MySQL
+```bash
+yum -y install mysql-devel
 ```
 
 * PostgreSQLとヘッダファイル
@@ -68,9 +86,9 @@ echo 'eval "$(rbenv init -)"' | sudo tee -a  /etc/profile.d/rbenv.sh
 source /etc/profile.d/rbenv.sh
 ```
 
-* ファイルの編集
+* rbenv を実行するためファイル編集
 ```bash
-sudo vi
+visudo
 # --------------------------------------------------
 # 下記のように既存の行をコメントアウトして以下の2行追加する
 # Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
@@ -81,8 +99,9 @@ Defaults    env_keep += "RBENV_ROOT"
 
 * rbenvにruby-installプラグインを追加する
 ```bash
-git clone https://github.com/rbenv/ruby-build.git  rbenv/plugins/ruby-build
-sudo rbenv/plugins/ruby-build/install.sh
+git clone https://github.com/rbenv/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+cd /usr/local/rbenv/plugins/ruby-build
+sudo ./install.sh
 ```
 
 * インストール可能なRuby一覧を確認
@@ -95,12 +114,17 @@ rbenv install -l | grep 2.4
 sudo rbenv install 2.4.4
 sudo rbenv rehash
 sudo rbenv global 2.4.4
-ruby -v # バージョンが表示される
+```
+
+* インストールバージョンの確認
+```bash
+# バージョンを表示する
+ruby -v
 ```
 
 ***
 ## gemの管理をするbundlerをインストール  
-* ※後続処理でエラーとなったため回避策としてバージョンを指定している
+* ※後続処理でエラーとならなかったバージョンを指定している
 ```bash
 gem install -v 1.5.0 bundler
 ```
@@ -110,7 +134,7 @@ gem install -v 1.5.0 bundler
 * 初期設定
 ```bash
 postgresql-setup initdb
-# Initializing database ... OK
+# Initializing database ... OK が表示されれば成功
 ```
 
 * 設定ファイルの編集
@@ -150,7 +174,7 @@ svn co https://svn.redmine.org/redmine/branches/3.4-stable /var/lib/redmine
 * デフォルトファイルをコピーして設定ファイルを編集する
 ```bash
 cd /var/lib/redmine/config
-touch database.yml
+cp database.yml.example database.yml
 vi database.yml
 # --------------------------------------------------
 # 以下の内容で作成
@@ -174,7 +198,8 @@ cp configuration.yml.example configuration.yml
 * gemパッケージのインストール
 ```bash
 cd /var/lib/redmine/
-bundle install --without development test --path vendor/bundle
+bundle config --local build.mysql2 "--with-ldflags=-L/usr/local/opt/openssl/lib --with-cppflags=-I/usr/local/opt/openssl/include"
+bundle install
 ```
 
 ***
@@ -204,9 +229,9 @@ passenger-install-apache2-module --auto --languages ruby
 passenger-install-apache2-module --snippet
 # --------------------------------------------------
 # ここで表示された内容を控えておく
-LoadModule passenger_module /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/passenger-6.0.2/buildout/apache2/mod_passenger.so
+LoadModule passenger_module /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/passenger-6.0.4/buildout/apache2/mod_passenger.so
 <IfModule mod_passenger.c>
-  PassengerRoot /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/passenger-6.0.2
+  PassengerRoot /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/passenger-6.0.4
   PassengerDefaultRuby /usr/local/rbenv/versions/2.4.4/bin/ruby
 </IfModule>
 # --------------------------------------------------
@@ -219,10 +244,10 @@ vi /etc/httpd/conf.d/redmine.conf
 <Directory "/var/lib/redmine/public">
   Require all granted
 </Directory>
-# 先ほどのコマンドの結果を入力する
-LoadModule passenger_module /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/passenger-6.0.2/buildout/apache2/mod_passenger.so
+# 先ほどのコマンドの結果
+LoadModule passenger_module /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/passenger-6.0.4/buildout/apache2/mod_passenger.so
 <IfModule mod_passenger.c>
-  PassengerRoot /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/passenger-6.0.2
+  PassengerRoot /usr/local/rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/passenger-6.0.4
   PassengerDefaultRuby /usr/local/rbenv/versions/2.4.4/bin/ruby
 </IfModule>
 # --------------------------------------------------
@@ -276,4 +301,4 @@ Listen 192.168.33.10:80
 systemctl restart httpd
 systemctl status httpd
 ```
-__[http://192.168.33.10:80] にアクセスできればセットアップ完了__
+__[http://192.168.33.10:80/redmine] にアクセスできればセットアップ完了__
