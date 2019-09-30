@@ -1,6 +1,7 @@
 # CentOS7にRedmineをセットアップする  
 * CentOS7のセットアップまでは省略
 * 作業はrootで実行する
+* 使用するDBはPostgreSQL
 
 ***
 ## SELinuxの無効化  
@@ -46,11 +47,6 @@ yum -y groupinstall "Development Tools"
 * Ruby/Passenger
 ```bash
 yum -y install openssl-devel readline-devel zlib-devel curl-devel libyaml-devel libffi-devel
-```
-
-* MySQL
-```bash
-yum -y install mysql-devel
 ```
 
 * PostgreSQLとヘッダファイル
@@ -133,8 +129,8 @@ gem install -v 1.5.0 bundler
 ## PostgreSQLのインストール  
 * 初期設定
 ```bash
+# Initializing database ... OK が表示されること
 postgresql-setup initdb
-# Initializing database ... OK が表示されれば成功
 ```
 
 * 設定ファイルの編集
@@ -171,10 +167,9 @@ svn co https://svn.redmine.org/redmine/branches/3.4-stable /var/lib/redmine
 ```
 
 * DB設定ファイルdatabase.ymlの作成
-* デフォルトファイルをコピーして設定ファイルを編集する
+* デフォルトファイルを参考に設定ファイルを作成する
 ```bash
 cd /var/lib/redmine/config
-cp database.yml.example database.yml
 vi database.yml
 # --------------------------------------------------
 # 以下の内容で作成
@@ -187,10 +182,8 @@ production:
   password: "設定したパスワード"
 # --------------------------------------------------
 ```
-
-***
-## 設定ファイルconfiguration.ymlの作成  
-* メール通知用のサーバやファイルのアップロード先をこのファイル内で設定できるが今回は使用しないのでデフォルのまま
+* 設定ファイルconfiguration.ymlの作成  
+メール通知用のサーバやファイルのアップロード先をこのファイル内で設定できるが今回は使用しないのでデフォルのまま
 ```bash
 cp configuration.yml.example configuration.yml
 ```
@@ -198,8 +191,8 @@ cp configuration.yml.example configuration.yml
 * gemパッケージのインストール
 ```bash
 cd /var/lib/redmine/
-bundle config --local build.mysql2 "--with-ldflags=-L/usr/local/opt/openssl/lib --with-cppflags=-I/usr/local/opt/openssl/include"
-bundle install
+# CPUコア数分だけ並列処理を指定する
+bundle install --jobs=2
 ```
 
 ***
@@ -281,8 +274,8 @@ Alias /redmine /var/lib/redmine/public
 
 * 設定が正しいかチェック
 ```bash
+# Syntax OK が表示されること
 service httpd configtest
-# Syntax OK
 ```
 
 * ApacheのListenアドレス/ポートを変更
@@ -301,4 +294,5 @@ Listen 192.168.33.10:80
 systemctl restart httpd
 systemctl status httpd
 ```
-__[http://192.168.33.10:80/redmine] にアクセスできればセットアップ完了__
+__[http://192.168.33.10:80/redmine] にアクセスできればセットアップ完了__  
+__ログインIDとパスワードはどちらも admin__
