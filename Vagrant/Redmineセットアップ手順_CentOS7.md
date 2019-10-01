@@ -1,7 +1,7 @@
 # CentOS7にRedmineをセットアップする  
 * CentOS7のセットアップまでは省略
-* 作業はrootで実行する
-* 使用するDBはPostgreSQL
+* 作業アカウント：root
+* 使用DB：PostgreSQL
 
 ***
 ## SELinuxの無効化  
