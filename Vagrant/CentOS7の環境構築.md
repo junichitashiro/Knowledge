@@ -113,15 +113,10 @@ timedatectl
 ***
 ## ファイアウォール設定の変更  
 * ファイアウォールをON
+初期設定がON/OFFのどちらでも対応できるよう restart を指定
 ```bash
 sudo systemctl restart firewalld.service
 sudo systemctl enable firewalld.service
-```
-
-* ファイアウォールをOFF
-```bash
-sudo systemctl stop firewalld.service
-sudo systemctl disable firewalld.service
 ```
 
 * httpとssh通信を許可する
