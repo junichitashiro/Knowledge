@@ -1,4 +1,4 @@
-## Oracle Database Express Edition 11g のCentOS7へのインストール  
+# Oracle Database Express Edition 11g のCentOS7へのインストール  
 * 作業アカウント：root
 
 ***
