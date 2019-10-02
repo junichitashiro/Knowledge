@@ -1,25 +1,55 @@
-# WindowsのVagrantセットアップ手順  
+# VagrantでCentOS7をセットアップする手順  
 * [ドットインストール](https://dotinstall.com/)を参考に作成した手順
+* Macで作業する場合は事前にHomebrewをインストールしておく
 
 ***
 ## VirtualBoxのインストール  
+### Windows
 * 下記VirtualBoxのダウンロードページへアクセス  
 [https://www.virtualbox.org/wiki/Downloads]  
 Windows用インストーラ「VirtualBox x.x.xx for Windows hosts x86/amd64」をダウンロードしてインストーラを実行  
 ※x.x.xxはバージョン
 
+### Mac
+* Homebrewからインストールする
+```bash
+brew cask install VirtualBox
+# バージョンの確認
+VirtualBox --version
+```
+* アップデートの場合
+```bash
+brew cask reinstall VirtualBox
+```
+
 ***
 ## Vagrantのインストール  
+### Windows
 * 下記Vagrantのダウンロードページへアクセス  
 [http://www.vagrantup.com/downloads.html]  
 WINDOWSカテゴリから「Universal (32 and 64-bit)」をダウンロードしてインストーラを実行
 
+### Mac
+* Homebrewからインストールする
+```bash
+brew cask install vagrant
+# バージョンの確認
+vagrant --version
+```
+
+* アップデートの場合
+```bash
+brew cask reinstall vagrant
+```
+
+
 ***
 ## Box作成の準備  
-* コマンドプロンプトからVagrantのBox用ディレクトリを作成
+* コマンドプロンプト、ターミナルから作業
+* VagrantのBox用ディレクトリを作成
 ```bat
-mkdir MyVagrant
-cd MyVagrant
+mkdir vagrant
+cd vagrant
 ```
 * Boxごとにディレクトリ分けしたほうが管理しやすいため各Box用のディレクトリを作成
 ```bat
