@@ -31,12 +31,12 @@ sudo make install
 ```bash
 mkdir ~/git
 cd ~/git
-git clone https://github.com/junichitashiro/vm_setup.git
+git clone https://github.com/junichitashiro/ShellScript.git
 ```
 
 * セットアップシェルを実行する
 ```bash
-cd vm_setup
+cd ShellScript
 ./centos7_initial_setup.sh
 ```
 
