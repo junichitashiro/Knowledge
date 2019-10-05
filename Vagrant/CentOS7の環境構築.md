@@ -128,6 +128,53 @@ sudo firewall-cmd --reload
 ```
 
 ***
+## 時刻同期の設定  
+* ntpのインストール
+```bash
+sudo yum -y install ntp
+```
+
+* デーモンが起動している場合は止める
+```bash
+sudo systemctl stop ntpd.service
+```
+
+* 事前に手動で日本標準時プロジェクトのサーバから時刻を取得する  
+大幅に時刻がずれていると自動での時刻合わせができないため
+```bash
+sudo ntpdate ntp.nict.jp
+```
+
+* 設定ファイルを編集して同期するサーバを設定する
+```bash
+# 編集前の内容
+# --------------------------------------------------
+# Use public servers from the pool.ntp.org project.
+# Please consider joining the pool (http://www.pool.ntp.org/join.html).
+server 0.centos.pool.ntp.org iburst
+server 1.centos.pool.ntp.org iburst
+server 2.centos.pool.ntp.org iburst
+server 3.centos.pool.ntp.org iburst
+# --------------------------------------------------
+```
+```bash
+# 以下の内容に書き換える
+# --------------------------------------------------
+# Use public servers from the pool.ntp.org project.
+# Please consider joining the pool (http://www.pool.ntp.org/join.html).
+server -4 ntp.nict.jp iburst
+server -4 ntp.nict.jp iburst
+server -4 ntp.nict.jp iburst
+# --------------------------------------------------
+```
+
+* デーモンの起動と自動同期の設定
+```bash
+systemctl start ntpd.service
+systemctl enable ntpd.service
+```
+
+***
 ## パッケージの追加インストール  
 * マニュアルのインストール
 ```bash

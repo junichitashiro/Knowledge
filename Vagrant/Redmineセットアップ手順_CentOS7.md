@@ -294,5 +294,9 @@ Listen 192.168.33.10:80
 systemctl restart httpd
 systemctl status httpd
 ```
-__[http://192.168.33.10:80/redmine] にアクセスできればセットアップ完了__  
-__ログインIDとパスワードはどちらも admin__
+
+## アクセス確認  
+* 以下の設定で [http://192.168.33.10:80/redmine] アクセスする  
+Useraname:Admin  
+Password :zabbix  
+アクセスできればセットアップ完了
