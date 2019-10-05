@@ -13,14 +13,14 @@ sudo yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-deve
 * 新しいバージョンのGitをインストール
 ```bash
 # Gitの取得　必要なバージョンを指定すること
-wget https://www.kernel.org/pub/software/scm/git/git-2.23.0.tar.gz
+sudo wget https://www.kernel.org/pub/software/scm/git/git-2.23.0.tar.gz
 # 取得したファイルの展開
-tar vfx git-2.23.0.tar.gz
+sudo tar vfx git-2.23.0.tar.gz
 cd git-2.23.0
 # インストールの事前チェックとコンパイル
-make configure
-./configure --prefix=/usr
-make all
+sudo make configure
+sudo ./configure --prefix=/usr
+sudo make all
 # インストールの実行
 sudo make install
 ```
