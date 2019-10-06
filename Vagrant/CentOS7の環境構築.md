@@ -3,6 +3,24 @@
 * 各種パッケージのバージョンは動作確認できたものを記載
 
 ***
+## yum のリポジトリサーバのドメインを指定する
+* 国内サーバを指定して高速化を図る
+```bash
+sudo sed -i '/# include_only=/i include_only=.JP' /etc/yum/pluginconf.d/fastestmirror.conf
+sudo yum clean all
+```
+
+* 手動の場合
+```bash
+sudo vi /etc/yum/pluginconf.d/fastestmirror.conf
+# --------------------------------------------------
+# 以下の指定をする
+include_only=.JP
+# --------------------------------------------------
+sudo yum clean all
+```
+
+***
 ## Gitのセットアップ準備  
 * 古いバージョンの削除と開発用パッケージのインストール
 ```bash
