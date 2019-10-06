@@ -1,10 +1,11 @@
 # 既存のPHPを削除してバージョンアップする手順  
+* 作業アカウント：root
 
 ***
 ## PHPのリポジトリ追加  
 * EPELのリポジトリ追加
 ```bash
-yum install epel-release
+yum -y install epel-release
 ```
 
 * REMIのリポジトリ追加
@@ -21,16 +22,16 @@ yum remove php-*
 ## 新しいバージョンのPHPをインストール  
 * ここでは7.1.Xを指定
 ```bash
-yum install --disablerepo=* --enablerepo=epel,remi,remi-safe,remi-php71 php
+yum -y install --disablerepo=* --enablerepo=epel,remi,remi-safe,remi-php71 php
 ```
 
 ***
-## MySQLの拡張機能をインストール  
+## 補足　関連性の高いMySQLの拡張機能をインストールしておく  
 * php-mysqlndのインストール
 ```bash
-yum install yum-utils
+yum -y install yum-utils
 yum-config-manager --enable remi-php71
-yum install php-mysqlnd
+yum -y install php-mysqlnd
 ```
 
 * 確認コマンド
