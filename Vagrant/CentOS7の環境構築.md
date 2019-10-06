@@ -6,7 +6,7 @@
 ## yum のリポジトリサーバのドメインを指定する  
 * 国内サーバを指定して高速化を図る
 ```bash
-sudo sed -i '/# include_only=/i include_only=.JP' /etc/yum/pluginconf.d/fastestmirror.conf
+sudo sed -i '/#include_only=/a include_only=.JP' /etc/yum/pluginconf.d/fastestmirror.conf
 sudo yum clean all
 ```
 
