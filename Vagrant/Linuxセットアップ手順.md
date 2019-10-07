@@ -1,5 +1,5 @@
-# VagrantでCentOS7をセットアップする手順  
-* [ドットインストール](https://dotinstall.com/)を参考に作成した手順
+# VagrantでLinux環境をセットアップする手順  
+* OS：CentOS7
 * Macで作業する場合は事前にHomebrewをインストールしておく
 
 ***
@@ -116,19 +116,4 @@ TCPポート：2222
 TCP/IP ホスト：192.168.33.10
 TCPポート：22
 サービス：SSH SSHバージョン：SSH2
-```
-
-***
-## Vagrantコマンドの一部抜粋  
-```bash
-vagrant up                  # Boxの起動
-vagrant halt                # Boxのシャットダウン
-vagrant suspend             # Boxの一時停止
-vagrant resume              # 一時停止したBoxの再開
-vagrant reload              # Boxの再起動
-vagrant ssh-config          # 接続用の設定情報を表示
-vagrant status              # Boxの状態を表示
-vagrant destroy             # Boxの破棄
-vagrant box list            # Boxの一覧を表示
-vagrant box remove [Box名]  # Boxの削除
 ```
