@@ -5,7 +5,7 @@
 * 作業アカウント：root
 * Zabbixのバージョン：4系
 * 使用DB：MariaDB
-* [https://github.com/junichitashiro/Technical-Notes/] のVagrant/CentOS7の環境構築.md を実施しておく
+* [https://github.com/junichitashiro/Technical-Notes/] の __インストール後の環境整備.md__ を実施しておく
 
 ***
 ## Zabbixで使用するフォントの対応  
