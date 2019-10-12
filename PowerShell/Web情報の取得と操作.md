@@ -11,9 +11,9 @@ $ie.Visible = $true
 $ie.Navigate($url)
 while($ie.Busy) { Start-Sleep -milliseconds 100 }
 $doc = $ie.document
+```
 
 ***
-```
 ## ログイン処理の自動化  
 * __getElementsByName__ を使用し __id__ で特定した要素の __value__ を設定している
 ```PowerShell
