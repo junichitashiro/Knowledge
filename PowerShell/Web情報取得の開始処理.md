@@ -6,7 +6,7 @@
 * IEを起動して対象のWebページに移動する場合
 ```PowerShell
 # 対象ページのURLを設定
-$url = "https://d4c-lt.com/contents/powershell/samplepage1.html"
+$url = "https://d4c-lt.com"
 
 # IEを起動する
 $ie = New-Object -ComObject InternetExplorer.Application
@@ -27,7 +27,7 @@ $doc = $ie.document
 * すでにIEでWebページを表示している場合
 ```PowerShell
 # 対象ページのURLを設定
-$url = "https://d4c-lt.com/contents/powershell/samplepage1.html"
+$url = "https://d4c-lt.com"
 
 # シェルを取得
 $shell = New-Object -ComObject Shell.Application
