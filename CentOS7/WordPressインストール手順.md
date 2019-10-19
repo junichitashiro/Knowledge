@@ -1,6 +1,6 @@
 # CentOS7にWordPressをインストールする手順  
 * 作業アカウント：vagrant
-*使用DB：MariaDB
+* 使用DB：MariaDB
 * PHPのバージョンアップを実行しておく  
 [https://github.com/junichitashiro/Technical-Notes]  
 CentOS7/PHPバージョンアップ手順.md
