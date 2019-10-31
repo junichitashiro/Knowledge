@@ -37,7 +37,7 @@ swapoff -a
 cat /proc/swaps
 ```
 
-* スワップ領域の作成  
+* スワップファイルの作成  
 ここでは2GB（1MB×2048）を割り当てている
 ```bash
 dd if=/dev/zero of=/swap bs=1M count=2048
@@ -47,9 +47,14 @@ dd if=/dev/zero of=/swap bs=1M count=2048
 2147483648 bytes (2.1 GB) copied, 01.2345 s, 789 MB/s
 ```
 
-* ファイルタイプの変更
+* スワップ領域の作成  
 ```bash
 mkswap /swap
+```
+
+* スワップ領域の有効化  
+```bash
+swapon /swap
 ```
 
 * 確認コマンド
