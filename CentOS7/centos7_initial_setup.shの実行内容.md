@@ -93,6 +93,9 @@ sudo ntpdate ntp.nict.jp
 
 * 設定ファイルを編集して同期するサーバを設定する
 ```bash
+sudo vi /etc/ntp.conf
+```
+```bash
 # 編集前の内容
 # --------------------------------------------------
 # Use public servers from the pool.ntp.org project.
