@@ -1,16 +1,20 @@
 # データベースの文字コードを設定する  
+
 * DB：MariaDB,MySQL
 * サーバの文字コード、ターミナルの文字コードがutf-8になっている前提で文字コードを __utf8__ に設定する
 
 ***
+
 ## 現在の設定を確認する  
+
 * DBにログインして現在の設定を確認  
 すでにutf8以外で作成したDBがある場合、作成済みのDBをDROPしてから以下の設定をすること
+
 ```sql
 show variables like 'cha%';
 ```
 
-```
+```sql
 +--------------------------+----------------------------+
 | Variable_name            | Value                      |
 +--------------------------+----------------------------+
@@ -26,7 +30,9 @@ show variables like 'cha%';
 ```
 
 ## 設定ファイルを編集する  
+
 * DBからログアウトして __/etc/my.cnf__ ファイルを編集
+
 ```bash
 sudo vi /etc/my.cnf
 # --------------------------------------------------
@@ -42,21 +48,28 @@ default-character-set=utf8
 ```
 
 ## サービスを再起動する  
+
 * MariaDBの場合
+
 ```bash
 sudo systemctl restart mariadb.service
 ```
+
 * MySQLの場合
+
 ```bash
 sudo systemctl restart mysqlb.service
 ```
 
 ## 設定を確認する  
+
 * DDBにログインして変更後の文字コードを確認する
+
 ```sql
 show variables like 'cha%';
 ```
-```
+
+```sql
 +--------------------------+----------------------------+
 | Variable_name            | Value                      |
 +--------------------------+----------------------------+
