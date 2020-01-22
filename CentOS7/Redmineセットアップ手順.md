@@ -253,6 +253,7 @@ RAILS_ENV=production REDMINE_LANG=ja bundle exec rake redmine:load_default_data
 ```
 
 ***
+
 ## Passengerのインストール  
 
 * Phusion Passengerをインストール
@@ -311,7 +312,7 @@ chown -R apache:apache /var/lib/redmine
 
 ## Redmineのアドレス変更  
 
-* http://<IPアドレス>/redmine でアクセス出来るようにするためRedmineをサブディレクトリ運用にする
+* [<http://IPアドレス/redmine>] でアクセス出来るようにするためRedmineをサブディレクトリ運用にする
 
 ```bash
 vi /etc/httpd/conf.d/redmine.conf
@@ -353,7 +354,7 @@ systemctl status httpd
 
 ## アクセス確認  
 
-* 以下の設定で [http://192.168.33.10:80/redmine] へアクセスする  
+* 以下の設定で [<http://192.168.33.10:80/redmine>] へアクセスする  
 Useraname:admin  
 Password :admin  
 アクセスできればセットアップ完了
