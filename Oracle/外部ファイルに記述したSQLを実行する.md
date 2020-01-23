@@ -1,9 +1,12 @@
 # 外部ファイルに記述したSQLを実行する  
+
 >## SQL*Plusから @filename.sql で実行する  
 
 ## sqlファイルのサンプル  
+
 * テーブルを全選択するSQLを実行する
 * 実行結果をログファイルに出力する
+
 ```sql
 -- 出力設定
 SET LINESIZE -- 1行に表示する文字の数
@@ -23,4 +26,3 @@ SELECT * FROM TABLE_NAME ;
 
 SPOOL OFF
 ```
-
