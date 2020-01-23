@@ -1,10 +1,14 @@
 # macOSにGitをインストールする  
+
 * masOSセットアップ後のgitインストール手順
 * 事前にHomebrewをインストールしておく
 
 ***
+
 ## 設定ファイルの編集  
+
 * .bash_profileの設定
+
 ```bash
 vi ~/.bash_profile
 # --------------------------------------------------
@@ -18,6 +22,7 @@ export PS1="\W \$ "
 ```
 
 * .bash_rcの設定
+
 ```bash
 vi ~/.bashrc
 # --------------------------------------------------
@@ -35,28 +40,35 @@ alias ll='ls -alFG'
 ```
 
 * 設定反映
+
 ```bash
 source ~/.bash_profile
 ```
 
 ***
+
 ## Gitのインストール  
+
 * 現在のバージョンを確認
+
 ```bash
 git --version
 ```
 
 * インストール
+
 ```bash
 brew install git
 ```
 
 * pathの確認
+
 ```bash
 which git
 ```
 
 * ユーザー設定
+
 ```bash
 git config --global user.name "GitHubのアカウント名"
 git config --global user.email "GitHubで設定したメールアドレス"
@@ -64,27 +76,32 @@ git config --list
 ```
 
 * 鍵の生成
+
 ```bash
 ssh-keygen -t rsa -b 4096 -C "GitHubで設定したメールアドレス"
 ```
 
 * 鍵の配置場所を指定
+
 ```bash
 /Users/[user name]/.ssh/id_rsa_github
 ```
 
 * パーミッションの変更
+
 ```bash
 chmod 600 /Users/[user name]/.ssh/id_rsa_github
 ```
 
 * ssh-agentに秘密鍵を登録
+
 ```bash
 eval `ssh-agent`
 ssh-add ~/.ssh/id_rsa_github
 ```
 
 * 登録の確認
+
 ```bash
 ssh-add -l
 # 鍵の情報が表示されること
@@ -94,6 +111,7 @@ ssh-add -l
 ```
 
 * sshのconfigファイル作成
+
 ```bash
 vim ~/.ssh/config
 # ------------------------------------
@@ -105,16 +123,19 @@ vim ~/.ssh/config
 ```
 
 * 公開鍵をGitHubに登録する
+
 ```bash
 pbcopy < ~/.ssh/id_rsa_github.pub
 ```
 
 * 接続を確認
+
 ```bash
 ssh github
 ```
 
 * push,pull,cloneの実行ができることを確認
+
 ```bash
 git clone git@github.com:[Account]/[Repository].git
 ```
