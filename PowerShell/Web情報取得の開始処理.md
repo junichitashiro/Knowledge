@@ -1,9 +1,11 @@
 # Web情報取得の開始処理  
 
 ***
+
 ## Webページから情報を取得する方法  
 
 * IEを起動して対象のWebページに移動する場合
+
 ```PowerShell
 # 対象ページのURLを設定
 $url = "https://d4c-lt.com"
@@ -25,6 +27,7 @@ $doc = $ie.document
 ```
 
 * すでにIEでWebページを表示している場合
+
 ```PowerShell
 # 対象ページのURLを設定
 $url = "https://d4c-lt.com"
