@@ -1,37 +1,28 @@
-# データベースの文字コードを設定する  
+# MariaDBのセットアップ手順  
 
-* DB：MariaDB,MySQL
-* サーバの文字コード、ターミナルの文字コードがutf-8になっている前提で文字コードを __utf8__ に設定する
+* 作業アカウント：vagrant
+* 初期設定で文字コードを __utf8__ に設定する
 
 ***
 
-## 現在の設定を確認する  
+## MariaDBをインストールする  
 
-* DBにログインして現在の設定を確認  
-すでにutf8以外で作成したDBがある場合、作成済みのDBをDROPしてから以下の設定をすること
+* yum からインストール  
 
-```sql
-show variables like 'cha%';
+```bash
+sudo yum -y install mariadb mariadb-server
 ```
 
-```sql
-+--------------------------+----------------------------+
-| Variable_name            | Value                      |
-+--------------------------+----------------------------+
-| character_set_client     | utf8                       |
-| character_set_connection | utf8                       |
-| character_set_database   | latin1                     |←ここをutf8に設定する
-| character_set_filesystem | binary                     |
-| character_set_results    | utf8                       |
-| character_set_server     | utf8                       |
-| character_set_system     | utf8                       |
-| character_sets_dir       | /usr/share/mysql/charsets/ |
-+--------------------------+----------------------------+
+* 自動起動登録とサービスの起動
+
+```bash
+sudo systemctl enable mariadb.service
+sudo systemctl start mariadb.service
 ```
 
 ## 設定ファイルを編集する  
 
-* DBからログアウトして __/etc/my.cnf__ ファイルを編集
+* __/etc/my.cnf__ ファイルを編集
 
 ```bash
 sudo vi /etc/my.cnf
@@ -47,29 +38,57 @@ default-character-set=utf8
 # --------------------------------------------------
 ```
 
-## サービスを再起動する  
-
-* MariaDBの場合
+* サービスの再起動  
 
 ```bash
 sudo systemctl restart mariadb.service
 ```
 
-* MySQLの場合
+* MariaDBの初期設定を行う  
 
 ```bash
-sudo systemctl restart mysqlb.service
+sudo mysql_secure_installation
+
+# 1. 現在のrootパスワードを入力  
+Enter current password for root (enter for none): # 未設定なのでそのままEnter
+
+# 2. rootパスワードの設定をするか
+Set root password? [Y/n] # Enter
+
+# 3.新しいrootパスワードを設定
+New password: # パスワードを入力してEnter
+
+# 4.パスワードの確認
+Re-enter new password: # パスワードを再入力してEnter
+
+# 5.匿名ユーザを削除するか
+# 初期設定などのために誰でもログインできるユーザ、削除推奨
+Remove anonymous users? [Y/n] # Enter
+
+# 6.rootのリモートログインを禁止するか
+Disallow root login remotely? [Y/n] # Enter
+
+# 7.testデータベースを削除するか
+Remove test database and access to it? [Y/n]  # Enter
+
+# 8.権限を管理するテーブルをリロードして設定をすぐに反映するか
+Reload privilege tables now? [Y/n] # Enter
 ```
 
 ## 設定を確認する  
 
-* DDBにログインして変更後の文字コードを確認する
+* DBにログインして文字コードを確認する
+
+```bash
+$ mysql -u root -p
+Enter password: #パスワードを入力する
+```
+
+* 設定を確認する  
 
 ```sql
 show variables like 'cha%';
-```
 
-```sql
 +--------------------------+----------------------------+
 | Variable_name            | Value                      |
 +--------------------------+----------------------------+
