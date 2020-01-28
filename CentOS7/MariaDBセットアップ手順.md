@@ -20,7 +20,7 @@ sudo systemctl enable mariadb.service
 sudo systemctl start mariadb.service
 ```
 
-## 設定ファイルを編集する  
+## 文字コードを設定する  
 
 * __/etc/my.cnf__ ファイルを編集
 
@@ -89,6 +89,7 @@ Enter password: #パスワードを入力する
 ```sql
 show variables like 'cha%';
 
+-- character_set_database が utf8になっていること
 +--------------------------+----------------------------+
 | Variable_name            | Value                      |
 +--------------------------+----------------------------+
