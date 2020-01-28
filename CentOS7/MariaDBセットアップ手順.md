@@ -89,7 +89,7 @@ Enter password: #パスワードを入力する
 ```sql
 show variables like 'cha%';
 
--- character_set_database が utf8になっていること
+-- character_set_database が utf8 になっていること
 +--------------------------+----------------------------+
 | Variable_name            | Value                      |
 +--------------------------+----------------------------+
