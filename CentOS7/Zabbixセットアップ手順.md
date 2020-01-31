@@ -76,7 +76,7 @@ systemctl enable mariadb
 chmod -R 777 /var/www/html
 ```
 
-* Zabbixインストール前に一度CentOS7の再起動をしておく  
+* Zabbixインストール前に一度CentOS7の再起動をしておく
 
 ```bash
 reboot
