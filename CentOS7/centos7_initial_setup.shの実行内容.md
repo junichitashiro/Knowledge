@@ -1,4 +1,4 @@
-# centos7_initial_setup.shの実行内容
+# centos7_initial_setup.shの実行内容  
 
 ***
 
@@ -171,7 +171,7 @@ sudo systemctl enable httpd.service
 
 ***
 
-## 設定の反映
+## 設定の反映  
 
 * shellにログインしなおす
 
