@@ -7,7 +7,7 @@
 
 ## MariaDBをインストールする  
 
-* yum からインストール  
+* yum からインストール
 
 ```bash
 sudo yum -y install mariadb mariadb-server
@@ -38,18 +38,18 @@ default-character-set=utf8
 # --------------------------------------------------
 ```
 
-* サービスの再起動  
+* サービスの再起動
 
 ```bash
 sudo systemctl restart mariadb.service
 ```
 
-* MariaDBの初期設定を行う  
+* MariaDBの初期設定を行う
 
 ```bash
 sudo mysql_secure_installation
 
-# 1. 現在のrootパスワードを入力  
+# 1. 現在のrootパスワードを入力
 Enter current password for root (enter for none): # 未設定なのでそのままEnter
 
 # 2. rootパスワードの設定をするか
@@ -84,7 +84,7 @@ $ mysql -u root -p
 Enter password: #パスワードを入力する
 ```
 
-* 設定を確認する  
+* 設定を確認する
 
 ```sql
 show variables like 'cha%';

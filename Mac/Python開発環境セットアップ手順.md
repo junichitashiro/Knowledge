@@ -20,7 +20,7 @@ python3 --version   # バージョン確認
 brew install pyenv
 ```
 
-* pathの設定  
+* pathの設定
 
 ```bash
 sudo vim .bash_profile
@@ -102,7 +102,7 @@ python manage.py runserver  # http://127.0.0.1:8000/ が起動する
 
 ## Pythonの統合開発環境を導入
 
-* pycharmのインストール  
+* pycharmのインストール
 
 ```bash
 brew cask install pycharm-ce

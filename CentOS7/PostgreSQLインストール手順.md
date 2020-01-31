@@ -116,7 +116,7 @@ psql (PostgreSQL) 12.1
 
 ## PostgreSQLのアンインストール  
 
-不要になったPostgreSQLを削除する手順  
+不要になったPostgreSQLを削除する手順
 
 * postgresqlの削除
 

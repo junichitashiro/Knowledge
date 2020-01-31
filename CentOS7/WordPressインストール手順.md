@@ -63,7 +63,7 @@ mysql -uroot
 * 以下の設定のデータベースを作成する  
 データベース名：wordpress  
 ユーザ名：dbuser  
-パスワード：dbuser1  
+パスワード：dbuser1
 
 ```sql
 create database wordpress;
