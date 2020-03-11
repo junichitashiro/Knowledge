@@ -36,8 +36,8 @@ $url = "https://d4c-lt.com"
 $shell = New-Object -ComObject Shell.Application
 
 # IEで開いているページ一覧を取得
-$ieList = @($shell.Windows() | where { $_.Name -match "Internet Explorer" })
+$ieList = @($shell.Windows() | Where-Object { $_.Name -match "Internet Explorer" })
 
 # URL指定でIEページのオブジェクトを取得する([-1]で同一ページの最新のタブのオブジェクトを取得する)
-$ie = @($ieList | where { $_.LocationURL -match $url })[-1]
+$ie = @($ieList | Where-Object { $_.LocationURL -match $url })[-1]
 ```
