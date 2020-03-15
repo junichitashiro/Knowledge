@@ -1,4 +1,4 @@
-# 既存のPHPを削除してバージョンアップする手順  
+# 既存のPHPを削除してバージョンアップする手順
 
 * 作業アカウント：root
 * wordpressインストール用の手順として作成  
@@ -6,7 +6,7 @@ Zabbixのインストールに都合が悪いため共存させない
 
 ***
 
-## PHPのリポジトリ追加  
+## PHPのリポジトリ追加
 
 * EPELのリポジトリ追加
 
@@ -20,7 +20,7 @@ yum -y install epel-release
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 ```
 
-## 既存のPHPを削除  
+## 既存のPHPを削除
 
 * 既存のPHPはすべて削除する
 
@@ -28,7 +28,7 @@ rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 yum remove php-*
 ```
 
-## 新しいバージョンのPHPをインストール  
+## 新しいバージョンのPHPをインストール
 
 * ここでは7.1.Xを指定
 
@@ -38,7 +38,7 @@ yum -y install --disablerepo=* --enablerepo=epel,remi,remi-safe,remi-php71 php
 
 ***
 
-## 補足　関連性の高いMySQLの拡張機能をインストールしておく  
+## 補足　関連性の高いMySQLの拡張機能をインストールしておく
 
 * php-mysqlndのインストール
 

@@ -1,10 +1,10 @@
-# CentOS7 で Oracle Database Express Edition 11g をセットアップする手順  
+# CentOS7 で Oracle Database Express Edition 11g をセットアップする手順
 
 * 作業アカウント：root
 
 ***
 
-## パッケージのダウンロード  
+## パッケージのダウンロード
 
 * 下記URLより Oracle Database Express Edition 11g Release 2 for Linux x64 をダウンロードする
 
@@ -20,7 +20,7 @@ config.vm.synced_folder "./share", "/tmp/share", owner: "vagrant", group: "vagra
 
 ***
 
-## hostsファイルの設定変更  
+## hostsファイルの設定変更
 
 * Oracleが自身を認識するための設定をする
 
@@ -33,7 +33,7 @@ vi /etc/hosts
 # --------------------------------------------------
 ```
 
-## スワップの設定  
+## スワップの設定
 
 * インストールに要求されるサイズのスワップ（物理メモリの2倍）を設定する
 
@@ -82,7 +82,7 @@ cat /proc/swaps
 
 ***
 
-## 事前インストール  
+## 事前インストール
 
 * 必要なライブラリをインストールしておく
 
@@ -90,7 +90,7 @@ cat /proc/swaps
 yum -y install libaio bc zip unzip
 ```
 
-## Oracleパッケージのインストール  
+## Oracleパッケージのインストール
 
 * ダウンロードしたファイルを展開してインストールする
 
@@ -137,7 +137,7 @@ vi .bashrc
 
 ***
 
-## インストール後の確認  
+## インストール後の確認
 
 * sqlplusでログイン
 

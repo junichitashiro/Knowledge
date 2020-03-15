@@ -1,4 +1,4 @@
-# CentOS7にZabbixをセットアップする  
+# CentOS7にZabbixをセットアップする
 
 * Vagrantで実施する場合のシステム要件  
 メモリ：4G以上  
@@ -10,7 +10,7 @@
 
 ***
 
-## Zabbixで使用するフォントの対応  
+## Zabbixで使用するフォントの対応
 
 * 日本語用フォントのインストール
 
@@ -20,7 +20,7 @@ yum -y install ibus-kkc vlgothic-*
 
 ***
 
-## ファイアウォール機能の停止  
+## ファイアウォール機能の停止
 
 * 起動中サービスの停止と自動起動の停止  
 安全な環境でない場合は非推奨
@@ -39,7 +39,7 @@ systemctl list-unit-files -t service | grep firewalld.service
 
 ***
 
-## パッケージのインストール  
+## パッケージのインストール
 
 * PHPのインストール
 
@@ -68,7 +68,7 @@ systemctl enable mariadb
 
 ***
 
-## パーミッションの変更  
+## パーミッションの変更
 
 * インストールエラー回避のためパーミッションを変更しておく
 
@@ -84,7 +84,7 @@ reboot
 
 ***
 
-## Zabbix関連パッケージのインストール  
+## Zabbix関連パッケージのインストール
 
 * Zabbixリポジトリの登録
 
@@ -104,7 +104,7 @@ yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-web-japanese zabbix-a
 yum -y install zabbix-get zabbix-sender
 ```
 
-## MariaDBの設定変更  
+## MariaDBの設定変更
 
 * [mysqld]カテゴリの編集
 
@@ -128,7 +128,7 @@ systemctl restart mariadb
 
 ***
 
-## Zabbix用データベースの作成  
+## Zabbix用データベースの作成
 
 * MariaDBにログイン
 
@@ -204,17 +204,17 @@ ps ax | grep zabbix
 
 ***
 
-## GUIからインストールを実行  
+## GUIからインストールを実行
 
-## Zabbixにアクセス  
+## Zabbixにアクセス
 
 * ホスト端末のブラウザから [<http://192.168.33.10/zabbix>] にアクセスする
 
-## 事前チェック画面  
+## 事前チェック画面
 
 * すべて OK になっていること
 
-## DB接続設定画面  
+## DB接続設定画面
 
 * 作成したMariaDBの設定に合わせる
 
@@ -227,21 +227,21 @@ user          : zabbix
 Password      : zabbixpassword
 ```
 
-## Zabbixサーバー詳細画面  
+## Zabbixサーバー詳細画面
 
 * Zabbixから監視するときのDB名を指定できるが、希望がなければそのまま次へ
 
-## 事前チェックまとめ画面  
+## 事前チェックまとめ画面
 
 * 内容を確認してそのまま次へ
 
-## インストール画面  
+## インストール画面
 
 * 完了が表示されたら次へ
 
-## ログイン画面  
+## ログイン画面
 
 * 以下の設定でログインする  
 Useraname:Admin  
 Password :zabbix  
-ログインできればセットアップ完了  
+ログインできればセットアップ完了

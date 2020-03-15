@@ -1,11 +1,11 @@
-# MariaDBセットアップ手順  
+# MariaDBセットアップ手順
 
 * 作業アカウント：vagrant
 * 初期設定で文字コードを __utf8__ に設定する
 
 ***
 
-## MariaDBをインストールする  
+## MariaDBをインストールする
 
 * yum からインストール
 
@@ -20,7 +20,7 @@ sudo systemctl enable mariadb.service
 sudo systemctl start mariadb.service
 ```
 
-## 文字コードを設定する  
+## 文字コードを設定する
 
 * __/etc/my.cnf__ ファイルを編集
 
@@ -75,7 +75,7 @@ Remove test database and access to it? [Y/n]  # Enter
 Reload privilege tables now? [Y/n] # Enter
 ```
 
-## 設定を確認する  
+## 設定を確認する
 
 * DBにログインして文字コードを確認する
 

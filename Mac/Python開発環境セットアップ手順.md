@@ -1,11 +1,11 @@
-# Pythonのセットアップ  
+# Pythonのセットアップ
 
 * Google Colaboratoryが使えない場合の備忘録
 * 事前にHomebrewをインストールしておく
 
 ***
 
-## python3とpyenvのインストール  
+## python3とpyenvのインストール
 
 * python3のインストール
 
@@ -38,7 +38,7 @@ eval "$(pyenv init -)"
 source .bash_profile
 ```
 
-## pyenvによるpythonのインストール  
+## pyenvによるpythonのインストール
 
 * pyenvでインストール可能な一覧を表示する
 
@@ -62,7 +62,7 @@ python --version
 
 ***
 
-## Djangoによる開発環境の作成  
+## Djangoによる開発環境の作成
 
 * ホームディレクトリに仮想環境を作成する
 
@@ -100,7 +100,7 @@ python manage.py runserver  # http://127.0.0.1:8000/ が起動する
 
 ***
 
-## Pythonの統合開発環境を導入  
+## Pythonの統合開発環境を導入
 
 * pycharmのインストール
 

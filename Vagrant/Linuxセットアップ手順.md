@@ -1,11 +1,11 @@
-# VagrantでLinux環境をセットアップする手順  
+# VagrantでLinux環境をセットアップする手順
 
 * OS：CentOS7
 * Macで作業する場合は事前にHomebrewをインストールしておく
 
 ***
 
-## VirtualBoxのインストール  
+## VirtualBoxのインストール
 
 ### Windows
 
@@ -32,7 +32,7 @@ brew cask reinstall VirtualBox
 
 ***
 
-## Vagrantのインストール  
+## Vagrantのインストール
 
 Windows
 
@@ -58,7 +58,7 @@ brew cask reinstall vagrant
 
 ***
 
-## Box作成の準備  
+## Box作成の準備
 
 * コマンドプロンプト、ターミナルから作業
 * VagrantのBox用ディレクトリを作成
@@ -75,7 +75,7 @@ mkdir local-centos7
 cd local-centos7
 ```
 
-## Boxを追加  
+## Boxを追加
 
 * 下記のBox公開ページへアクセス  
 [<http://www.vagrantbox.es/>]  
@@ -84,7 +84,7 @@ cd local-centos7
 * [<https://www.dropbox.com/s/7u194d6reyr1loe/vagrant-centos-7.2.box?dl=0>]  
 ここでは上記URLからダウンロードしたBoxをローカルに配置して実行している
 
-* Boxの追加  
+* Boxの追加
 
 vagrant box add [Box名] [コピーしたBoxのURLまはたパス]
 
@@ -102,7 +102,7 @@ vagrant init local-centos7
 
 ***
 
-## Vagrantfileの編集  
+## Vagrantfileの編集
 
 * 作成されたVagrantfileの下記の行をコメントインして保存する
 * ブラウザから下記アドレスを指定するとWEBサーバとしてアクセスできるようになる
@@ -111,7 +111,7 @@ vagrant init local-centos7
 # config.vm.network "private_network", ip: "192.168.33.10"
 ```
 
-## ホストOSとゲストOSのフォルダを共有する設定（任意）  
+## ホストOSとゲストOSのフォルダを共有する設定（任意）
 
 * ホスト端末の"share"フォルダとゲスト端末の"/tmp/share"フォルダを共有する設定  
 なお[create: true]はフォルダがなかった場合作成するオプション
@@ -122,15 +122,15 @@ config.vm.synced_folder "./share", "/tmp/share", owner: "vagrant", group: "vagra
 
 ***
 
-## Boxの起動  
+## Boxの起動
 
-* Vagrantfileと同一のディレクトリでコマンドを実行  
+* Vagrantfileと同一のディレクトリでコマンドを実行
 
 ```bat
 vagrant up
 ```
 
-## ターミナルからBoxにアクセス  
+## ターミナルからBoxにアクセス
 
 * Boxが起動している状態でTeraTermなどからアクセスする
 

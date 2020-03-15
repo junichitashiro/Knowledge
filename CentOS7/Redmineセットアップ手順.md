@@ -1,4 +1,4 @@
-# CentOS7にRedmineをセットアップする  
+# CentOS7にRedmineをセットアップする
 
 * CentOS7のセットアップまでは省略
 * 作業アカウント：root
@@ -6,7 +6,7 @@
 
 ***
 
-## SELinuxの無効化  
+## SELinuxの無効化
 
 * SELINUX の設定を enforcing , permissiveから disabled に変更する
 
@@ -46,7 +46,7 @@ firewall-cmd --zone=public --list-services
 
 ***
 
-## 各種パッケージのインストール  
+## 各種パッケージのインストール
 
 * 開発ツール
 
@@ -80,7 +80,7 @@ yum -y install ImageMagick ImageMagick-devel ipa-pgothic-fonts
 
 ***
 
-## Rubyのインストール  
+## Rubyのインストール
 
 * rbenvのインストール
 
@@ -143,7 +143,7 @@ ruby -v
 
 ***
 
-## gemの管理をするbundlerをインストール  
+## gemの管理をするbundlerをインストール
 
 * ※後続処理でエラーとならなかったバージョンを指定している
 
@@ -153,7 +153,7 @@ gem install -v 1.5.0 bundler
 
 ***
 
-## PostgreSQLのインストール  
+## PostgreSQLのインストール
 
 * 初期設定
 
@@ -193,7 +193,7 @@ sudo -u postgres createdb -E UTF-8 -l ja_JP.UTF-8 -O redmine -T template0 redmin
 
 ***
 
-## Redmineのインストール  
+## Redmineのインストール
 
 * Redmineのsvnからチェックアウト
 
@@ -237,7 +237,7 @@ bundle install --jobs=2
 
 ***
 
-## Redmineの初期設定  
+## Redmineの初期設定
 
 * セッション改ざん防止用の秘密鍵作成
 
@@ -254,7 +254,7 @@ RAILS_ENV=production REDMINE_LANG=ja bundle exec rake redmine:load_default_data
 
 ***
 
-## Passengerのインストール  
+## Passengerのインストール
 
 * Phusion Passengerをインストール
 * Apache上でRedmineなどのRailsアプリを動かすために使われる
@@ -310,7 +310,7 @@ chown -R apache:apache /var/lib/redmine
 
 ***
 
-## Redmineのアドレス変更  
+## Redmineのアドレス変更
 
 * [<http://IPアドレス/redmine>] でアクセス出来るようにするためRedmineをサブディレクトリ運用にする
 
@@ -352,7 +352,7 @@ systemctl restart httpd
 systemctl status httpd
 ```
 
-## アクセス確認  
+## アクセス確認
 
 * 以下の設定で [<http://192.168.33.10:80/redmine>] へアクセスする  
 Useraname:admin  

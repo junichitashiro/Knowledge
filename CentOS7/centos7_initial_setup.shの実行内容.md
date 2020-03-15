@@ -1,8 +1,8 @@
-# centos7_initial_setup.shの実行内容  
+# centos7_initial_setup.shの実行内容
 
 ***
 
-## ホスト名の変更  
+## ホスト名の変更
 
 * /etc/hostnameを上書きする
 
@@ -29,7 +29,7 @@ hostname
 
 ***
 
-## システムの表記を日本語にする  
+## システムの表記を日本語にする
 
 * 日本語用のutf8設定をlocaleに追加する
 コマンドは『localectl -f "文字コード" -i "設定元となるlocaleファイル"』
@@ -54,7 +54,7 @@ echo $LANG
 
 ***
 
-## タイムゾーンを設定する  
+## タイムゾーンを設定する
 
 * タイムゾーンを日本に設定
 
@@ -73,7 +73,7 @@ timedatectl
 
 ***
 
-## ファイアウォール設定の変更  
+## ファイアウォール設定の変更
 
 * ファイアウォールをON
 初期設定がON/OFFのどちらでも対応できるよう restart を指定
@@ -93,7 +93,7 @@ sudo firewall-cmd --reload
 
 ***
 
-## 時刻同期の設定  
+## 時刻同期の設定
 
 * ntpのインストール
 
@@ -152,7 +152,7 @@ systemctl enable ntpd.service
 
 ***
 
-## パッケージの追加インストール  
+## パッケージの追加インストール
 
 * マニュアルのインストール
 
@@ -171,7 +171,7 @@ sudo systemctl enable httpd.service
 
 ***
 
-## 設定の反映  
+## 設定の反映
 
 * shellにログインしなおす
 

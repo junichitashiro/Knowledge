@@ -1,4 +1,4 @@
-# CentOS7にWordPressをインストールする手順  
+# CentOS7にWordPressをインストールする手順
 
 * 作業アカウント：vagrant
 * 使用DB：MariaDB
@@ -8,7 +8,7 @@ CentOS7/PHPバージョンアップ手順.md
 
 ***
 
-## DocumentRootの確認  
+## DocumentRootの確認
 
 * DocumentRoot がwordpressのファイル配置場所（ここでは"/var/www/html"）と同じであることを確認する
 
@@ -16,7 +16,7 @@ CentOS7/PHPバージョンアップ手順.md
 view /etc/httpd/conf/httpd.conf
 ```
 
-## ディレクティブの変更  
+## ディレクティブの変更
 
 * \<Directory "/var/www/html">～\</Directory>タグの AllowOverride の設定をNone から All に変更する
 
@@ -24,7 +24,7 @@ view /etc/httpd/conf/httpd.conf
 vi /etc/httpd/conf/httpd.conf
 ```
 
-## ファイルの取得  
+## ファイルの取得
 
 * [<https://ja.wordpress.org/download/>] からWordPressの最新版を取得する
 
@@ -39,7 +39,7 @@ wget https://ja.wordpress.org/latest-ja.zip
 unzip latest-ja.zip
 ```
 
-## データベースの準備  
+## データベースの準備
 
 * MariaDBのインストール
 
@@ -71,7 +71,7 @@ grant all privileges on wordpress.* to dbuser@localhost identified by 'dbuser1';
 exit
 ```
 
-## .htaccessファイルの作成  
+## .htaccessファイルの作成
 
 * /var/www/html/wordpress 配下に.htaccessファイルを作成する
 
@@ -101,7 +101,7 @@ RewriteRule . /index.php [L]
 # --------------------------------------------------
 ```
 
-## wp-config.phpファイルの作成  
+## wp-config.phpファイルの作成
 
 * wp-config-sample.phpをコピーしてwp-config.phpを作成する
 
@@ -132,13 +132,13 @@ define('DB_PASSWORD', 'dbuser1');
 # --------------------------------------------------
 ```
 
-## 認証キーの取得と設定  
+## 認証キーの取得と設定
 
 * wp-config.phpに記載されている  
 [<ttps://api.wordpress.org/secret-key/1.1/salt/>]  
 にアクセスし wp-config.php の55～62行目を書き換える
 
-## WordPressのインストール  
+## WordPressのインストール
 
 * ブラウザから [<http://192.168.33.10/wordpress/>]  
 にアクセスしインストールを実行する
