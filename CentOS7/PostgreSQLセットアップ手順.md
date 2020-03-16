@@ -133,14 +133,6 @@ su - postgres
 
 ***
 
-## initdbのやり直し
-
-```bash
-rm -fr /var/lib/pgsql
-```
-
-***
-
 ## PostgreSQLのアンインストール
 
 不要になったPostgreSQLを削除する手順
