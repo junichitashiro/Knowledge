@@ -2,24 +2,25 @@
 
 ***
 
-* 下記サイトから最新のコマンドを確認する  
+* 最新のコマンドを下記から確認する  
 [<https://brew.sh/index_ja.html>]
 
-* 確認したコマンドの実行
+* インストールの実行
 
-```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
+  ```bash
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ```
 
-* 実行結果の確認
+* 実行結果を表示して確認
 
-```bash
-brew doctor
-# "Your system is ready to brew."の表示で成功
-```
+  ```bash
+  brew doctor
+  # Your system is ready to brew.
+  ```
 
-* バージョン確認
+* バージョン表示して確認
 
-```bash
-brew --version
-```
+  ```bash
+  brew --version
+  # バージョンが表示される
+  ```
