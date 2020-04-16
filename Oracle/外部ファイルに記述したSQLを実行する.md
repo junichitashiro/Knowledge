@@ -1,28 +1,27 @@
 # 外部ファイルに記述したSQLを実行する
 
->## SQL*Plusから @filename.sql で実行する
+## SQL*Plusから @ファイル名.sql で実行する
 
-## sqlファイルのサンプル
+sqlファイルのサンプル
 
-* テーブルを全選択するSQLを実行する
-* 実行結果をログファイルに出力する
+* テーブルを全選択して実行結果をログファイルに出力する
 
-```sql
--- 出力設定
-SET LINESIZE -- 1行に表示する文字の数
-SET WRAP OFF -- 折り返しをしない
-SET TRIMOUT ON -- 表示行の終わりに空白を入れない
-SET TRIMSPOOL ON -- スプール行の終わりに空白を入れない
-SET COLSEP , -- 区切り文字にカンマを指定する
-SET TERMOUT OFF -- 画面に結果を出力しない
-SET FEEDBACK OFF -- 結果件数を表示しない
-SET ECHO OFF -- コンソールメッセージを表示しない
-SET PAGESIZE 0 -- 全行1ページに表示する
+  ```sql
+  -- 出力設定
+  set linesize      -- 1行に表示する文字の数（指定なしなのでデフォルト）
+  set wrap      off -- 1行の表示文字数が多くても折り返しをしない
+  set trimout   on  -- 表示行の終わりに空白を入れない
+  set trimspool on  -- スプール行の終わりに空白を入れない
+  set colsep ,      -- 区切り文字にカンマを指定する
+  set termout   off -- 画面に処理結果を出力しない
+  set feedback  off -- 結果件数を表示しない
+  set echo      off -- コンソールメッセージを表示しない
+  set pagesize 0    -- 全行1ページに表示する
 
-SPOOL sql.log --出力ファイル名
+  spool sql.log     --出力ファイル名
 
--- SQL本体
-SELECT * FROM TABLE_NAME ;
+  -- SQL本体
+  select * from table_name;
 
-SPOOL OFF
-```
+  spool off
+  ```
