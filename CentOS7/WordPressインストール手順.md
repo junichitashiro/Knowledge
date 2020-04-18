@@ -2,8 +2,8 @@
 
 * 作業アカウント：vagrant
 * 使用DB：MariaDB
-* PHPのバージョンアップを実行しておく
-[<https://github.com/junichitashiro/Technical-Notes/blob/master/CentOS7/PHPバージョンアップ手順.md>]
+* PHPのバージョンアップを実行しておく  
+  [<https://github.com/junichitashiro/Technical-Notes/blob/master/CentOS7/PHPバージョンアップ手順.md>]
 
 ***
 
@@ -15,7 +15,7 @@
   view /etc/httpd/conf/httpd.conf
   ```
 
-* 以下内容であること
+* 以下の内容であること
 
   ```bash
   #
@@ -36,7 +36,7 @@
   sudo vi /etc/httpd/conf/httpd.conf
   ```
 
-* 以下のように変更する
+* 以下の内容に変更する
 
   ```bash
   <Directory "/var/www/html">
@@ -56,7 +56,7 @@
 
 ***
 
-## WordPressインストールファイルを取得する
+## WordPressのインストールファイルを取得する
 
 * [<https://ja.wordpress.org/download/>] からWordPressの最新版を取得する
 
@@ -94,9 +94,8 @@
   # Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
   ```
 
-* MariaDBにログインする
-* ログインするとプロンプトの表示が __MariaDB [(none)]>__ に変わる
-
+* MariaDBにログインする  
+  ログインするとプロンプトの表示が __MariaDB [(none)]>__ に変わる
 
   ```bash
   mysql -uroot
