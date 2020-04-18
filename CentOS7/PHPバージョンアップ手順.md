@@ -6,60 +6,68 @@ Zabbixのインストールに都合が悪いため共存させない
 
 ***
 
-## PHPのリポジトリ追加
+## リポジトリの追加
 
-* EPELのリポジトリ追加
+* EPELのリポジトリを追加する
 
-```bash
-yum -y install epel-release
-```
+  ```bash
+  yum -y install epel-release
+  ```
 
-* REMIのリポジトリ追加
+* REMIのリポジトリを追加する
 
-```bash
-rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-```
+  ```bash
+  rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+  ```
 
-## 既存のPHPを削除
+## 既存のPHPを削除する
 
 * 既存のPHPはすべて削除する
 
-```bash
-yum remove php-*
-```
+  ```bash
+  yum -y remove php-*
+  ```
 
-## 新しいバージョンのPHPをインストール
+## 新しいバージョンのPHPをインストールする
 
-* ここでは7.1.Xを指定
+* 7.1を指定してインストール
 
-```bash
-yum -y install --disablerepo=* --enablerepo=epel,remi,remi-safe,remi-php71 php
-```
+  ```bash
+  yum -y install --disablerepo=* --enablerepo=epel,remi,remi-safe,remi-php71 php
+  ```
 
 ***
 
-## 補足　関連性の高いMySQLの拡張機能をインストールしておく
+## 補足：関連性の高いMySQLの拡張機能をインストールしておく
 
-* php-mysqlndのインストール
+* MySQLネイティブドライバのインストール
 
-```bash
-yum -y install yum-utils
-yum-config-manager --enable remi-php71
-yum -y install php-mysqlnd
-```
+  ```bash
+  yum -y install yum-utils
+  yum-config-manager --enable remi-php71
+  yum -y install php-mysqlnd
+  ```
 
-* 確認コマンド
+* PHPモジュールを表示して確認する
 
-```bash
-php -m | grep mysql
-# 以下が表示されること
-mysqli
-mysqlnd
-pdo_mysql
-```
+  ```bash
+  php -m | grep mysql
+  # mysqli
+  # mysqlnd
+  # pdo_mysql
+  ```
 
-* Apacheの再起動
+* バージョンを表示して確認する
 
-```bash
-service httpd restart
-```
+  ```bash
+  php -v
+  # PHP 7.1.33 (cli) (built: Apr 14 2020 10:36:03) ( NTS )
+  # Copyright (c) 1997-2018 The PHP Group
+  # Zend Engine v3.1.0, Copyright (c) 1998-2018 Zend Technologies
+  ```
+
+* Apacheを再起動する
+
+  ```bash
+  systemctl restart httpd.service
+  ```
