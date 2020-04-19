@@ -81,7 +81,7 @@
   systemctl start postgresql-10.service
   ```
 
-* 自動起動を設定する
+* 自動起動の設定をする
 
   ```bash
   systemctl enable postgresql-10.service
@@ -145,7 +145,7 @@ OSのpostgresユーザとPostgreSQLのpostgresユーザを混同しないよう�
   # → -bash-4.2$
   ```
 
-* データベースにログイン
+* データベースにログインする
 
   ```bash
   psql
@@ -153,23 +153,29 @@ OSのpostgresユーザとPostgreSQLのpostgresユーザを混同しないよう�
 
   # psql (10.12)
   # "help" でヘルプを表示します。
+  ```
 
+* ユーザpostgresにパスワード'postgres'を設定する
+
+  ```bash
   alter role postgres with password 'postgres';
   # → ALTER ROLE
   ```
 
-* 設定ファイルを編集してパスワード認証を有効にする
+* 設定ファイルを編集する
 
   ```bash
   vi /var/lib/pgsql/10/data/pg_hba.conf
-  # 下記のように変更する
-  # --------------------------------------------------
+  ```
+
+* 以下のように編集してパスワード認証を有効にする
+
+  ```bash
   local   all    all                    password # ←変更箇所
   # IPv4 local connections:
   host    all    all    127.0.0.1/32    password # ←変更箇所
   # IPv6 local connections:
   host    all    all    ::1/128         password # ←変更箇所
-  # --------------------------------------------------
   ```
 
 * 再起動して設定を反映する
