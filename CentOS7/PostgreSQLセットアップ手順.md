@@ -32,20 +32,20 @@
   yum -y localinstall https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
   ```
 
-* PostgreSQL本体のインストール
+* PostgreSQLの本体をインストールする
 
   ```bash
   yum -y install postgresql10-server
   ```
 
-* バージョンを表示して確認
+* バージョンを表示して確認する
 
   ```bash
   /usr/pgsql-10/bin/postgres --version
   # postgres (PostgreSQL) 10.12
   ```
 
-* 作成されるディレクトリで確認
+* 作成されるディレクトリで確認する
 
   ```bash
   ls -l /usr/pgsql-10/
@@ -58,7 +58,7 @@
 
 ## 初期設定作業
 
-* データベースの初期化
+* データベースを初期化する
 
   ```bash
   /usr/pgsql-10/bin/postgresql-10-setup initdb
@@ -162,7 +162,7 @@ OSのpostgresユーザとPostgreSQLのpostgresユーザを混同しないよう�
   # → ALTER ROLE
   ```
 
-* 設定ファイルを編集する
+* __root__ に戻って設定ファイルを編集する
 
   ```bash
   vi /var/lib/pgsql/10/data/pg_hba.conf
