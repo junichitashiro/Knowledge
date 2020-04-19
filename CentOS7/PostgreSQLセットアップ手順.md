@@ -23,12 +23,13 @@
 
 ## インストール
 
-別バージョンをインストールするときは、指定する対象バージョンを変えて行う。
+ここで指定しているURLは下記サイトの対象パッケージから確認できる。  
+[<https://yum.postgresql.org/repopackages.php#pg10>]
 
 * 公式リポジトリの追加
 
   ```bash
-  yum -y localinstall https://download.postgresql.org/pub/repos/yum/10/redhat/rh el-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+  yum -y localinstall https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
   ```
 
 * PostgreSQL本体のインストール
