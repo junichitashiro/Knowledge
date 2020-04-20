@@ -33,6 +33,8 @@
   %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -c "select * from test_table;" -o %LOGFILE%
   ```
 
+***
+
 * 実行結果をCSV形式で出力する
 
   ```bat
@@ -95,6 +97,8 @@
   select * from test_table
   ```
 
+***
+
 * __input.sql__ ファイルに記述したSQLを実行して結果をCSV形式で出力する
 
   ```bat
@@ -127,4 +131,40 @@
   copy (
       select * from test_table
   ) to stdout with csv delimiter ',' null as '' header;
+  ```
+
+***
+
+* __input.sql__ ファイルに出力パスまで記載する場合
+
+  ```bat
+  @echo off
+  rem --------------------------------------------------
+  rem DB接続パラメータ
+  rem --------------------------------------------------
+  set PGPATH=C:\"Program Files"\PostgreSQL\10\bin\
+  set HOSTNAME=localhost
+  set PORTNUM=5432
+  set DBNAME=postgres
+  set USERNAME=postgres
+  set PGPASSWORD=postgres
+
+  rem --------------------------------------------------
+  rem bat実行パラメータ
+  rem --------------------------------------------------
+  set SQLFILE=input.sql
+
+  rem --------------------------------------------------
+  rem SQL実行
+  rem --------------------------------------------------
+  %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -f %SQLFILE%
+  ```
+
+* __input.sql__ の内容
+* パスは絶対参照で指定する
+
+  ```sql
+  copy (
+      select * from test_table
+  ) to 'D:\test\result.csv' with csv delimiter ',' null as '' header;
   ```
