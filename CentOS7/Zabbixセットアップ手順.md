@@ -6,242 +6,250 @@
 * 作業アカウント：root
 * Zabbixのバージョン：4系
 * 使用DB：MariaDB
-* [<https://github.com/junichitashiro/Technical-Notes/>] の __インストール後の環境整備.md__ を実施しておく
 
 ***
 
-## Zabbixで使用するフォントの対応
+## Zabbixで使用するフォントを準備する
 
 * 日本語用フォントのインストール
 
-```bash
-yum -y install ibus-kkc vlgothic-*
-```
+  ```bash
+  yum -y install ibus-kkc vlgothic-*
+  ```
 
 ***
 
-## ファイアウォール機能の停止
+## ファイアウォール機能を停止する
 
-* 起動中サービスの停止と自動起動の停止  
 安全な環境でない場合は非推奨
 
-```bash
-systemctl stop firewalld
-systemctl disable firewalld
-```
+* 起動中のサービスを停止する
 
-* サービス自動起動一覧の確認
+  ```bash
+  systemctl stop firewalld.service
+  ```
 
-```bash
-# firewalld.service が disabled になっていること
-systemctl list-unit-files -t service | grep firewalld.service
-```
+* 自動起動も停止しておく
+
+  ```bash
+  systemctl disable firewalld.service
+  # Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+  # Removed symlink /etc/systemd/system/basic.target.wants/firewalld.service.
+  ```
+
+* サービス自動起動一覧を表示して確認する
+
+  ```bash
+  systemctl list-unit-files -t service | grep firewalld.service
+  # firewalld.service                             disabled
+  ```
 
 ***
 
-## パッケージのインストール
+## 必要なパッケージをインストールする
 
 * PHPのインストール
 
-```bash
-yum -y install php php-mysql php-mbstring
-```
+  ```bash
+  yum -y install php php-mysql php-mbstring
+  ```
 
-* webサービスの再起動
+* Webサービスを再起動する
 
-```bash
-systemctl restart httpd.service
-```
+  ```bash
+  systemctl restart httpd.service
+  ```
 
 * MariaDBのインストール
 
-```bash
-yum -y install mariadb-server
-```
+  ```bash
+  yum -y install mariadb-server
+  ```
 
-* サービスの開始と自動起動の設定
+* MariaDBのサービスを開始する
 
-```bash
-systemctl start mariadb
-systemctl enable mariadb
-```
+  ```bash
+  systemctl start mariadb.service
+  ```
 
-***
+* MariaDBの自動起動を設定する
 
-## パーミッションの変更
+  ```bash
+  systemctl enable mariadb.service
+  # Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
+  ```
 
-* インストールエラー回避のためパーミッションを変更しておく
+* サービス自動起動一覧を表示して確認する
 
-```bash
-chmod -R 777 /var/www/html
-```
+  ```bash
+  systemctl list-unit-files -t service | grep mariadb.service
+  # mariadb.service                               enabled
+  ```
 
-* Zabbixインストール前に一度CentOS7の再起動をしておく
+* Zabbixインストール前に一度OSを再起動する
 
-```bash
-reboot
-```
+  ```bash
+  reboot
+  ```
 
 ***
 
 ## Zabbix関連パッケージのインストール
 
-* Zabbixリポジトリの登録
+* Zabbixのリポジトリを登録する
 
-```bash
-yum -y install http://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
-```
+  ```bash
+  yum -y install http://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
+  ```
 
-* Zabbixのバイナリ、Webインターフェース、Zabbixエージェントのインストール
+* Zabbixのバイナリ, Webインターフェース, Zabbixエージェントをインストールする
 
-```bash
-yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-web-japanese zabbix-agent
-```
+  ```bash
+  yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-web-japanese zabbix-agent
+  ```
 
 * getコマンドとsenderコマンドのインストール
 
-```bash
-yum -y install zabbix-get zabbix-sender
-```
+  ```bash
+  yum -y install zabbix-get zabbix-sender
+  ```
 
 ## MariaDBの設定変更
 
-* [mysqld]カテゴリの編集
+* [mysqld]カテゴリを編集する
 
-```bash
-vi /etc/my.cnf.d/server.cnf
-# --------------------------------------------------
-# [mysqld]カテゴリを編集、なければ追加する
-[mysqld]
-character-set-server = utf8
-collation-server = utf8_bin
-skip-character-set-client-handshake
-innodb_file_per_table
-# --------------------------------------------------
-```
+  ```bash
+  vi /etc/my.cnf.d/server.cnf
+  # --------------------------------------------------
+  # [mysqld]カテゴリを以下のように編集する
+  [mysqld]
+  character-set-server = utf8
+  collation-server = utf8_bin
+  skip-character-set-client-handshake
+  innodb_file_per_table
+  # --------------------------------------------------
+  ```
 
-* MariaDBのサービス再起動
+* MariaDBのサービスを再起動する
 
-```bash
-systemctl restart mariadb
-```
-
-***
-
-## Zabbix用データベースの作成
-
-* MariaDBにログイン
-
-```bash
-mysql -uroot
-```
-
-* データベースの作成
-
-```sql
-create database zabbix;
-```
-
-* 権限付与とパスワードの設定  
-パスワードに zabbixpassword を設定
-
-```sql
-grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbixpassword';
-```
-
-* MariaDBからログアウト
-
-```sql
-exit
-```
-
-* DBのインポート  
-インストールしたパッケージのバージョンによってパスが異なるので確認すること
-
-```bash
-zcat /usr/share/doc/zabbix-server-mysql-X.X.X/create.sql.gz | mysql -uroot zabbix
-```
-
-* zabbix_server.conf ファイルの設定変更
-
-```bash
-sed -i '/# DBHost=localhost/cDBHost=localhost' /etc/zabbix/zabbix_server.conf
-sed -i '/# DBPassword/cDBPassword=zabbixpassword' /etc/zabbix/zabbix_server.conf
-```
-
-* zabbix.conf ファイルの設定変更
-
-```bash
-sed -i '/date.timezone/a\        php_value\ date.timezone \Asia\/Tokyo' /etc/httpd/conf.d/zabbix.conf
-```
-
-* Zabbixサービスの開始
-
-```bash
-systemctl start zabbix-server
-systemctl enable zabbix-server
-```
-
-* 自動起動の設定
-
-```bash
-systemctl start zabbix-agent
-systemctl enable zabbix-agent
-```
-
-* Webサービスの再起動
-
-```bash
-systemctl restart httpd
-```
-
-* プロセスの確認  
-複数のzabbixプロセスが起動していること
-
-```bash
-ps ax | grep zabbix
-```
+  ```bash
+  systemctl restart mariadb.service
+  ```
 
 ***
 
-## GUIからインストールを実行
+## Zabbix用のデータベースを作成する
 
-## Zabbixにアクセス
+* MariaDBにログインする
 
-* ホスト端末のブラウザから [<http://192.168.33.10/zabbix>] にアクセスする
+  ```bash
+  mysql -uroot
+  # → プロンプトの表示が root から MariaDB に変わる
+  ```
 
-## 事前チェック画面
+* データベースを作成する
 
-* すべて OK になっていること
+  ```sql
+  create database zabbix;
+  # Query OK, 1 row affected (0.00 sec)
+  ```
 
-## DB接続設定画面
+* 権限を付与してパスワードを設定する
 
-* 作成したMariaDBの設定に合わせる
+  ```sql
+  grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbixpassword';
+  # Query OK, 0 rows affected (0.00 sec)
+  # ここではパスワードに zabbixpassword を設定している
+  ```
 
-```ini
-Database type : MySQL
-Database host : localhost
-Database port : 0
-Database name : zabbix
-user          : zabbix
-Password      : zabbixpassword
-```
+* MariaDBからログアウトする
 
-## Zabbixサーバー詳細画面
+  ```sql
+  exit
+  # Bye
+  ```
 
-* Zabbixから監視するときのDB名を指定できるが、希望がなければそのまま次へ
+* DBのインポート
 
-## 事前チェックまとめ画面
+  インストールしたパッケージのバージョンによってパスが異なるので確認すること
 
-* 内容を確認してそのまま次へ
+  ```bash
+  zcat /usr/share/doc/zabbix-server-mysql-4.0.20/create.sql.gz | mysql -uroot zabbix
+  ```
 
-## インストール画面
+* zabbix_server.conf ファイルの設定を変更する
 
-* 完了が表示されたら次へ
+  ```bash
+  sed -i '/# DBHost=localhost/cDBHost=localhost' /etc/zabbix/zabbix_server.conf
+  sed -i '/# DBPassword/cDBPassword=zabbixpassword' /etc/zabbix/zabbix_server.conf
+  ```
 
-## ログイン画面
+* zabbix.conf ファイルの設定を変更する
 
-* 以下の設定でログインする  
-Useraname:Admin  
-Password :zabbix  
+  ```bash
+  sed -i '/date.timezone/a\        php_value\ date.timezone \Asia\/Tokyo' /etc/httpd/conf.d/zabbix.conf
+  ```
+
+* zabbixサーバのサービスを起動して自動起動を設定する
+
+  ```bash
+  systemctl start zabbix-server.service
+  systemctl enable zabbix-server.service
+  # Created symlink from /etc/systemd/system/multi-user.target.wants/zabbix-server.service to /usr/lib/systemd/system/zabbix-server.service.
+  ```
+
+* zabbixエージェントのサービスを起動して自動起動を設定する
+
+  ```bash
+  systemctl start zabbix-agent.service
+  systemctl enable zabbix-agent.service
+  # Created symlink from /etc/systemd/system/multi-user.target.wants/zabbix-agent.service to /usr/lib/systemd/system/zabbix-agent.service.
+  ```
+
+* Webサービスを再起動する
+
+  ```bash
+  systemctl restart httpd.service
+  ```
+
+* プロセスを表示して複数のzabbixプロセスが起動していることを確認する
+
+  ```bash
+  ps ax | grep zabbix
+  ```
+
+***
+
+## GUIからインストールを実行する
+
+## Zabbixにアクセスして以下を実行する
+
+1. ホスト端末のブラウザから [<http://192.168.33.10/zabbix>] にアクセスする
+
+2. 事前チェック画面ですべて OK になっていること
+
+3. DB接続設定画面で作成したMariaDBの設定に合わせる
+
+    ```ini
+    Database type : MySQL
+    Database host : localhost
+    Database port : 0
+    Database name : zabbix
+    user          : zabbix
+    Password      : zabbixpassword
+    ```
+
+4. Zabbixサーバー詳細画面
+
+    Zabbixから監視するときのDB名を指定できるが、希望がなければそのまま次へ
+
+5. 事前チェックまとめ画面で内容を確認してそのまま次へ進む
+
+6. インストール画面で完了が表示されたら次へ進む
+
+7. ログイン画面が表示されたら以下の設定でログインする
+
+    Useraname:Admin  
+    Password :zabbix
+
 ログインできればセットアップ完了
