@@ -98,7 +98,7 @@
 * CentOS7以降 __netstat__ コマンドが非推奨となっているため __net-tools__ を実行して有効化する
 
   ```bash
-  yum -y install libaio bc zip unzip net-tools
+  yum -y install  net-tools
   ```
 
 ## Oracleパッケージのインストール
