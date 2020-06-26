@@ -100,14 +100,14 @@ __ここ以外では表示できないので注意！！__
   # Linux version 4.14.181-108.257.amzn1.x86_64 (mockbuild@koji-pdx-corp-builder-64003) (gcc version 7.2.1 20170915 (Red Hat 7.2.1-2) (GCC)) #1 SMP Wed May 27 02:43:03 UTC 2020
   ```
 
-* MySQL
+* MySQLのバージョン
 
   ```bash
   mysql --version
   # mysql  Ver 14.14 Distrib 5.5.62, for Linux (x86_64) using readline 5.1
   ```
 
-* MySQL
+* PHPのバージョン
 
   ```bash
   php -v
@@ -117,21 +117,21 @@ __ここ以外では表示できないので注意！！__
   #     with Xdebug v2.5.5, Copyright (c) 2002-2017, by Derick Rethans
   ```
 
-* Python
+* Pythonのバージョン
 
   ```bash
   python -V
   # Python 3.6.10
   ```
 
-* Node.js
+* Node.jsのバージョン
 
   ```bash
   node -v
   # v10.21.0
   ```
 
-* Ruby
+* RubyとRailsのバージョン
 
   ```bash
   ruby -v
@@ -143,9 +143,9 @@ __ここ以外では表示できないので注意！！__
 
 ***
 
-### OSの更新をする
+### OSを最新化する
 
-* yumの最新化をする
+* yumで最新化処理を実行する
 
   ```bash
   sudo yum -y update
