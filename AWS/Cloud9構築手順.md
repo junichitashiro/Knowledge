@@ -4,13 +4,13 @@
 
 ***
 
-## 【IAM】での作業
+## １．【IAM】での作業
 
 [ユーザー追加手順](https://github.com/junichitashiro/Technical-Notes/blob/master/AWS/ユーザー追加手順.md) に従ってユーザーグループとユーザーを追加する
 
 ***
 
-## 【Cloud9】での作業
+## ２．【Cloud9】での作業
 
 英語表記になっている場合は上部メニューからリージョンを __東京__ に変える
 
