@@ -41,4 +41,7 @@
   # URL指定でIEページのオブジェクトを取得する
   # ([-1]で同一ページの最新タブのオブジェクトを取得する)
   $ie = @($ieList | Where-Object { $_.LocationURL -match $url })[-1]
+
+  # ドキュメントオブジェクトを取得する
+  $doc = $ie.document
   ```
