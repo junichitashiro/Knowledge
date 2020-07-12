@@ -5,7 +5,7 @@
 * VBA実行中に警告メッセージを表示させない
 
   ```vb
-  Sub AlertOnOff()
+  Sub alertOnOff()
       ' 警告を非表示にする
       Application.DisplayAlerts = False
 
