@@ -52,20 +52,20 @@
 * 新しいGitの取得
 
   ```bash
-  # 2.23.0のバージョンを指定している
-  sudo wget https://www.kernel.org/pub/software/scm/git/git-2.23.0.tar.gz
+  # 2.26.0のバージョンを指定している
+  sudo wget https://www.kernel.org/pub/software/scm/git/git-2.26.0.tar.gz
   ```
 
 * 取得したファイルを展開する
 
   ```bash
-  sudo tar vfx git-2.23.0.tar.gz
+  sudo tar vfx git-2.26.0.tar.gz
   ```
 
 * インストールの事前チェックとコンパイル
 
   ```bash
-  cd git-2.23.0
+  cd git-2.26.0
   sudo make configure
   sudo ./configure --prefix=/usr
   sudo make all

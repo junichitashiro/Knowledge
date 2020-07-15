@@ -12,8 +12,7 @@
 * VirtualBoxのダウンロードページへアクセスする  
 [<https://www.virtualbox.org/wiki/Downloads>]
 
-* Windows用インストーラ __VirtualBox x.x.xx for Windows hosts x86/amd64__ をダウンロードして実行する  
-※ __x.x.xx__ はバージョン
+* Windows hostsのリンクからインストーラをダウンロードして実行する  
 
 ### Mac
 
@@ -43,7 +42,7 @@ Windows
 
 * 下記Vagrantのダウンロードページへアクセス  
 [<http://www.vagrantup.com/downloads.html>]  
-WINDOWSカテゴリから「Universal (32 and 64-bit)」をダウンロードしてインストーラを実行
+WINDOWSカテゴリから対象bit数のインストーラをダウンロードして実行する
 
 Mac
 
