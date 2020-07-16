@@ -13,7 +13,7 @@
 * 手動で/etc/hostnameを編集する場合
 
   ```bash
-  vi /etc/hostname
+  sudo vi /etc/hostname
   # --------------------------------------------------
   # 設定したいホスト名を追記して上書き保存する
   dev-centos7
@@ -37,7 +37,6 @@
 * 現在のログインシェルに設定を反映する
 
   ```bash
-  sudo localectl set-locale LANG=ja_JP.UTF-8
   source /etc/locale.conf
   ```
 
