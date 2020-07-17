@@ -5,13 +5,12 @@
 
 ***
 
-## yum のリポジトリサーバのドメインを設定する
+## yum のリポジトリサーバーのドメインを設定する
 
-* 国内サーバを指定して高速化を図る
+* 国内サーバーを指定して高速化を図る
 
   ```bash
   sudo sed -i '/#include_only=/a include_only=.JP' /etc/yum/pluginconf.d/fastestmirror.conf
-  sudo yum clean all
   ```
 
 * 手動で書き換える場合
@@ -35,21 +34,21 @@
 
 ## Gitのセットアップ準備
 
-デフォルトでインストールされているGitは古い場合が多いのでアップデートする。
+デフォルトでインストールされているGitは古い場合が多いのでアップデートする
 
-* 古いバージョンの削除
+* 古いバージョンを削除する
 
   ```bash
   sudo yum -y remove git
   ```
 
-* 開発用パッケージのインストール
+* 開発用パッケージをインストールする
 
   ```bash
   sudo yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker autoconf
   ```
 
-* 新しいGitの取得
+* 新しいGitを取得する
 
   ```bash
   # 2.26.0のバージョンを指定している
@@ -62,7 +61,7 @@
   sudo tar vfx git-2.26.0.tar.gz
   ```
 
-* インストールの事前チェックとコンパイル
+* インストールの事前チェックをしてコンパイルする
 
   ```bash
   cd git-2.26.0

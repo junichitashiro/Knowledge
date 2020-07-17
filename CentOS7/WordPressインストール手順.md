@@ -7,6 +7,16 @@
 
 ***
 
+## unzipのインストール
+
+* zipファイルを展開する必要があるので __unzip__ をインストールする
+
+  ```bash
+  sudo yum -y install unzip
+  ```
+
+***
+
 ## DocumentRootの確認
 
 * __DocumentRoot__ がwordpressのファイル配置場所（ここでは"/var/www/html"）と同じであることを確認する
@@ -58,7 +68,7 @@
 
 ## WordPressのインストールファイルを取得する
 
-* [<https://ja.wordpress.org/download/>] からWordPressの最新版を取得する
+* WordPressの公式サイトから最新版のファイルを取得する
 
   ```bash
   cd /var/www/html
@@ -107,9 +117,12 @@
   ```
 
 * 以下の設定のデータベースを作成する
-  * データベース名：wordpress
-  * ユーザ名：dbuser
-  * パスワード：dbuser1
+
+  |設定項目|設定値|
+  |--|--|
+  |データベース名|wordpress|
+  |ユーザー名|dbuser|
+  |パスワード|dbuser1|
 
 * データベースの作成
 
@@ -173,7 +186,7 @@
 
 ***
 
-## コンフィグファイルの作成
+## configファイルの作成
 
 * __wp-config-sample.php__ をコピーして __wp-config.php__ を作成する
 

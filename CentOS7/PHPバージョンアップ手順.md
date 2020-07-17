@@ -30,10 +30,10 @@ Zabbixのインストールに都合が悪いため共存させない
 
 ## 新しいバージョンのPHPをインストールする
 
-* 7.1を指定してインストール
+* 7.4を指定してインストール
 
   ```bash
-  yum -y install --disablerepo=* --enablerepo=epel,remi,remi-safe,remi-php71 php
+  yum -y install --disablerepo=* --enablerepo=epel,remi,remi-safe,remi-php74 php
   ```
 
 ***
@@ -44,7 +44,7 @@ Zabbixのインストールに都合が悪いため共存させない
 
   ```bash
   yum -y install yum-utils
-  yum-config-manager --enable remi-php71
+  yum-config-manager --enable remi-php74
   yum -y install php-mysqlnd
   ```
 
@@ -61,9 +61,9 @@ Zabbixのインストールに都合が悪いため共存させない
 
   ```bash
   php -v
-  # PHP 7.1.33 (cli) (built: Apr 14 2020 10:36:03) ( NTS )
-  # Copyright (c) 1997-2018 The PHP Group
-  # Zend Engine v3.1.0, Copyright (c) 1998-2018 Zend Technologies
+  # PHP 7.4.8 (cli) (built: Jul  9 2020 08:57:23) ( NTS )
+  # Copyright (c) The PHP Group
+  # Zend Engine v3.4.0, Copyright (c) Zend Technologies
   ```
 
 * Apacheを再起動する
