@@ -1,7 +1,7 @@
-# VagrantでローカルにCentOSをセットアップする
+# VagrantでローカルにLinux環境をつくる
 
 * OS：CentOS7
-* Macで作業する場合は事前にHomebrewをインストールしておく
+* Macで作業する場合は事前に __Homebrew__ をインストールしておく
 
 ***
 
@@ -22,16 +22,16 @@
   brew cask install VirtualBox
   ```
 
+* インストール済みの場合はアップデートする
+
+  ```bash
+  brew cask reinstall VirtualBox
+  ```
+
 * バージョンを表示して確認する
 
   ```bash
   VirtualBox --version
-  ```
-
-* インストール済みでアップデートする場合
-
-  ```bash
-  brew cask reinstall VirtualBox
   ```
 
 ***
@@ -40,9 +40,10 @@
 
 Windows
 
-* 下記Vagrantのダウンロードページへアクセス  
-[<http://www.vagrantup.com/downloads.html>]  
-WINDOWSカテゴリから対象bit数のインストーラをダウンロードして実行する
+* 下記Vagrantのダウンロードページへアクセスする  
+[<http://www.vagrantup.com/downloads.html>]
+
+* WINDOWSカテゴリから対象bit数のインストーラをダウンロードして実行する
 
 Mac
 
@@ -54,7 +55,7 @@ Mac
   vagrant --version
   ```
 
-* アップデートの場合
+* インストール済みの場合はアップデートする
 
   ```bash
   brew cask reinstall vagrant
@@ -64,15 +65,16 @@ Mac
 
 ## Box作成の準備
 
+### コマンドプロンプト、ターミナルから作業する
+
 * VagrantのBox用ディレクトリを作成する
-* コマンドプロンプト、ターミナルから作業する
 
   ```bash
   mkdir vagrant
   cd vagrant
   ```
 
-* Boxごとにディレクトリ分けしたほうが管理しやすいため各Box用のディレクトリを作成
+* Boxごとにディレクトリ分けしたほうが管理しやすいため各Box用のディレクトリを作成する
 
   ```bash
   mkdir dev-centos7
@@ -84,17 +86,17 @@ Mac
 * Box公開ページへアクセスする  
 [<http://www.vagrantbox.es/>]
 
-* 対象となるBoxのURLをコピーするかBoxファイルをダウンロードしておく
+* 対象となるBoxのURLをコピーしておく
 
 * Boxを追加する
 
   ```bash
-  # vagrant box add [Box名] [コピーしたBoxのURLまはたパス]
-  vagrant box add dev-centos7 vagrant-centos-7.2.box
+  # vagrant box add [Box名] [コピーしたBoxのURL]
+  vagrant box add dev-centos7 https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.2/vagrant-centos-7.2.box
   ```
 
 * Boxを初期化する  
-実行後Box名のディレクトリにVagrantfileが作成される
+初期化するとBox名のディレクトリに __Vagrantfile__ が作成される
 
   ```bash
   # vagrant init [Box名]
@@ -105,19 +107,21 @@ Mac
 
 ## Vagrantfileの編集
 
-* 作成されたVagrantfileの下記の行をコメントインして保存する
-* ブラウザから下記アドレスを指定するとWEBサーバとしてアクセスできるようになる
+* 作成された __Vagrantfile__ の下記の行をコメントインして保存する
+
+* このIPアドレスを指定してSSH接続する  
+  また、ブラウザからこのアドレスを指定するとWebサーバへのアクセスができる
 
   ```ruby
   config.vm.network "private_network", ip: "192.168.33.10"
   ```
 
-## ホストOSとゲストOSのフォルダを共有する設定（任意）
+## フォルダを共有する設定（任意）
 
-* ホスト端末の"share"フォルダとゲスト端末の"/tmp/share"フォルダを共有する設定
+* ホスト端末の __share__ フォルダとゲスト端末の __/tmp/share__ フォルダを共有する設定
+* __create: true__ はフォルダがなかった場合作成するオプション
 
   ```bash
-  # [create: true]はフォルダがなかった場合作成するオプション
   config.vm.synced_folder "./share", "/tmp/share", owner: "vagrant", group: "vagrant" , create: true
   ```
 
@@ -125,19 +129,19 @@ Mac
 
 ## Boxの起動
 
-* Vagrantfileと同一のディレクトリでコマンドを実行する
+* __Vagrantfile__ と同一のディレクトリでコマンドを実行する
 
   ```bash
   vagrant up
   ```
 
-## ターミナルからBoxにアクセス
+## ターミナルからBoxにアクセスする
 
 * Boxが起動している状態でTeraTermなどからアクセスする
 
   ```bash
-  TCP/IP ホスト：127.0.0.1
-  TCPポート：2222
+  TCP/IP ホスト：192.168.33.10
+  TCPポート：22
   サービス：SSH SSHバージョン：SSH2
   ```
 
@@ -147,10 +151,10 @@ Mac
   ※rootもパスワードは同じ
   ```
 
-* Vagrantfileの編集を行っている場合は次の設定でもアクセス可能
+* __Vagrantfile__ の編集を行わなくても次の設定でアクセス可能
 
   ```bash
-  TCP/IP ホスト：192.168.33.10
-  TCPポート：22
+  TCP/IP ホスト：127.0.0.1
+  TCPポート：2222
   サービス：SSH SSHバージョン：SSH2
   ```
