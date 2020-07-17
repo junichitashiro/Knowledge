@@ -22,7 +22,15 @@ Zabbixのインストールに都合が悪いため共存させない
 
 ## 既存のPHPを削除する
 
-* 既存のPHPはすべて削除する
+* PHPのバージョンを確認して古い場合は削除する
+
+  ```bash
+  php -v
+  ```
+
+  >PHP X.X.X (cli) (built: Jul  9 2020 08:57:23) ( NTS )
+
+* 既存のPHPを削除するコマンド
 
   ```bash
   yum -y remove php-*
@@ -52,19 +60,21 @@ Zabbixのインストールに都合が悪いため共存させない
 
   ```bash
   php -m | grep mysql
-  # mysqli
-  # mysqlnd
-  # pdo_mysql
   ```
+  > mysqli  
+  mysqlnd  
+  pdo_mysql
+
 
 * バージョンを表示して確認する
 
   ```bash
   php -v
-  # PHP 7.4.8 (cli) (built: Jul  9 2020 08:57:23) ( NTS )
-  # Copyright (c) The PHP Group
-  # Zend Engine v3.4.0, Copyright (c) Zend Technologies
   ```
+
+  > PHP 7.4.8 (cli) (built: Jul  9 2020 08:57:23) ( NTS )  
+  Copyright (c) The PHP Group  
+  Zend Engine v3.4.0, Copyright (c) Zend Technologies
 
 * Apacheを再起動する
 
