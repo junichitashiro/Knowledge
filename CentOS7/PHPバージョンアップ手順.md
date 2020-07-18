@@ -61,10 +61,10 @@ Zabbixのインストールに都合が悪いため共存させない
   ```bash
   php -m | grep mysql
   ```
+
   > mysqli  
   mysqlnd  
   pdo_mysql
-
 
 * バージョンを表示して確認する
 

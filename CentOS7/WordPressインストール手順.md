@@ -50,17 +50,10 @@
 
   ```bash
   <Directory "/var/www/html">
-
-    # --------------------------------------------------
-    #
-    # AllowOverride controls what directives may be placed in .htaccess files.
-    # It can be "All", "None", or any combination of the keywords:
-    #   Options FileInfo AuthConfig Limit
-    #
-    # AllowOverride None
-    AllowOverride All
-    # --------------------------------------------------
-
+    Options Indexes FollowSymLinks
+    # AllowOverride None # コメントアウトする
+    AllowOverride All    # 追記する
+    Require all granted
   </Directory>
   ```
 
@@ -101,20 +94,22 @@
 
   ```bash
   sudo systemctl enable mariadb
-  # Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
   ```
+
+  > Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
 
 * MariaDBにログインする  
   ログインするとプロンプトの表示が __MariaDB [(none)]>__ に変わる
 
   ```bash
   mysql -uroot
-  # Welcome to the MariaDB monitor.  Commands end with ; or \g.
-  # Your MariaDB connection id is 2
-  # Server version: 5.5.64-MariaDB MariaDB Server
-  # Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
-  # Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
   ```
+
+  > Welcome to the MariaDB monitor.  Commands end with ; or \g.  
+  Your MariaDB connection id is 2  
+  Server version: 5.5.64-MariaDB MariaDB Server  
+  Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.  
+  Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 * 以下の設定のデータベースを作成する
 
@@ -128,22 +123,25 @@
 
   ```sql
   create database wordpress;
-  -- Query OK, 1 row affected (0.00 sec)
   ```
+
+  > Query OK, 1 row affected (0.00 sec)
 
 * __dbuser__ に データベース __wordpress__ を変更する権限を付与する
 
   ```sql
   grant all privileges on wordpress.* to dbuser@localhost identified by 'dbuser1';
-  -- Query OK, 0 rows affected (0.00 sec)
   ```
+
+  > Query OK, 0 rows affected (0.00 sec)
 
 * MariaDBからログアウトする
 
   ```sql
   exit
-  -- Bye
   ```
+
+  > Bye
 
 ***
 
@@ -194,7 +192,7 @@
   sudo cp wp-config-sample.php wp-config.php
   ```
 
-* __wp-config.php__ の内容を編集し、作成したデータベースの設定情報を
+* __wp-config.php__ の内容を編集し、作成したデータベースの設定情報を入力する
 
   ```bash
   sudo sed -i 's/database_name_here/wordpress/g' /var/www/html/wordpress/wp-config.php
