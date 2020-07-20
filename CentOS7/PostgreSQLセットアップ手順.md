@@ -134,7 +134,6 @@ OSのpostgresユーザーとPostgreSQLのpostgresユーザーを混同しない�
 
 * rootで実行する
 
-
   ```bash
   passwd postgres
   ```
@@ -191,9 +190,8 @@ OSのpostgresユーザーとPostgreSQLのpostgresユーザーを混同しない�
   exit
   ```
 
-  > ログアウト
-
-  > -bash-4.2$  
+  > ログアウト  
+    -bash-4.2$  
     → root
 
 * 設定ファイルを編集する
