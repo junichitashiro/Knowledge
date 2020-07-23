@@ -39,7 +39,7 @@
 * __input.sql__ の内容
 
   ```sql
-  select * from test_table
+  select * from test_table;
   ```
 
 ***
@@ -75,7 +75,7 @@
 
 ### __input.sql__ の内容
 
-* SQLを"copy (" と ")to stdout with csv delimiter ',' ;" の中に記述する
+* SQLを __copy (__ と __)to stdout with csv delimiter ',' ;__ の中に記述する
 * ここでは出力先を標準出力、nullを空白、ヘッダ出力ありを指定している
 
   ```sql
@@ -113,7 +113,7 @@
   %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -f %SQLFILE%
   ```
 
-* __input.sql__ 出力先を指定する
+* __input.sql__ で出力先を指定する
 * 出力先は絶対参照で指定する
 
   ```sql
