@@ -1,4 +1,4 @@
-# Homebrewのインストール
+# Homebrewのインストールと最新化
 
 ***
 
@@ -9,6 +9,18 @@
 
   ```bash
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ```
+
+* Homebrewの最新化
+
+  ```bash
+  brew update
+  ```
+
+* HomebrewとHomebrewでインストールしたパッケージの最新化
+
+  ```bash
+  brew upgrade
   ```
 
 * 実行結果を表示して確認
