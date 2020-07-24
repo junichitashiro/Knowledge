@@ -11,28 +11,24 @@
 * 通常のSQL実行結果
 
   ```sql
-  select * from test_table where price = 260;
+  select * from test_table where price = 270;
   ```
 
 * 実行結果
 
-  menu|price|cal
-  --|--|--
-  ブレンド             | 260 | 4
-  アメリカン           | 260 | 3
-  ティー(ダージリン)   | 260 | 1
-  ティー(アールグレイ) | 260 | 1
-  ティー(アッサム)     | 260 | 1
-  アイスカフェ         | 260 | 4
-  アイスティー         | 260 | 3
-  (7 行)|
+  |menu|category|price|cal|
+  |--|--|--|--|
+  |ブレンドコーヒー|drink|270|7|
+  |アメリカンコーヒー|drink|270|7|
+  |エスプレッソコーヒー|drink|270|10|
+  (3 行)|
 
 ***
 
 ### バッチファイルの設定
 
 * __-v__ オプションを指定する
-* SQLに渡す変数名（PRICE）と値（260）を設定する
+* SQLに渡す変数名（PRICE）と値（270）を設定する
 
   ```bat
   @echo off
@@ -54,7 +50,7 @@
   rem --------------------------------------------------
   rem SQL実行
   rem --------------------------------------------------
-  %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -f %SQLFILE% -v PRICE=260
+  %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -f %SQLFILE% -v PRICE=270
   ```
 
 ### input.sqlの設定
@@ -67,16 +63,12 @@
 
 * 実行結果
 
-  menu|price|cal
-  --|--|--
-  ブレンド             | 260 | 4
-  アメリカン           | 260 | 3
-  ティー(ダージリン)   | 260 | 1
-  ティー(アールグレイ) | 260 | 1
-  ティー(アッサム)     | 260 | 1
-  アイスカフェ         | 260 | 4
-  アイスティー         | 260 | 3
-  (7 行)|
+  |menu|category|price|cal|
+  |--|--|--|--|
+  |ブレンドコーヒー|drink|270|7|
+  |アメリカンコーヒー|drink|270|7|
+  |エスプレッソコーヒー|drink|270|10|
+  (3 行)|
 
 ***
 
@@ -85,25 +77,24 @@
 * 通常のSQL実行結果
 
   ```sql
-  select * from test_table where price = 260 and cal = 3;
-  select * from test_table where price = 260 and cal = 3;
+  select * from test_table where price = 270 and cal = 7;
+  select * from test_table where price = 270 and cal = 10;
   ```
 
 * 実行結果1
 
-  menu|price|cal
-  --|--|--
-  アメリカン           | 260 | 3
-  アイスティー         | 260 | 3
+  |menu|category|price|cal|
+  |--|--|--|--|
+  |ブレンドコーヒー|drink|270|7|
+  |アメリカンコーヒー|drink|270|7|
   (2 行)|
 
 * 実行結果2
 
-  menu|price|cal
-  --|--|--
-  ブレンド             | 260 | 4
-  アイスカフェ         | 260 | 4
-  (2 行)|
+  |menu|category|price|cal|
+  |--|--|--|--|
+  |エスプレッソコーヒー|drink|270|10|
+  (1 行)|
 
 ***
 
@@ -139,17 +130,17 @@
   )
   ```
 
-### input.txtの設定
+### 変数を記述するinput.txtの設定
 
 * カンマ区切りで値を記述する
 
   ```txt
   no,price,cal
-  1,260,3
-  2,260,4
+  1,270,7
+  2,270,10
   ```
 
-### input.sqlの設定
+### 変数を受け取るinput.sqlの設定
 
 * __:'PRICE'__ と __:'CAL'__ で変数値を受け取る
 
@@ -159,16 +150,15 @@
 
 * 実行結果1（result_1.log）
 
-  menu|price|cal
-  --|--|--
-  アメリカン           | 260 | 3
-  アイスティー         | 260 | 3
+  |menu|category|price|cal|
+  |--|--|--|--|
+  |ブレンドコーヒー|drink|270|7|
+  |アメリカンコーヒー|drink|270|7|
   (2 行)|
 
 * 実行結果2（result_2.log）
 
-  menu|price|cal
-  --|--|--
-  ブレンド             | 260 | 4
-  アイスカフェ         | 260 | 4
-  (2 行)|
+  |menu|category|price|cal|
+  |--|--|--|--|
+  |エスプレッソコーヒー|drink|270|10|
+  (1 行)|

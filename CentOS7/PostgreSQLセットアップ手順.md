@@ -23,7 +23,7 @@
 
 ## インストール
 
-ここで指定しているURLは下記サイトの対象パッケージから確認できる。  
+指定するリポジトリのURLはパッケージごとに異なり、下記サイトで確認できる。  
 [<https://yum.postgresql.org/repopackages.php#pg10>]
 
 * 公式リポジトリの追加
@@ -42,17 +42,19 @@
 
   ```bash
   /usr/pgsql-10/bin/postgres --version
-  # postgres (PostgreSQL) 10.12
   ```
+
+  > postgres (PostgreSQL) 10.13
 
 * 作成されるディレクトリで確認する
 
   ```bash
   ls -l /usr/pgsql-10/
-  # drwxr-xr-x 2 root root 4096  1月 23 09:00 bin
-  # drwxr-xr-x 2 root root 4096  1月 23 09:00 lib
-  # drwxr-xr-x 7 root root 4096  1月 23 09:00 share
   ```
+
+  > drwxr-xr-x 2 root root 4096  1月 23 09:00 bin  
+    drwxr-xr-x 2 root root 4096  1月 23 09:00 lib  
+    drwxr-xr-x 7 root root 4096  1月 23 09:00 share
 
 ***
 
@@ -62,8 +64,9 @@
 
   ```bash
   /usr/pgsql-10/bin/postgresql-10-setup initdb
-  # Initializing database ... OK
   ```
+
+  > Initializing database ... OK
 
 * 初期化をやり直す場合は関連ファイルを削除してから行う
 
@@ -85,84 +88,113 @@
 
   ```bash
   systemctl enable postgresql-10.service
-  # Created symlink from /etc/systemd/system/multi-user.target.wants/postgresql-10.service to /usr/lib/systemd/system/postgresql-10.service.
   ```
+
+  > Created symlink from /etc/systemd/system/multi-user.target.wants/postgresql-10.service to /usr/lib/systemd/system/postgresql-10.service.
 
 ***
 
 ## データベースの動作確認
 
-PostgreSQLインストール時にpostgresユーザがOSに追加されるので、追加されたユーザで動作確認を行う。
+PostgreSQLインストール時にpostgresユーザーがOSに追加されるので、追加されたユーザーで動作確認を行う。
 
 * postgresに切り替える
 
   ```bash
   su - postgres
-  # → プロンプトの表示が root から -bash-4.2 に変わる
   ```
+
+  > プロンプトの表示が root から -bash-4.2 に変わる
 
 * テーブル一覧を表示する
 
   ```bash
   psql -l
-  # デフォルトのテーブル一覧が表示される
   ```
+
+  > デフォルトのテーブル一覧が表示される
 
 * バージョンを表示する
 
   ```bash
   psql --version
-  # psql (PostgreSQL) 10.12
   ```
+
+  > psql (PostgreSQL) 10.13
 
 ***
 
-## OSのpostgresユーザにログインパスワードを設定する
+## OSのpostgresユーザーにログインパスワードを設定する
 
-インストール時に作成されるpostgresユーザはパスワードが設定されていない。  
+インストール時に作成されるpostgresユーザーはパスワードが設定されていない。  
 DB接続ツールを使うとき等、パスワードが必要になるため設定しておく。  
-OSのpostgresユーザとPostgreSQLのpostgresユーザを混同しないように注意。
+OSのpostgresユーザーとPostgreSQLのpostgresユーザーを混同しないように注意。
 
-* postgresユーザにパスワードを設定
+* postgresユーザーにパスワードを設定する
+
+* rootで実行する
 
   ```bash
-  # rootで実行
   passwd postgres
-    ユーザー postgres のパスワードを変更。
-    新しいパスワード: # パスワードを入力
-    新しいパスワードを再入力してください: # パスワードを再入力
-    passwd: すべての認証トークンが正しく更新できました。
   ```
+
+  > ユーザー postgres のパスワードを変更。
+
+  ```bash
+  新しいパスワード: # パスワードを入力
+  新しいパスワードを再入力してください: # パスワードを再入力
+  ```
+  
+  > passwd: すべての認証トークンが正しく更新できました。
 
 ***
 
-## PostgreSQLのpostgresユーザにパスワードを設定する
+## PostgreSQLのpostgresユーザーにパスワードを設定する
 
-* postgresユーザに切り替える
+* postgresユーザーに切り替える
 
   ```bash
   su - postgres
-  # → -bash-4.2$
   ```
+
+  > -bash-4.2$
 
 * データベースにログインする
 
   ```bash
   psql
-  # → postgres
-
-  # psql (10.12)
-  # "help" でヘルプを表示します。
   ```
 
-* ユーザpostgresにパスワード'postgres'を設定する
+  > postgres  
+    psql (10.13)  
+    "help" でヘルプを表示します。
+
+* ユーザーpostgresにパスワード'postgres'を設定する
 
   ```bash
   alter role postgres with password 'postgres';
-  # → ALTER ROLE
   ```
 
-* __root__ に戻って設定ファイルを編集する
+  > ALTER ROLE
+
+* データベースからログアウトして __root__ に戻る
+
+  ```bash
+  \q
+  ```
+
+  > postgres-#  
+    → -bash-4.2$
+
+  ```bash
+  exit
+  ```
+
+  > ログアウト  
+    -bash-4.2$  
+    → root
+
+* 設定ファイルを編集する
 
   ```bash
   vi /var/lib/pgsql/10/data/pg_hba.conf
@@ -171,11 +203,11 @@ OSのpostgresユーザとPostgreSQLのpostgresユーザを混同しないよう�
 * 以下のように編集してパスワード認証を有効にする
 
   ```bash
-  local   all    all                    password # ←変更箇所
+  local   all    all                    password # peerから変更する箇所
   # IPv4 local connections:
-  host    all    all    127.0.0.1/32    password # ←変更箇所
+  host    all    all    127.0.0.1/32    password # peerから変更する箇所
   # IPv6 local connections:
-  host    all    all    ::1/128         password # ←変更箇所
+  host    all    all    ::1/128         password # peerから変更する箇所
   ```
 
 * 再起動して設定を反映する
@@ -189,7 +221,7 @@ OSのpostgresユーザとPostgreSQLのpostgresユーザを混同しないよう�
   ```bash
   psql -U postgres
   Password for user postgres: # 設定したパスワードを入力
-  psql (10.12)
+  psql (10.13)
   Type "help" for help.
   ```
 
@@ -211,9 +243,10 @@ OSのpostgresユーザとPostgreSQLのpostgresユーザを混同しないよう�
   yum -y remove postgresql-libs
   ```
 
-* postgresユーザの削除
+* postgresユーザーの削除
+
+* __-r__ はユーザーの作成データを削除するオプション
 
   ```bash
-  # -r はユーザの作成データを削除するオプション
   userdel -r postgres
   ```
