@@ -1,6 +1,6 @@
-# macOSにGitをインストールする
+# macOSでGitを最新化する
 
-* masOSセットアップ後のgitインストール手順
+* masOSセットアップ後のgit最新化手順
 * 事前にHomebrewをインストールしておく
 
 ***
