@@ -1,25 +1,37 @@
-# Pythonのセットアップ
+# Python開発環境のセットアップ
 
-* Google Colaboratoryが使えない場合の備忘録
-* 事前にHomebrewをインストールしておく
+インストール手順
+
+1. Xcode（Mac用開発ツール）
+2. Homebrew（アプリ管理ツール）
+3. pyenv（Pythonのバージョン切替）
+4. Python 3.X（本体）
+
+上記をインストールした後、 __venv__ による開発用の仮想環境を作成する
 
 ***
 
-## python3とpyenvのインストール
+## Xcodeのインストール
 
-* python3のインストール
+* App Storeで __Xcode__ を検索してインストールする
 
-  ```bash
-  brew install python3
-  ```
-
-* バージョンを表示して確認
+* XCodeの __Command Line Tools__ をインストールする
 
   ```bash
-  python3 --version
+  xcode-select --install
   ```
 
-* pyenvをインストールする
+***
+
+## Homebrewのインストール
+
+* [Homebrew最新化手順](https://github.com/junichitashiro/Technical-Notes/blob/master/Mac/Homebrew最新化手順.md)でHomebrewをインストール、もしくは最新化しておく
+
+***
+
+## pyenvのインストール
+
+* Homebrewからpyenvをインストールする
 
   ```bash
   brew install pyenv
@@ -28,34 +40,48 @@
 * pathの設定
 
   ```bash
-  sudo vim .bash_profile
+  sudo vim ~/.bash_profile
   ```
 
-* 以下を設定する
+* 以下の2行を追記する
 
   ```bash
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
+  # ~/.pyenvではなく /usr/loca/var/pyenv を使用する
+  export PYENV_ROOT=/usr/local/var/pyenv
+
+  # 自動補完機能を提供してもらう
+  if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
   ```
 
-* 設定の反映
+* 設定を反映させる
 
   ```bash
   source .bash_profile
   ```
 
+* 確認コマンド
+
+  ```bash
+  brew list | grep pyenv
+  # -> pyenv が表示される
+  ```
+
+  ```bash
+  pyenv --version
+  # -> pyenv とバージョン番号が表示される
+  ```
+
 ***
 
-## pyenvによるpythonのインストール
+## Pythonのインストール
 
-* pyenvでインストール可能な一覧を表示する
+* pyenvからインストール可能な一覧を表示する
 
   ```bash
   pyenv install --list
   ```
 
-* pyenvでpythonをインストールする
+* pyenvからpythonをインストールする
 
   ```bash
   pyenv install 3.X.X
@@ -66,54 +92,78 @@
   ```bash
   pyenv global 3.X.X
   pyenv rehash
+  ```
+
+* Pythonのバージョン確認コマンド
+
+  ```bash
   python --version
+  # -> Python 3.X.X
+  ```
+
+* pyenvのバージョン確認コマンド
+
+  ```bash
+  pyenv versions
+  #   system
+  # * 3.8.5 (set by /usr/local/var/pyenv/version)
   ```
 
 ***
 
-## Djangoによる開発環境の作成
+## 仮想環境の作成
 
-* ホームディレクトリに仮想環境を作成する
+* ホームディレクトリに仮想環境用のフォルダを作成して移動する
 
   ```bash
-  mkdir my_django;cd $_
-  python3 -m venv myvenv
+  cd ~
+  mkdir python_dev;cd $_
+  ```
+
+* 仮想環境を作成する
+
+  ```bash
+  python -m venv pyenv385
   ```
 
 * 仮想環境の有効化と無効化
 
   ```bash
-  source myvenv/bin/activate  # 有効化
+  source pyenv385/bin/activate  # 有効化
   deactivate  # 無効化
-  ```
-
-* Djangoのインストール
-
-  ```bash
-  pip install --upgrade pip
-  pip install django==2.1.2
-  pip freeze  # 確認
-  ```
-
-* プロジェクトを作成する（ここではtestProjectを作成している）
-
-  ```bash
-  django-admin startproject testProject
-  ```
-
-* サーバの起動
-
-  ```bash
-  python manage.py runserver
-  # http://127.0.0.1:8000/ が起動する
   ```
 
 ***
 
-## Pythonの統合開発環境を導入する
+## pygameのインストール
 
-* pycharmのインストール
+* 仮想環境を無効化する
 
   ```bash
-  brew cask install pycharm-ce
+  deactivate
+  ```
+
+* HomebrewからSDL関連ライブラリをインストールする
+* venvで作成した開発環境でpygameをインストールするときに必要になる
+
+  ```bash
+  brew install sdl sdl_image sdl_mixer sdl_ttf portmidi
+  ```
+
+* 仮想環境を有効化する
+
+  ```bash
+  source pyenv385/bin/activate
+  ```
+
+* pipを最新化する
+
+  ```bash
+  python -m pip install --upgrade pip
+  ```
+
+* pipからpygameをインストールする
+
+  ```bash
+  pip install pygame
   ```
