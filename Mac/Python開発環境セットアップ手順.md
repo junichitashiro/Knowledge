@@ -84,13 +84,13 @@
 * pyenvからpythonをインストールする
 
   ```bash
-  pyenv install 3.9.0
+  pyenv install 3.8.5
   ```
 
 * インストールしたバージョンをシステム全体に適用する
 
   ```bash
-  pyenv global 3.9.0
+  pyenv global 3.8.5
   pyenv rehash
   ```
 
@@ -98,7 +98,7 @@
 
   ```bash
   python --version
-  # -> Python 3.9.0
+  # -> Python 3.8.5
   ```
 
 * pyenvのバージョン確認コマンド
@@ -106,7 +106,7 @@
   ```bash
   pyenv versions
   #   system
-  # * 3.9.0 (set by /usr/local/var/pyenv/version)
+  # * 3.8.5 (set by /usr/local/var/pyenv/version)
   ```
 
 ***
@@ -123,13 +123,13 @@
 * 仮想環境を作成する
 
   ```bash
-  python -m venv venv390
+  python -m venv venv385
   ```
 
 * 仮想環境の有効化と無効化
 
   ```bash
-  source venv390/bin/activate  # 有効化
+  source venv385/bin/activate  # 有効化
   deactivate  # 無効化
   ```
 
@@ -153,7 +153,7 @@ venvで作成した開発環境でpygameをインストールするときに必�
 * 仮想環境を有効化する
 
   ```bash
-  source venv390/bin/activate
+  source venv385/bin/activate
   ```
 
 * pipを最新化する
