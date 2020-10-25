@@ -16,9 +16,9 @@
 
 ## Chrome Driverのダウンロード
 
-* 使用しているChromeのバージョン確認
+* 使用しているChromeのバージョンを確認する
 
-  * 設定 - ヘルプ - Chromeについて の画面から確認する
+  * 設定もしくはヘルプから __Chromeについて__ を開く
 
 * [ダウンロードページ](https://chromedriver.chromium.org/downloads)で対象バージョンのドライバーをダウンロードする
 
