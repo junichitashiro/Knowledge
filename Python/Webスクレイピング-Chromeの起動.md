@@ -1,4 +1,4 @@
-# ブラウザの操作
+# Webスクレイピング-Chromeの起動
 
 * seleniumとChrome DriverでGoogle Chromeを操作する
 
