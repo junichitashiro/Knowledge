@@ -42,8 +42,8 @@
   # ----------------------------------------
   # 変数の設定
   # ----------------------------------------
-  # # ChromeDriverを絶対パスで指定する
-  cd_path = '\\...\\\\...\\chromedriver.exe'
+  # ChromeDriverの絶対パス
+  cd_path = '\\...\\...\\chromedriver.exe'
 
   # ----------------------------------------
   # 処理開始
@@ -69,12 +69,12 @@
   # ----------------------------------------
   # 変数の設定
   # ----------------------------------------
-  # ChromeDriverのパスを絶対パスで指定する
-  cd_path = '\\...\\\\...\\chromedriver.exe'
-  # ChromeDriverのオプションを指定する
+  # ChromeDriverの絶対パス
+  cd_path = '\\...\\...\\chromedriver.exe'
+  # ChromeDriverのオプション
   chrome_options = webdriver.ChromeOptions()
   # ブラウザ起動時の警告を非表示にするオプション
-  chrome_options.add_experimental_option("excludeSwitches", ['enable-automation'])
+  chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 
   # ----------------------------------------
   # 処理開始
