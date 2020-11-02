@@ -46,4 +46,3 @@
   # 2秒かけてカーソルを中央に移動
   pyautogui.moveTo(center_x, center_y, duration=2)
   ```
-  
