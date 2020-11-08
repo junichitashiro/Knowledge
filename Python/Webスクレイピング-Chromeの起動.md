@@ -39,11 +39,13 @@
   import time
   from selenium import webdriver
 
+
   # ----------------------------------------
   # 変数の設定
   # ----------------------------------------
   # ChromeDriverの絶対パス
   cd_path = '\\...\\...\\chromedriver.exe'
+
 
   # ----------------------------------------
   # 処理開始
@@ -57,7 +59,10 @@
   driver.quit()
   ```
 
-* 警告非表示とブラウザ最大化のオプションを加えたテストコード
+* 以下のオプションを加えたテストコード
+  * ヘッドレスモードで起動
+  * ブラウザ起動時のテスト実行警告を非表示
+  * DevToolsのログを出力しない
 
   ```python
   # ----------------------------------------
@@ -66,6 +71,7 @@
   import time
   from selenium import webdriver
 
+
   # ----------------------------------------
   # 変数の設定
   # ----------------------------------------
@@ -73,8 +79,15 @@
   cd_path = '\\...\\...\\chromedriver.exe'
   # ChromeDriverのオプション
   chrome_options = webdriver.ChromeOptions()
-  # ブラウザ起動時の警告を非表示にするオプション
-  chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
+  # ヘッドレスモードで起動
+  chrome_options.add_argument('--headless')
+  # enable-automation：ブラウザ起動時のテスト実行警告を非表示
+  # enable-logging：DevToolsのログを出力しない
+  chrome_options.add_experimental_option('excludeSwitches', ['enable-automation', 'enable-logging'])
+  # ファイルのダウンロードフォルダを指定する
+  dl_folder = '\\...'
+  chrome_options.add_experimental_option('prefs', {'download.default_directory': dl_folder})
+
 
   # ----------------------------------------
   # 処理開始
