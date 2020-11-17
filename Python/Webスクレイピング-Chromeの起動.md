@@ -95,10 +95,10 @@
   # ----------------------------------------
   # ブラウザを起動する
   driver = webdriver.Chrome(cd_path, options=chrome_options)
-  # 要素が見つかるまで最大10秒待つ設定
-  driver.implicitly_wait(10)
   # ブラウザを最大化
   driver.maximize_window()
+  # 要素が見つかるまで最大10秒待つ設定
+  driver.implicitly_wait(10)
 
   # Googleを開いて5秒後に閉じる
   driver.get('https://www.google.com/')
