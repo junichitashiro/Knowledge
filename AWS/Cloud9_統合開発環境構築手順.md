@@ -22,14 +22,14 @@
 
 2. Nameフィールドに名前（MyWorkspace）を設定して __次のステップ__ へ進む
 
-3. サーバ設定：下記のAWS無料枠を想定した設定をして __Create environment__ をクリックする
+3. サーバー設定：下記のAWS無料枠を想定した設定をして __Create environment__ をクリックする
     * Environment type：Create a new instance for environment (EC2)
     * Instance type：t2.micro (1 GiB RAM + 1 vCPU)
     * 他はデフォルト
 
 ***
 
-### 作成したサーバにログインする
+### 作成したサーバーにログインする
 
 * 上部メニューの __Cloud9アイコン__ から __Go To Your Dashboard__ をクリックすると作成した環境の一覧が表示される  
 ここから追加作成や不要になった環境の削除ができる
