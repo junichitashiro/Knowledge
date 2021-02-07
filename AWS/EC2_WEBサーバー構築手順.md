@@ -102,7 +102,7 @@
 
 ***
 
-## ６．SSHでの接続方法
+## ６．sshでの接続方法
 
 1. 作成したキーペアのディレクトリへ移動する
 
@@ -110,10 +110,10 @@
     cd ~/Desktop/
     ```
 
-2. pemファイル（秘密鍵）の権限を変更する
+2. pemファイル（秘密鍵）の権限を変更して編集不可にする
 
     ```bash
-    chmod 600 magenta-magenta-ssh-key.pem
+    chmod 400 magenta-magenta-ssh-key.pem
     ```
 
 3. EC2画面の対象インスタンスから __パブリック IPv4 アドレス__ を控えておく
@@ -133,13 +133,13 @@
 * yum からインストールを実行する
 
   ```bash
-  sudo yum update -y
+  sudo yum install -y httpd
   ```
 
 * サービスを開始する
 
   ```bash
-  sudo systemctl start httpd.sercivice
+  sudo systemctl start httpd.service
   ```
 
 * サービスの状態を表示して確認する
@@ -151,55 +151,64 @@
   下記が表示される
 
   ```bash
-    ・・ httpd.service - The Apache HTTP Server
-      Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)
-      Active: active (running) since Tue 2020-06-30 06:20:20 UTC; 20s ago
-        Docs: man:httpd.service(8)
-    Main PID: 15726 (httpd)
-      Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
-      CGroup: /system.slice/httpd.service
-              tq15726 /usr/sbin/httpd -DFOREGROUND
-              tq15727 /usr/sbin/httpd -DFOREGROUND
-              tq15728 /usr/sbin/httpd -DFOREGROUND
-              tq15729 /usr/sbin/httpd -DFOREGROUND
-              tq15730 /usr/sbin/httpd -DFOREGROUND
-              mq15731 /usr/sbin/httpd -DFOREGROUND
+  ● httpd.service - The Apache HTTP Server
+    Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)
+    Active: active (running) since 日 2021-02-07 06:24:18 UTC; 10s ago
+      Docs: man:httpd.service(8)
+  Main PID: 930 (httpd)
+    Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
+    CGroup: /system.slice/httpd.service
+            ├─930 /usr/sbin/httpd -DFOREGROUND
+            ├─931 /usr/sbin/httpd -DFOREGROUND
+            ├─932 /usr/sbin/httpd -DFOREGROUND
+            ├─933 /usr/sbin/httpd -DFOREGROUND
+            ├─934 /usr/sbin/httpd -DFOREGROUND
+            └─935 /usr/sbin/httpd -DFOREGROUND
 
-    Jun 30 06:20:20 ip-10-0-10-10.ap-northeast-1.compute.internal systemd[1]: Starting The ...
-    Jun 30 06:20:20 ip-10-0-10-10.ap-northeast-1.compute.internal systemd[1]: Started The A...
-    Hint: Some lines were ellipsized, use -l to show in full.
-  ```
+  2月 07 06:24:18 ip-10-0-10-10.ap-northeast-1.compute.internal systemd[1]: Starting The Apache HTTP Server...
+  2月 07 06:24:18 ip-10-0-10-10.ap-northeast-1.compute.internal systemd[1]: Started The Apache HTTP Server.
+   ```
 
 * プロセスを表示して確認する
 
   ```bash
-  ps -aux | grep httpd
+  ps -axu | grep httpd
   ```
 
   下記が表示される
 
   ```bash
-  root     15726  0.0  0.9 257432  9552 ?        Ss   06:20   0:00 /usr/sbin/httpd -DFOREGROUND
-  apache   15727  0.0  0.6 298560  6380 ?        Sl   06:20   0:00 /usr/sbin/httpd -DFOREGROUND
-  apache   15728  0.0  0.6 298560  6380 ?        Sl   06:20   0:00 /usr/sbin/httpd -DFOREGROUND
-  apache   15729  0.0  0.6 495240  6392 ?        Sl   06:20   0:00 /usr/sbin/httpd -DFOREGROUND
-  apache   15730  0.0  0.6 298560  6380 ?        Sl   06:20   0:00 /usr/sbin/httpd -DFOREGROUND
-  apache   15731  0.0  0.6 298560  6380 ?        Sl   06:20   0:00 /usr/sbin/httpd -DFOREGROUND
-  ec2-user 15776  0.0  0.0 119420   988 pts/0    S+   06:21   0:00 grep --color=auto httpd
+  root       930  0.0  0.9 257348  9464 ?        Ss   06:24   0:00 /usr/sbin/httpd -DFOREGROUND
+  apache     931  0.0  0.6 308696  6384 ?        Sl   06:24   0:00 /usr/sbin/httpd -DFOREGROUND
+  apache     932  0.0  0.6 538136  6384 ?        Sl   06:24   0:00 /usr/sbin/httpd -DFOREGROUND
+  apache     933  0.0  0.6 308696  6384 ?        Sl   06:24   0:00 /usr/sbin/httpd -DFOREGROUND
+  apache     934  0.0  0.6 308696  6384 ?        Sl   06:24   0:00 /usr/sbin/httpd -DFOREGROUND
+  apache     935  0.0  0.6 308696  6384 ?        Sl   06:24   0:00 /usr/sbin/httpd -DFOREGROUND
+  ec2-user   988  0.0  0.0   8860   940 pts/0    R+   06:28   0:00 grep --color=auto httpd
   ```
 
 * 自動起動の設定をする
 
   ```bash
   sudo systemctl enable httpd.service
-  # Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
+  ```
+
+  下記が表示される
+
+  ```bash
+  Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
   ```
 
 * 自動起動が有効になっているか確認する
 
   ```bash
-  sudo ssystemctl is-enabled httpd.service
-  # enabled
+  sudo systemctl is-enabled httpd.service
+  ```
+
+  下記が表示される
+
+  ```bash
+  enabled
   ```
 
 ***
@@ -235,7 +244,8 @@
 8. 以下の設定をして __関連付ける__ をクリックする
     * リソースタイプ：インスタンス
     * インスタンス：magenta-magenta-web
-    * プライベートIPアドレス：10.0.10.0（magenta-magenta-webのプライベートIPアドレスが表示される）
+    * プライベートIPアドレス：10.0.10.0
+      * magenta-magenta-webのプライベートIPアドレスが表示される
     * 再関連付け：チェックなし
 
 ### ※使用していない時は以下の手順で開放する
@@ -245,3 +255,12 @@
 3. 確認画面で __関連付け解除__ をクリックする
 4. 続けて __Elastic IP アドレスの開放__ をクリックする
 5. 確認画面で __解除__ をクリックする
+
+***
+
+## １０．事後作業
+
+不必要な料金が発生しないように以下の作業を行う
+
+* Elastic IP アドレスの開放
+* EC2インスタンスの停止
