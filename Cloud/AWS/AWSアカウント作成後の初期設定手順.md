@@ -92,7 +92,7 @@ rootユーザー以外でも請求情報が見えたほうが便利なため
 
 ### ユーザーを追加する
 
-[IAM_ユーザー追加手順](https://github.com/junichitashiro/Technical-Notes/blob/master/AWS/IAM_ユーザー追加手順.md) に従ってユーザーグループとユーザーを追加する
+[IAM_ユーザー追加手順](https://github.com/junichitashiro/Technical-Notes/blob/master/Cloud/AWS/IAM_ユーザー追加手順.md) に従ってユーザーグループとユーザーを追加する
 
 一通りの環境構築が可能な権限が必要になるので __アクセス許可の設定__ については下記の設定にする
 
