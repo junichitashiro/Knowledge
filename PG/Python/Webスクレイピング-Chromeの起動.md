@@ -15,47 +15,58 @@
 ***
 
 ## Chrome Driverのダウンロード
-
 * 使用しているChromeのバージョンを確認する
-
   * 設定もしくはヘルプから __Chromeについて__ を開く
-
 * [ダウンロードページ](https://chromedriver.chromium.org/downloads)で対象バージョンのドライバーをダウンロードする
-
 * 展開したexeファイルを適宜配置しておく
-
 * ソースコードの中でドライバーのパスを指定して使用する
 
 ***
 
 ## ブラウザ操作のテストコード
 
-* ブラウザを開いて5秒後に閉じる動作テストコード
+* 動作テストコードの例
 
   ```python
   # ----------------------------------------
   # モジュールのインポート
   # ----------------------------------------
   import time
+
   from selenium import webdriver
+  from selenium.webdriver.common.by import By
+  from selenium.webdriver.common.keys import Keys
+  from selenium.webdriver.chrome import service as fs
 
 
   # ----------------------------------------
-  # 変数の設定
+  # ChromeDriverの設定
   # ----------------------------------------
   # ChromeDriverの絶対パス
-  cd_path = '\\...\\...\\chromedriver.exe'
+  CHROMEDRIVER = 'C:\chromedriver\chromedriver.exe'
+  chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
 
   # ----------------------------------------
   # 処理開始
   # ----------------------------------------
-  # ブラウザを起動
-  driver = webdriver.Chrome(cd_path)
+  # ブラウザを起動する
+  driver = webdriver.Chrome(service=chrome_service)
 
-  # Googleを開いて5秒後に閉じる
+  # 指定するURLを開く
   driver.get('https://www.google.com/')
-  time.sleep(5)
+
+  # XPathで検索ボックスを特定する
+  search_box_xpath = '/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input'
+  driver.find_element(By.XPATH, search_box_xpath).send_keys('Selenium実践入門')
+
+  # NAMEで検索ボックスを特定する
+  search_box_name = 'q'
+  driver.find_element(By.NAME, search_box_name).clear()
+
+  # 検索の3秒後にブラウザを閉じる
+  driver.find_element(By.XPATH, search_box_xpath).send_keys('Selenium実践入門' + Keys.RETURN)
+  time.sleep(3)
   driver.quit()
   ```
 
@@ -71,23 +82,30 @@
   # モジュールのインポート
   # ----------------------------------------
   import time
+
   from selenium import webdriver
+  from selenium.webdriver.common.by import By
+  from selenium.webdriver.common.keys import Keys
+  from selenium.webdriver.chrome import service as fs
 
 
   # ----------------------------------------
-  # 変数の設定
+  # ChromeDriverの設定
   # ----------------------------------------
   # ChromeDriverの絶対パス
-  cd_path = '\\...\\...\\chromedriver.exe'
-  # ChromeDriverのオプション
+  CHROMEDRIVER = 'C:\chromedriver\chromedriver.exe'
+  chrome_service = fs.Service(executable_path=CHROMEDRIVER)
+
+  # オプションを設定する
   chrome_options = webdriver.ChromeOptions()
-  # ヘッドレスモードで起動
+  # ヘッドレスモードで起動する
   chrome_options.add_argument('--headless')
   # enable-automation：ブラウザ起動時のテスト実行警告を非表示
   # enable-logging：DevToolsのログを出力しない
   chrome_options.add_experimental_option('excludeSwitches', ['enable-automation', 'enable-logging'])
+  chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
   # ファイルのダウンロードフォルダを指定する
-  dl_folder = '\\...'
+  dl_folder = 'C:\temp'
   chrome_options.add_experimental_option('prefs', {'download.default_directory': dl_folder})
 
 
@@ -95,14 +113,25 @@
   # 処理開始
   # ----------------------------------------
   # ブラウザを起動する
-  driver = webdriver.Chrome(cd_path, options=chrome_options)
-  # ブラウザを最大化
+  driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+  # ブラウザを最大化する
   driver.maximize_window()
   # 要素が見つかるまで最大10秒待つ設定
   driver.implicitly_wait(10)
 
-  # Googleを開いて5秒後に閉じる
+  # 指定したURLを開く
   driver.get('https://www.google.com/')
-  time.sleep(5)
+
+  # XPathで検索ボックスを特定する
+  search_box_xpath = '/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input'
+  driver.find_element(By.XPATH, search_box_xpath).send_keys('Selenium実践入門')
+
+  # NAMEで検索ボックスを特定する
+  search_box_name = 'q'
+  driver.find_element(By.NAME, search_box_name).clear()
+
+  # 検索の3秒後にブラウザを閉じる
+  driver.find_element(By.XPATH, search_box_xpath).send_keys('Selenium実践入門' + Keys.RETURN)
+  time.sleep(3)
   driver.quit()
   ```
