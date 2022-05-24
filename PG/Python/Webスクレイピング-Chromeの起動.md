@@ -43,7 +43,7 @@
   # ChromeDriverの設定
   # ----------------------------------------
   # ChromeDriverの絶対パス
-  CHROMEDRIVER = 'C:\chromedriver\chromedriver.exe'
+  CHROMEDRIVER = r'C:\chromedriver\chromedriver.exe'
   chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
 
@@ -93,7 +93,7 @@
   # ChromeDriverの設定
   # ----------------------------------------
   # ChromeDriverの絶対パス
-  CHROMEDRIVER = 'C:\chromedriver\chromedriver.exe'
+  CHROMEDRIVER = r'C:\chromedriver\chromedriver.exe'
   chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
   # オプションを設定する
@@ -134,4 +134,12 @@
   driver.find_element(By.XPATH, search_box_xpath).send_keys('Selenium実践入門' + Keys.RETURN)
   time.sleep(3)
   driver.quit()
+  ```
+
+* その他のオプション
+  * 起動するChromeのアカウントを指定する
+
+  ```python
+  PROFILE_PATH = r'C:\Users\***\AppData\Local\Google\Chrome\User Data'
+  chrome_options.add_argument('--user-data-dir=' + PROFILE_PATH)
   ```
