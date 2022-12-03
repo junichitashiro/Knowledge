@@ -36,13 +36,21 @@
   %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -c "select * from test_table;" -o %LOGFILE%
   ```
 
+### SQLの設定
+
+* ここでは以下のSQLを記述している
+
+  ```sql
+  select * from test_table;
+  ```
+
 ***
 
 ## 実行結果をCSV形式で出力する場合
 
 ### バッチファイルの設定
 
-* "copy ("SQL文") to '出力パス' with csv delimiter ',' ;" のコマンドを記述する
+* __"copy ("SQL文") to '出力パス' with csv delimiter ',' ;"__ のコマンドを記述する
 * ここではさらにnullを空白に、ヘッダ出力ありを指定している
 
   ```bat
@@ -69,4 +77,13 @@
   rem SQL実行
   rem --------------------------------------------------
   %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -c "copy (select * from test_table) to '%FILEPATH%%CSVFILE%' with csv delimiter ',' null as '' header;"
+  ```
+
+### SQLの設定
+
+* ( )内に以下のSQLを記述している
+* __;__ は不要
+
+  ```sql
+  select * from test_table
   ```
