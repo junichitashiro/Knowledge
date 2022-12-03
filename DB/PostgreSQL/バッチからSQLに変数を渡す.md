@@ -53,7 +53,9 @@
   %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -f %SQLFILE% -v PRICE=270
   ```
 
-### input.sqlの設定
+### SQLファイルの設定
+
+* ファイル名 __input.sql__
 
 * __:'変数名'__ で値を受け取る変数を記述する
 

@@ -8,7 +8,9 @@
 
 ## オプションでSQLファイルを実行し、実行結果を外部ファイルに出力する
 
-* 出力先をバッチファイルで指定する
+### バッチファイルの設定
+
+* 出力先はバッチファイルで指定する
 * __-f__ オプションで実行するSQLファイルを指定する
 * __-o__ オプションで出力先を指定する
 
@@ -36,7 +38,9 @@
   %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -f %SQLFILE% -o %LOGFILE%
   ```
 
-* __input.sql__ の内容
+### SQLファイルの設定
+
+* ファイル名 __input.sql__
 
   ```sql
   select * from test_table;
@@ -45,6 +49,8 @@
 ***
 
 ## 実行結果をCSV形式で出力する場合
+
+### バッチファイルの設定
 
 * 出力先をバッチファイルで指定する
 * 出力形式はSQLファイルで指定する
@@ -73,8 +79,9 @@
   %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -f %SQLFILE% -o %CSVFILE%
   ```
 
-### __input.sql__ の内容
+### SQLファイルの設定
 
+* ファイル名 __input.sql__
 * SQLを __copy (__ と __)to stdout with csv delimiter ',' ;__ の中に記述する
 * ここでは出力先を標準出力、nullを空白、ヘッダ出力ありを指定している
 
@@ -87,6 +94,8 @@
 ***
 
 ## SQLファイルに出力パスまで記載する場合
+
+### バッチファイルの設定
 
 * バッチファイルで出力先の記述はしない
 
@@ -113,6 +122,9 @@
   %PGPATH%psql -h %HOSTNAME% -p %PORTNUM% -d %DBNAME% -U %USERNAME% -f %SQLFILE%
   ```
 
+### SQLファイルの設定
+
+* ファイル名 __input.sql__
 * __input.sql__ で出力先を指定する
 * 出力先は絶対参照で指定する
 
