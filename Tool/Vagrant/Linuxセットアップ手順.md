@@ -9,10 +9,9 @@
 
 ### Windows
 
-* VirtualBoxのダウンロードページへアクセスする  
-[<https://www.virtualbox.org/wiki/Downloads>]
-
-* Windows hostsのリンクからインストーラをダウンロードして実行する  
+* VirtualBoxのダウンロードページへアクセスする
+  * https://www.virtualbox.org/wiki/Downloads
+* Windows hostsのリンクからインストーラをダウンロードして実行する
 
 ### Mac
 
@@ -38,14 +37,13 @@
 
 ## Vagrantのインストール
 
-Windows
+### Windows
 
-* 下記Vagrantのダウンロードページへアクセスする  
-[<http://www.vagrantup.com/downloads.html>]
-
+* 下記Vagrantのダウンロードページへアクセスする
+  * http://www.vagrantup.com/downloads.html
 * WINDOWSカテゴリから対象bit数のインストーラをダウンロードして実行する
 
-Mac
+### Mac
 
 * Homebrewからインストールする
 
@@ -83,8 +81,8 @@ Mac
 
 ## Boxの追加
 
-* Box公開ページへアクセスする  
-[<http://www.vagrantbox.es/>]
+* Box公開ページへアクセスする
+  * http://www.vagrantbox.es/
 
 * 対象となるBoxのURLをコピーしておく
 
@@ -108,9 +106,8 @@ Mac
 ## Vagrantfileの編集
 
 * 作成された __Vagrantfile__ の下記の行をコメントインして保存する
-
-* このIPアドレスを指定してSSH接続する  
-  また、ブラウザからこのアドレスを指定するとWebサーバへのアクセスができる
+* このIPアドレスを指定してSSH接続する
+* ブラウザからこのアドレスを指定するとWebサーバへのアクセスができる
 
   ```ruby
   config.vm.network "private_network", ip: "192.168.33.10"
