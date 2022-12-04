@@ -93,8 +93,8 @@
   vagrant box add dev-centos7 https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.2/vagrant-centos-7.2.box
   ```
 
-* Boxを初期化する  
-初期化するとBox名のディレクトリに __Vagrantfile__ が作成される
+* Boxを初期化する
+* 初期化するとBox名のディレクトリに __Vagrantfile__ が作成される
 
   ```bash
   # vagrant init [Box名]
