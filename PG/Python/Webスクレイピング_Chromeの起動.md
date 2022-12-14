@@ -1,4 +1,4 @@
-# Webスクレイピング-Chromeの起動
+# Webスクレイピング_Chromeの起動
 
 * seleniumとChrome DriverでGoogle Chromeを操作する
 
@@ -11,15 +11,6 @@
   ```cmd
   pip install selenium
   ```
-
-***
-
-## Chrome Driverのダウンロード
-* 使用しているChromeのバージョンを確認する
-  * 設定もしくはヘルプから __Chromeについて__ を開く
-* [ダウンロードページ](https://chromedriver.chromium.org/downloads)で対象バージョンのドライバーをダウンロードする
-* 展開したexeファイルを適宜配置しておく
-* ソースコードの中でドライバーのパスを指定して使用する
 
 ***
 
