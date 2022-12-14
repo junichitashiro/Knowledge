@@ -63,18 +63,17 @@
 * 要素のy座標を取得してスクロールする
 
   ```python
-  # ----------------------------------------
-  # モジュールのインポート
-  # ----------------------------------------
+  import chromedriver_binary
   from selenium import webdriver
-  from selenium.webdriver.common.by import By
   from selenium.webdriver.chrome import service as fs
+  from selenium.webdriver.common.by import By
+  from webdriver_manager.chrome import ChromeDriverManager
 
 
   # ----------------------------------------
   # ChromeDriverの設定
   # ----------------------------------------
-  CHROMEDRIVER = r'C:\chromedriver\chromedriver.exe'
+  CHROMEDRIVER = ChromeDriverManager().install()
   chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
 
@@ -86,7 +85,7 @@
   # 指定するURLを開く
   driver.get('https://www.yahoo.co.jp/')
 
-  # 「サービス一覧」リンクの位置までスクロールしてからクリックする
+  # 画面左側カテゴリの「サービス一覧」リンクの位置までスクロールしてからクリックする
   service_list_link = '//*[@id="ToolFooter"]/a/dl/dt/span'
   element_heigh = str(driver.find_element(By.XPATH, service_list_link).location['y'])
   driver.execute_script("window.scrollTo(0, " + element_heigh + ");")

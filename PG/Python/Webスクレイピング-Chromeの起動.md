@@ -33,17 +33,18 @@
   # ----------------------------------------
   import time
 
+  import chromedriver_binary
   from selenium import webdriver
+  from selenium.webdriver.chrome import service as fs
   from selenium.webdriver.common.by import By
   from selenium.webdriver.common.keys import Keys
-  from selenium.webdriver.chrome import service as fs
+  from webdriver_manager.chrome import ChromeDriverManager
 
 
   # ----------------------------------------
   # ChromeDriverの設定
   # ----------------------------------------
-  # ChromeDriverの絶対パス
-  CHROMEDRIVER = r'C:\chromedriver\chromedriver.exe'
+  CHROMEDRIVER = ChromeDriverManager().install()
   chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
 
@@ -83,17 +84,18 @@
   # ----------------------------------------
   import time
 
+  import chromedriver_binary
   from selenium import webdriver
+  from selenium.webdriver.chrome import service as fs
   from selenium.webdriver.common.by import By
   from selenium.webdriver.common.keys import Keys
-  from selenium.webdriver.chrome import service as fs
+  from webdriver_manager.chrome import ChromeDriverManager
 
 
   # ----------------------------------------
   # ChromeDriverの設定
   # ----------------------------------------
-  # ChromeDriverの絶対パス
-  CHROMEDRIVER = r'C:\chromedriver\chromedriver.exe'
+  CHROMEDRIVER = ChromeDriverManager().install()
   chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
   # オプションを設定する
