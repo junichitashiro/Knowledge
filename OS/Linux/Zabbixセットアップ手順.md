@@ -7,7 +7,7 @@
 * Zabbixのバージョン：4系
 * 使用DB：MariaDB
 
-***
+---
 
 ## Zabbixで使用するフォントを準備する
 
@@ -17,7 +17,7 @@
   yum -y install ibus-kkc vlgothic-*
   ```
 
-***
+---
 
 ## ファイアウォール機能を停止する
 
@@ -44,7 +44,7 @@
   # firewalld.service                             disabled
   ```
 
-***
+---
 
 ## 必要なパッケージをインストールする
 
@@ -92,7 +92,7 @@
   reboot
   ```
 
-***
+---
 
 ## Zabbix関連パッケージのインストール
 
@@ -136,7 +136,7 @@
   systemctl restart mariadb.service
   ```
 
-***
+---
 
 ## Zabbix用のデータベースを作成する
 
@@ -218,7 +218,7 @@
   ps ax | grep zabbix
   ```
 
-***
+---
 
 ## GUIからインストールを実行する
 

@@ -2,7 +2,7 @@
 
 * seleniumとChrome DriverでGoogle Chromeを操作する
 
-***
+---
 
 ## モジュールのインストール
 
@@ -15,7 +15,7 @@
   pip install webdriver-manager
   ```
 
-***
+---
 
 ## ブラウザ操作のテストコード
 
@@ -65,7 +65,7 @@
   driver.quit()
   ```
 
-***
+---
 
 ## オプションと起動時の設定の説明
 
@@ -73,7 +73,7 @@
 
 * ブラウザのバージョンに合わせたChromeDriverをインストールする
 * 実行すると使用するChromeDriverのパスを返す
-* 下記はインストールと同時に変数 __CHROMEDRIVER__ に実行ファイルパスを格納する設定
+* 下記はインストールと同時に変数 **CHROMEDRIVER** に実行ファイルパスを格納する設定
 
   ```python
   CHROMEDRIVER = ChromeDriverManager().install()
@@ -83,7 +83,7 @@
 
 * 実行時にChromeDriverのパスを指定するのが推奨となっている
 * 指定しないと警告が表示されるので表示されないように設定する
-* 下記は __ChromeDriverManager().install()__ で返ってくるパスを格納した変数を使って設定している
+* 下記は **ChromeDriverManager().install()** で返ってくるパスを格納した変数を使って設定している
 
   ```python
   chrome_service = fs.Service(executable_path=CHROMEDRIVER)
@@ -103,7 +103,7 @@
 * 起動するChromeのアカウントを指定する
 
   ```python
-  PROFILE_PATH = r'C:\Users\***\AppData\Local\Google\Chrome\User Data'
+  PROFILE_PATH = r'C:\Users\---\AppData\Local\Google\Chrome\User Data'
   chrome_options.add_argument('--user-data-dir=' + PROFILE_PATH)
   ```
 
@@ -139,7 +139,7 @@
 
 * 要素が見つかるまで指定秒数待つ
 
-***
+---
 
 ## 各種オプションを指定したブラウザ操作のサンプル
 

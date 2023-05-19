@@ -5,21 +5,21 @@
 * PHPのバージョンアップを実行しておく  
   [<https://github.com/junichitashiro/Technical-Notes/blob/master/CentOS7/PHPバージョンアップ手順.md>]
 
-***
+---
 
 ## unzipのインストール
 
-* zipファイルを展開する必要があるので __unzip__ をインストールする
+* zipファイルを展開する必要があるので **unzip** をインストールする
 
   ```bash
   sudo yum -y install unzip
   ```
 
-***
+---
 
 ## DocumentRootの確認
 
-* __DocumentRoot__ がwordpressのファイル配置場所（ここでは"/var/www/html"）と同じであることを確認する
+* **DocumentRoot** がwordpressのファイル配置場所（ここでは"/var/www/html"）と同じであることを確認する
 
   ```bash
   view /etc/httpd/conf/httpd.conf
@@ -36,11 +36,11 @@
   DocumentRoot "/var/www/html"
   ```
 
-***
+---
 
 ## ディレクティブの変更
 
-* \<Directory "/var/www/html">～\</Directory>タグの __AllowOverride__ の設定をNone から All に変更する
+* \<Directory "/var/www/html">～\</Directory>タグの **AllowOverride** の設定をNone から All に変更する
 
   ```bash
   sudo vi /etc/httpd/conf/httpd.conf
@@ -57,7 +57,7 @@
   </Directory>
   ```
 
-***
+---
 
 ## WordPressのインストールファイルを取得する
 
@@ -74,7 +74,7 @@
   sudo unzip latest-ja.zip
   ```
 
-***
+---
 
 ## データベースの準備
 
@@ -99,7 +99,7 @@
   > Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
 
 * MariaDBにログインする  
-  ログインするとプロンプトの表示が __MariaDB [(none)]>__ に変わる
+  ログインするとプロンプトの表示が **MariaDB [(none)]>** に変わる
 
   ```bash
   mysql -uroot
@@ -113,11 +113,11 @@
 
 * 以下の設定のデータベースを作成する
 
-  |設定項目|設定値|
-  |--|--|
-  |データベース名|wordpress|
-  |ユーザー名|dbuser|
-  |パスワード|dbuser1|
+  | 設定項目       | 設定値    |
+  | -------------- | --------- |
+  | データベース名 | wordpress |
+  | ユーザー名     | dbuser    |
+  | パスワード     | dbuser1   |
 
 * データベースの作成
 
@@ -127,7 +127,7 @@
 
   > Query OK, 1 row affected (0.00 sec)
 
-* __dbuser__ に データベース __wordpress__ を変更する権限を付与する
+* **dbuser** に データベース **wordpress** を変更する権限を付与する
 
   ```sql
   grant all privileges on wordpress.* to dbuser@localhost identified by 'dbuser1';
@@ -143,11 +143,11 @@
 
   > Bye
 
-***
+---
 
 ## .htaccessファイルの作成
 
-* __/var/www/html/wordpress__ 配下に __.htaccess__ ファイルを作成する
+* **/var/www/html/wordpress** 配下に **.htaccess** ファイルを作成する
 
   ```bash
   cd /var/www/html/wordpress
@@ -182,17 +182,17 @@
   # END WordPress
   ```
 
-***
+---
 
 ## configファイルの作成
 
-* __wp-config-sample.php__ をコピーして __wp-config.php__ を作成する
+* **wp-config-sample.php** をコピーして **wp-config.php** を作成する
 
   ```bash
   sudo cp wp-config-sample.php wp-config.php
   ```
 
-* __wp-config.php__ の内容を編集し、作成したデータベースの設定情報を入力する
+* **wp-config.php** の内容を編集し、作成したデータベースの設定情報を入力する
 
   ```bash
   sudo sed -i 's/database_name_here/wordpress/g' /var/www/html/wordpress/wp-config.php
@@ -223,7 +223,7 @@
 
 * wp-config.phpに記載されている [<https://api.wordpress.org/secret-key/1.1/salt/>] にアクセスすると認証用のユニークキーが表示される
 
-* __wp-config.php__ の55～62行目を上記の内容に書き換える
+* **wp-config.php** の55～62行目を上記の内容に書き換える
 
   ```bash
   sudo vi wp-config.php
@@ -253,7 +253,7 @@
   /**#@-*/
   ```
 
-***
+---
 
 ## WordPressのインストール
 

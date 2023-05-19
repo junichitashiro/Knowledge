@@ -2,7 +2,7 @@
 
 * 作業アカウント：root
 
-***
+---
 
 ## パッケージのダウンロード
 
@@ -18,7 +18,7 @@
   config.vm.synced_folder "./share", "/tmp/share", owner: "vagrant", group: "vagrant" , create: true
   ```
 
-***
+---
 
 ## hostsファイルの設定を変更する
 
@@ -85,7 +85,7 @@
   /swap                                   file            4194300 0       -1
   ```
 
-***
+---
 
 ## 事前インストール
 
@@ -95,7 +95,7 @@
   yum -y install libaio bc zip unzip
   ```
 
-* CentOS7以降 __netstat__ コマンドが非推奨となっているため __net-tools__ を実行して有効化する
+* CentOS7以降 **netstat** コマンドが非推奨となっているため **net-tools** を実行して有効化する
 
   ```bash
   yum -y install  net-tools
@@ -158,7 +158,7 @@
   # --------------------------------------------------
   ```
 
-***
+---
 
 ## インストール後の確認
 

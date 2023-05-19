@@ -2,7 +2,7 @@
 
 * seleniumでGUI操作をする
 
-***
+---
 
 ## カーソル移動
 
@@ -51,7 +51,7 @@
   pyautogui.moveTo(center_x, center_y, duration=2)
   ```
 
-***
+---
 
 ## 画面スクロール
 

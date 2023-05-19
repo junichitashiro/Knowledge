@@ -4,15 +4,15 @@
 * データベース名：postgres
 * テーブル名：test_table
 
-***
+---
 
 ## オプションでSQLファイルを実行し、実行結果を外部ファイルに出力する
 
 ### バッチファイルの設定
 
 * 出力先はバッチファイルで指定する
-* __-f__ オプションで実行するSQLファイルを指定する
-* __-o__ オプションで出力先を指定する
+* **-f** オプションで実行するSQLファイルを指定する
+* **-o** オプションで出力先を指定する
 
   ```bat
   @echo off
@@ -40,13 +40,13 @@
 
 ### SQLファイルの設定
 
-* ファイル名 __input.sql__
+* ファイル名 **input.sql**
 
   ```sql
   select * from test_table;
   ```
 
-***
+---
 
 ## 実行結果をCSV形式で出力する場合
 
@@ -81,8 +81,8 @@
 
 ### SQLファイルの設定
 
-* ファイル名 __input.sql__
-* SQLを __copy (__ と __)to stdout with csv delimiter ',' ;__ の中に記述する
+* ファイル名 **input.sql**
+* SQLを **copy (** と **)to stdout with csv delimiter ',' ;** の中に記述する
 * ここでは出力先を標準出力、nullを空白、ヘッダ出力ありを指定している
 
   ```sql
@@ -91,7 +91,7 @@
   ) to stdout with csv delimiter ',' null as '' header;
   ```
 
-***
+---
 
 ## SQLファイルに出力パスまで記載する場合
 
@@ -124,8 +124,8 @@
 
 ### SQLファイルの設定
 
-* ファイル名 __input.sql__
-* __input.sql__ で出力先を指定する
+* ファイル名 **input.sql**
+* **input.sql** で出力先を指定する
 * 出力先は絶対参照で指定する
 
   ```sql

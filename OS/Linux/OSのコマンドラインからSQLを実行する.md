@@ -6,7 +6,7 @@
 * DBアカウント：root
 * DBパスワード：root1
 
-***
+---
 
 >## mysql [データベース名] -u [ユーザ名] -p[パスワード] -e "SQL"
 
@@ -16,7 +16,7 @@
 mysql workbook -u root -proot1 -e "select * from books"
 ```
 
-## __;__ で区切ることにより複数のSQLが実行可能
+## **;** で区切ることにより複数のSQLが実行可能
 
 >## mysql [データベース名] -u [ユーザ名] -p[パスワード] -e "SQL1;SQL2;SQL3"
 

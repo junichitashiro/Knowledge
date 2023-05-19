@@ -1,6 +1,6 @@
 # Homebrewのインストールと最新化
 
-***
+---
 
 * 最新のコマンドを下記から確認する  
 [<https://brew.sh/index_ja.html>]

@@ -2,39 +2,39 @@
 
 * 作業ユーザーのポリシータイプ：Cloud9User
 
-***
+---
 
 ## １．【IAM】での作業
 
 [IAM_ユーザー追加手順](https://github.com/junichitashiro/Technical-Notes/blob/master/Cloud/AWS/IAM_ユーザー追加手順.md) に従ってユーザーグループとユーザーを追加する
 
-***
+---
 
 ## ２．【Cloud9】での作業
 
-英語表記になっている場合は上部メニューからリージョンを __東京__ に変える
+英語表記になっている場合は上部メニューからリージョンを **東京** に変える
 
-***
+---
 
 ### サーバーを作成する
 
-1. __Create environment__ をクリックする
+1. **Create environment** をクリックする
 
-2. Nameフィールドに名前（MyWorkspace）を設定して __次のステップ__ へ進む
+2. Nameフィールドに名前（MyWorkspace）を設定して **次のステップ** へ進む
 
-3. サーバー設定：下記のAWS無料枠を想定した設定をして __Create environment__ をクリックする
+3. サーバー設定：下記のAWS無料枠を想定した設定をして **Create environment** をクリックする
     * Environment type：Create a new instance for environment (EC2)
     * Instance type：t2.micro (1 GiB RAM + 1 vCPU)
     * 他はデフォルト
 
-***
+---
 
 ### 作成したサーバーにログインする
 
-* 上部メニューの __Cloud9アイコン__ から __Go To Your Dashboard__ をクリックすると作成した環境の一覧が表示される  
+* 上部メニューの **Cloud9アイコン** から **Go To Your Dashboard** をクリックすると作成した環境の一覧が表示される  
 ここから追加作成や不要になった環境の削除ができる
 
-***
+---
 
 ### ターミナルで各種情報を表示してみる
 
@@ -86,7 +86,7 @@
   # Rails 5.0.0
   ```
 
-***
+---
 
 ### OSを最新化する
 
@@ -96,7 +96,7 @@
   sudo yum -y update
   ```
 
-***
+---
 
 ### タイムゾーンを設定する
 
@@ -129,7 +129,7 @@
   date
   ```
 
-***
+---
 
 ### MySQLを更新する
 
@@ -203,7 +203,7 @@
   mysql -u root
   ```
 
-***
+---
 
 ### PHPを更新する
 
@@ -251,7 +251,7 @@
   # Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
   ```
 
-***
+---
 
 ### Ruby on Rails を動かしてみる
 
@@ -305,11 +305,11 @@
   rails s
   ```
 
-* 上部メニューの __Preview__ から __Preview Running Application__ を選択する
+* 上部メニューの **Preview** から **Preview Running Application** を選択する
 
-* 接続拒否の画面が表示されるが右上の __Pop Out Into New Window__ をクリックすると別ウィンドウで正しく表示される
+* 接続拒否の画面が表示されるが右上の **Pop Out Into New Window** をクリックすると別ウィンドウで正しく表示される
 
-***
+---
 
 ### Railsでアプリを作る
 
@@ -331,6 +331,6 @@
   rails s
   ```
 
-* 上部メニューの __Preview__ から __Preview Running Application__ を選択する
+* 上部メニューの **Preview** から **Preview Running Application** を選択する
 
-* アドレスバーの末尾に __/memos__ を加えてアクセスする
+* アドレスバーの末尾に **/memos** を加えてアクセスする

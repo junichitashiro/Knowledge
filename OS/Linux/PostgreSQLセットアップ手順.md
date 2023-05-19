@@ -3,7 +3,7 @@
 * 作業アカウント：root
 * インストールバージョン：10
 
-***
+---
 
 ## 既存状態の確認
 
@@ -19,7 +19,7 @@
   yum -y remove postgresql
   ```
 
-***
+---
 
 ## インストール
 
@@ -56,7 +56,7 @@
     drwxr-xr-x 2 root root 4096  1月 23 09:00 lib  
     drwxr-xr-x 7 root root 4096  1月 23 09:00 share
 
-***
+---
 
 ## 初期設定作業
 
@@ -74,7 +74,7 @@
   rm -fr /var/lib/pgsql
   ```
 
-***
+---
 
 ## PostgreSQLの起動
 
@@ -92,7 +92,7 @@
 
   > Created symlink from /etc/systemd/system/multi-user.target.wants/postgresql-10.service to /usr/lib/systemd/system/postgresql-10.service.
 
-***
+---
 
 ## データベースの動作確認
 
@@ -122,7 +122,7 @@ PostgreSQLインストール時にpostgresユーザーがOSに追加されるの
 
   > psql (PostgreSQL) 10.13
 
-***
+---
 
 ## OSのpostgresユーザーにログインパスワードを設定する
 
@@ -147,7 +147,7 @@ OSのpostgresユーザーとPostgreSQLのpostgresユーザーを混同しない�
   
   > passwd: すべての認証トークンが正しく更新できました。
 
-***
+---
 
 ## PostgreSQLのpostgresユーザーにパスワードを設定する
 
@@ -177,7 +177,7 @@ OSのpostgresユーザーとPostgreSQLのpostgresユーザーを混同しない�
 
   > ALTER ROLE
 
-* データベースからログアウトして __root__ に戻る
+* データベースからログアウトして **root** に戻る
 
   ```bash
   \q
@@ -225,7 +225,7 @@ OSのpostgresユーザーとPostgreSQLのpostgresユーザーを混同しない�
   Type "help" for help.
   ```
 
-***
+---
 
 ## PostgreSQLのアンインストール
 
@@ -245,7 +245,7 @@ OSのpostgresユーザーとPostgreSQLのpostgresユーザーを混同しない�
 
 * postgresユーザーの削除
 
-* __-r__ はユーザーの作成データを削除するオプション
+* **-r** はユーザーの作成データを削除するオプション
 
   ```bash
   userdel -r postgres

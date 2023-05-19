@@ -4,7 +4,7 @@
 * wordpressインストール用の手順として作成  
 Zabbixのインストールに都合が悪いため共存させない
 
-***
+---
 
 ## リポジトリの追加
 
@@ -44,7 +44,7 @@ Zabbixのインストールに都合が悪いため共存させない
   yum -y install --disablerepo=* --enablerepo=epel,remi,remi-safe,remi-php74 php
   ```
 
-***
+---
 
 ## 補足：関連性の高いMySQLの拡張機能をインストールしておく
 

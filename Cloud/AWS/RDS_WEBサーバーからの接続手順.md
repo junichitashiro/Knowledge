@@ -1,6 +1,6 @@
 # RDS_WEBサーバーからの接続手順
 
-***
+---
 
 ## １．WEBサーバーにMySQLをインストールする
 
@@ -20,7 +20,7 @@
     sudo yum -y install mysql
     ```
 
-***
+---
 
 ## ２．MySQLに接続する
 

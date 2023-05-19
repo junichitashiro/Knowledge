@@ -7,28 +7,28 @@
 3. pyenv（Pythonのバージョン切替）
 4. Python 3.X（本体）
 
-* 上記をインストールした後 __venv__ による開発用の仮想環境を作成する
+* 上記をインストールした後 **venv** による開発用の仮想環境を作成する
 * ライブラリは仮想環境ごとにpipでインストールする
 
-***
+---
 
 ## Xcodeのインストール
 
-* App Storeで __Xcode__ を検索してインストールする
+* App Storeで **Xcode** を検索してインストールする
 
-* XCodeの __Command Line Tools__ をインストールする
+* XCodeの **Command Line Tools** をインストールする
 
   ```bash
   xcode-select --install
   ```
 
-***
+---
 
 ## Homebrewのインストール
 
 * [Homebrew最新化手順](https://github.com/junichitashiro/Technical-Notes/blob/master/Mac/Homebrew最新化手順.md)でHomebrewをインストール、もしくは最新化しておく
 
-***
+---
 
 ## pyenvのインストール
 
@@ -72,7 +72,7 @@
   # -> pyenv とバージョン番号が表示される
   ```
 
-***
+---
 
 ## Pythonのインストール
 
@@ -110,7 +110,7 @@
   # * 3.8.5 (set by /usr/local/var/pyenv/version)
   ```
 
-***
+---
 
 ## 仮想環境の作成
 
@@ -134,7 +134,7 @@
   deactivate  # 無効化
   ```
 
-***
+---
 
 ## pygameのインストール
 

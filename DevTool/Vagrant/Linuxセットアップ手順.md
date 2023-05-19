@@ -1,9 +1,9 @@
 # VagrantでローカルにLinux環境をつくる
 
 * OS：CentOS7
-* Macで作業する場合は事前に __Homebrew__ をインストールしておく
+* Macで作業する場合は事前に **Homebrew** をインストールしておく
 
-***
+---
 
 ## VirtualBoxのインストール
 
@@ -33,7 +33,7 @@
   VirtualBox --version
   ```
 
-***
+---
 
 ## Vagrantのインストール
 
@@ -59,7 +59,7 @@
   brew cask reinstall vagrant
   ```
 
-***
+---
 
 ## Box作成の準備
 
@@ -94,18 +94,18 @@
   ```
 
 * Boxを初期化する
-* 初期化するとBox名のディレクトリに __Vagrantfile__ が作成される
+* 初期化するとBox名のディレクトリに **Vagrantfile** が作成される
 
   ```bash
   # vagrant init [Box名]
   vagrant init dev-centos7
   ```
 
-***
+---
 
 ## Vagrantfileの編集
 
-* 作成された __Vagrantfile__ の下記の行をコメントインして保存する
+* 作成された **Vagrantfile** の下記の行をコメントインして保存する
 * このIPアドレスを指定してSSH接続する
 * ブラウザからこのアドレスを指定するとWebサーバへのアクセスができる
 
@@ -115,18 +115,18 @@
 
 ## フォルダを共有する設定（任意）
 
-* ホスト端末の __share__ フォルダとゲスト端末の __/tmp/share__ フォルダを共有する設定
-* __create: true__ はフォルダがなかった場合作成するオプション
+* ホスト端末の **share** フォルダとゲスト端末の **/tmp/share** フォルダを共有する設定
+* **create: true** はフォルダがなかった場合作成するオプション
 
   ```bash
   config.vm.synced_folder "./share", "/tmp/share", owner: "vagrant", group: "vagrant" , create: true
   ```
 
-***
+---
 
 ## Boxの起動
 
-* __Vagrantfile__ と同一のディレクトリでコマンドを実行する
+* **Vagrantfile** と同一のディレクトリでコマンドを実行する
 
   ```bash
   vagrant up
@@ -148,7 +148,7 @@
   ※rootもパスワードは同じ
   ```
 
-* __Vagrantfile__ の編集を行わなくても次の設定でアクセス可能
+* **Vagrantfile** の編集を行わなくても次の設定でアクセス可能
 
   ```bash
   TCP/IP ホスト：127.0.0.1

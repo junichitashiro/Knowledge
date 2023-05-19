@@ -1,9 +1,9 @@
 # MariaDBセットアップ手順
 
 * 作業アカウント：vagrant
-* 初期設定で文字コードを __utf8__ に設定する
+* 初期設定で文字コードを **utf8** に設定する
 
-***
+---
 
 ## MariaDBをインストールする
 
@@ -25,11 +25,11 @@
   sudo systemctl enable mariadb.service
   ```
 
-***
+---
 
 ## 文字コードを設定する
 
-* __/etc/my.cnf__ ファイルを編集する
+* **/etc/my.cnf** ファイルを編集する
 
   ```bash
   sudo vi /etc/my.cnf
@@ -53,7 +53,7 @@
   sudo systemctl restart mariadb.service
   ```
 
-***
+---
 
 ## データベースの初期設定
 
@@ -120,7 +120,7 @@
     Reload privilege tables now? [Y/n] # Enter
     ```
 
-***
+---
 
 ## 設定を確認する
 
@@ -140,7 +140,7 @@
   ```
 
 * 設定を確認する
-* __character_set_database__ が __utf8__ になっていること
+* **character_set_database** が **utf8** になっていること
 
   ```sql
   show variables like 'cha%';
