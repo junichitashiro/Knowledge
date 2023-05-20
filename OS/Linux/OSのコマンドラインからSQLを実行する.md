@@ -8,19 +8,24 @@
 
 ---
 
->## mysql [データベース名] -u [ユーザ名] -p[パスワード] -e "SQL"
+## SQLの基本構文
 
-* SQL実行のサンプル
+### mysql [データベース名] -u [ユーザ名] -p[パスワード] -e "SQL"
+
+#### SQL実行のサンプル
 
 ```sql
 mysql workbook -u root -proot1 -e "select * from books"
 ```
+---
 
-## **;** で区切ることにより複数のSQLが実行可能
+## 複数SQLを実行する場合の構文
 
->## mysql [データベース名] -u [ユーザ名] -p[パスワード] -e "SQL1;SQL2;SQL3"
+### mysql [データベース名] -u [ユーザ名] -p[パスワード] -e "SQL1;SQL2;SQL3"
 
-* 複数実行のサンプル
+**;** で区切ることで複数のSQLを実行可能
+
+#### 複数実行のサンプル
 
 ```sql
 mysql workbook -u root -proot1 -e "select * from books;select * from usr"
