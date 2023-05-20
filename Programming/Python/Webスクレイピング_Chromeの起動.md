@@ -2,9 +2,9 @@
 
 ## seleniumとChrome DriverでGoogle Chromeを操作する
 
-### 事前準備
+## 事前準備
 
-#### 必要なモジュールをpipでインストールする
+### 必要なモジュールをpipでインストールする
 
 ```cmd
 pip install selenium
@@ -13,7 +13,7 @@ pip install chromedriver-binary-auto
 pip install webdriver-manager
 ```
 
-### サンプルコード
+## サンプルコード
 
 ```python
 # ----------------------------------------
