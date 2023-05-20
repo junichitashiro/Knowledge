@@ -10,28 +10,28 @@
 ### Windows
 
 * VirtualBoxのダウンロードページへアクセスする
-  * https://www.virtualbox.org/wiki/Downloads
+* https://www.virtualbox.org/wiki/Downloads
 * Windows hostsのリンクからインストーラをダウンロードして実行する
 
 ### Mac
 
-* Homebrewからインストールする
+#### Homebrewからインストールする
 
-  ```bash
-  brew cask install VirtualBox
-  ```
+```bash
+brew cask install VirtualBox
+```
 
-* インストール済みの場合はアップデートする
+#### インストール済みの場合はアップデートする
 
-  ```bash
-  brew cask reinstall VirtualBox
-  ```
+```bash
+brew cask reinstall VirtualBox
+```
 
-* バージョンを表示して確認する
+#### バージョンを表示して確認する
 
-  ```bash
-  VirtualBox --version
-  ```
+```bash
+VirtualBox --version
+```
 
 ---
 
@@ -40,24 +40,24 @@
 ### Windows
 
 * 下記Vagrantのダウンロードページへアクセスする
-  * http://www.vagrantup.com/downloads.html
+* http://www.vagrantup.com/downloads.html
 * WINDOWSカテゴリから対象bit数のインストーラをダウンロードして実行する
 
 ### Mac
 
-* Homebrewからインストールする
+#### Homebrewからインストールする
 
-  ```bash
-  brew cask install vagrant
-  # バージョンの確認
-  vagrant --version
-  ```
+```bash
+brew cask install vagrant
+# バージョンの確認
+vagrant --version
+```
 
-* インストール済みの場合はアップデートする
+#### インストール済みの場合はアップデートする
 
-  ```bash
-  brew cask reinstall vagrant
-  ```
+```bash
+brew cask reinstall vagrant
+```
 
 ---
 
@@ -65,41 +65,37 @@
 
 ### コマンドプロンプト、ターミナルから作業する
 
-* VagrantのBox用ディレクトリを作成する
+#### VagrantのBox用ディレクトリを作成する
 
-  ```bash
-  mkdir vagrant
-  cd vagrant
-  ```
+```bash
+mkdir vagrant
+cd vagrant
+```
 
-* Boxごとにディレクトリ分けしたほうが管理しやすいため各Box用のディレクトリを作成する
+#### Boxごとにディレクトリ分けしたほうが管理しやすいため各Box用のディレクトリを作成する
 
-  ```bash
-  mkdir dev-centos7
-  cd dev-centos7
-  ```
+```bash
+mkdir dev-centos7
+cd dev-centos7
+```
 
-## Boxの追加
+---
 
-* Box公開ページへアクセスする
-  * http://www.vagrantbox.es/
+## Boxの追加手順
 
-* 対象となるBoxのURLをコピーしておく
-
-* Boxを追加する
-
-  ```bash
-  # vagrant box add [Box名] [コピーしたBoxのURL]
-  vagrant box add dev-centos7 https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.2/vagrant-centos-7.2.box
-  ```
-
-* Boxを初期化する
-* 初期化するとBox名のディレクトリに **Vagrantfile** が作成される
-
-  ```bash
-  # vagrant init [Box名]
-  vagrant init dev-centos7
-  ```
+1. [Box公開ページ](http://www.vagrantbox.es/) へアクセスする
+2. 対象となるBoxのURLをコピーしておく
+3. Boxを追加する
+    ```bash
+    # vagrant box add [Box名] [コピーしたBoxのURL]
+    vagrant box add dev-centos7 https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.2/vagrant-centos-7.2.box
+    ```
+4. Boxを初期化する
+5. 初期化するとBox名のディレクトリに **Vagrantfile** が作成される
+    ```bash
+    # vagrant init [Box名]
+    vagrant init dev-centos7
+    ```
 
 ---
 
@@ -113,7 +109,7 @@
   config.vm.network "private_network", ip: "192.168.33.10"
   ```
 
-## フォルダを共有する設定（任意）
+### フォルダを共有する設定（任意）
 
 * ホスト端末の **share** フォルダとゲスト端末の **/tmp/share** フォルダを共有する設定
 * **create: true** はフォルダがなかった場合作成するオプション
@@ -126,32 +122,34 @@
 
 ## Boxの起動
 
-* **Vagrantfile** と同一のディレクトリでコマンドを実行する
+### **Vagrantfile** と同一のディレクトリでコマンドを実行する
 
-  ```bash
-  vagrant up
-  ```
+```bash
+vagrant up
+```
+
+---
 
 ## ターミナルからBoxにアクセスする
 
-* Boxが起動している状態でTeraTermなどからアクセスする
+### Boxが起動している状態でTeraTermなどからアクセスする
 
-  ```bash
-  TCP/IP ホスト：192.168.33.10
-  TCPポート：22
-  サービス：SSH SSHバージョン：SSH2
-  ```
+```bash
+TCP/IP ホスト：192.168.33.10
+TCPポート：22
+サービス：SSH SSHバージョン：SSH2
+```
 
-  ```bash
-  ログインユーザ：vagrant
-  パスワード：vagrant
-  ※rootもパスワードは同じ
-  ```
+```bash
+ログインユーザ：vagrant
+パスワード：vagrant
+※rootもパスワードは同じ
+```
 
-* **Vagrantfile** の編集を行わなくても次の設定でアクセス可能
+#### Vagrantfile の編集を行わなくても次の設定でアクセス可能
 
-  ```bash
-  TCP/IP ホスト：127.0.0.1
-  TCPポート：2222
-  サービス：SSH SSHバージョン：SSH2
-  ```
+```bash
+TCP/IP ホスト：127.0.0.1
+TCPポート：2222
+サービス：SSH SSHバージョン：SSH2
+```
