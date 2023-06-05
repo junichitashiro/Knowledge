@@ -9,7 +9,6 @@
 ```python
 import requests
 import subprocess
-from subprocess import PIPE
 
 # Torのデフォルトポート
 proxies = {
