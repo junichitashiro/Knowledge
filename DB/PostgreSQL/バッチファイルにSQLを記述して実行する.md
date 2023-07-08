@@ -69,7 +69,7 @@ select * from test_table;
 rem --------------------------------------------------
 rem DB接続パラメータ
 rem --------------------------------------------------
-set PGPATH=C:\"Program Files"\PostgreSQL\10\bin\
+set PGPATH=C:\"Program Files"\PostgreSQL\14\bin\
 set HOSTNAME=localhost
 set PORTNUM=5432
 set DBNAME=postgres
