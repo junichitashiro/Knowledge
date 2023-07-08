@@ -1,8 +1,16 @@
 # バッチファイルからSQLファイルを読み込んで実行する
 
+## データベース情報
+
 * ユーザ名：postgres
 * データベース名：postgres
-* テーブル名：test_table
+* テーブル名：test_table（[サンプルテーブルの作成](https://github.com/junichitashiro/Technical-Notes/blob/master/DB/PostgreSQL/サンプルテーブルの作成.md) 参照）
+* パス：C:\Program Files\PostgreSQL\14\bin\
+
+## バッチファイルの共通設定
+
+* 文字コード：SJIS
+* 改行コード：CRLF
 
 ---
 
@@ -11,15 +19,15 @@
 ### バッチファイルの設定
 
 * 出力先はバッチファイルで指定する
-* **-f** オプションで実行するSQLファイルを指定する
-* **-o** オプションで出力先を指定する
+* -f オプションで実行するSQLファイルを指定する
+* -o オプションで出力先を指定する
 
 ```bat
 @echo off
 rem --------------------------------------------------
 rem DB接続パラメータ
 rem --------------------------------------------------
-set PGPATH=C:\"Program Files"\PostgreSQL\10\bin\
+set PGPATH=C:\"Program Files"\PostgreSQL\14\bin\
 set HOSTNAME=localhost
 set PORTNUM=5432
 set DBNAME=postgres
@@ -40,7 +48,7 @@ rem --------------------------------------------------
 
 ### SQLファイルの設定
 
-* ファイル名 **input.sql**
+* ファイル名：input.sql
 
 ```sql
 select * from test_table;
@@ -52,7 +60,7 @@ select * from test_table;
 
 ### バッチファイルの設定
 
-* 出力先をバッチファイルで指定する
+* 出力先はバッチファイルで指定する
 * 出力形式はSQLファイルで指定する
 
 ```bat
@@ -60,7 +68,7 @@ select * from test_table;
 rem --------------------------------------------------
 rem DB接続パラメータ
 rem --------------------------------------------------
-set PGPATH=C:\"Program Files"\PostgreSQL\10\bin\
+set PGPATH=C:\"Program Files"\PostgreSQL\14\bin\
 set HOSTNAME=localhost
 set PORTNUM=5432
 set DBNAME=postgres
@@ -81,9 +89,12 @@ rem --------------------------------------------------
 
 ### SQLファイルの設定
 
-* ファイル名 **input.sql**
-* SQLを **copy (** と **)to stdout with csv delimiter ',' ;** の中に記述する
-* ここでは出力先を標準出力、nullを空白、ヘッダ出力ありを指定している
+* ファイル名：input.sql
+* SQLを **『copy (』** と **『)to stdout with csv delimiter ',' ;』** の中に記述する
+* 出力先：標準出力
+* 追加設定
+  * nullを空白にする
+  * ヘッダ出力あり
 
 ```sql
 copy (
@@ -97,14 +108,14 @@ copy (
 
 ### バッチファイルの設定
 
-* バッチファイルで出力先の記述はしない
+* バッチファイルで出力先の記述はしないため -o オプションを指定しない
 
 ```bat
 @echo off
 rem --------------------------------------------------
 rem DB接続パラメータ
 rem --------------------------------------------------
-set PGPATH=C:\"Program Files"\PostgreSQL\10\bin\
+set PGPATH=C:\"Program Files"\PostgreSQL\14\bin\
 set HOSTNAME=localhost
 set PORTNUM=5432
 set DBNAME=postgres
@@ -124,12 +135,12 @@ rem --------------------------------------------------
 
 ### SQLファイルの設定
 
-* ファイル名 **input.sql**
-* **input.sql** で出力先を指定する
-* 出力先は絶対参照で指定する
+* ファイル名：input.sql
+* 出力先をSQLファイルに絶対参照で指定する
+* 書き込み権限のあるフォルダを指定すること
 
 ```sql
 copy (
     select * from test_table
-) to 'D:\test\result.csv' with csv delimiter ',' null as '' header;
+) to 'C:\temp\result.csv' with csv delimiter ',' null as '' header;
 ```
