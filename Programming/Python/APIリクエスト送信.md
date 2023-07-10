@@ -187,5 +187,3 @@ else:
     print('APIリクエストエラー')
     print('ステータスコード:', res.status_code)
 ```
-
----
