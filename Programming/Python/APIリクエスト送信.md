@@ -61,7 +61,7 @@ else:
 ### プロキシ設定ファイル（PACファイル）を使用してプロキシ経由でAPIリクエストを送信する
 
 * **requests** の代わりに **PACSession** を使用する
-* PSCファイルの指定はURLでも可能
+* PACファイルの指定はURLでも可能
 
 ```python
 from pypac import PACSession
