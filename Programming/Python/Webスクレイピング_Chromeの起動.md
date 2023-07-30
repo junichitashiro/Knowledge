@@ -16,9 +16,6 @@ pip install webdriver-manager
 ## サンプルコード
 
 ```python
-# ----------------------------------------
-# モジュールのインポート
-# ----------------------------------------
 import time
 
 import chromedriver_binary
@@ -29,16 +26,17 @@ from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-# ----------------------------------------
+# ========================================
+# 初期処理
+# ========================================
 # ChromeDriverの設定
-# ----------------------------------------
 CHROMEDRIVER = ChromeDriverManager().install()
 chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
 
-# ----------------------------------------
-# 処理開始
-# ----------------------------------------
+# ========================================
+# メイン処理
+# ========================================
 # ブラウザを起動する
 driver = webdriver.Chrome(service=chrome_service)
 
@@ -138,9 +136,6 @@ driver.quit()
 ## 各種オプションを指定したサンプルコード
 
 ```python
-# ----------------------------------------
-# モジュールのインポート
-# ----------------------------------------
 import time
 
 import chromedriver_binary
@@ -151,9 +146,10 @@ from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-# ----------------------------------------
+# ========================================
+# 初期処理
+# ========================================
 # ChromeDriverの設定
-# ----------------------------------------
 CHROMEDRIVER = ChromeDriverManager().install()
 chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
@@ -168,9 +164,9 @@ dl_folder = 'C:\temp'
 chrome_options.add_experimental_option('prefs', {'download.default_directory': dl_folder})
 
 
-# ----------------------------------------
-# 処理開始
-# ----------------------------------------
+# ========================================
+# メイン処理
+# ========================================
 # ブラウザを起動する
 driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 # ブラウザを最大化する

@@ -88,10 +88,6 @@ def make_plugin():
 * 実行の都度マニフェストファイルの存在をチェックし、なければ生成する
 
 ```python
-# ----------------------------------------
-# 初期処理
-# ----------------------------------------
-# モジュールのインポート
 import os
 import time
 
@@ -101,6 +97,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 import proxy_auth_plugin as proxy
 
+# ========================================
+# 初期処理
+# ========================================
 # ChromeDriverの設定
 CHROMEDRIVER = ChromeDriverManager().install()
 chrome_service = fs.Service (executable_path=CHROMEDRIVER)
