@@ -1,5 +1,7 @@
 # seleniumでGUI操作をする
 
+---
+
 ## カーソル移動
 
 * pyautoguiでカーソルを操作する

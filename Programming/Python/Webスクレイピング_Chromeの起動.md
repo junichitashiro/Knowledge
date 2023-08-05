@@ -1,10 +1,12 @@
 # Webスクレイピング_Chromeの起動
 
+---
+
 ## seleniumとChrome DriverでGoogle Chromeを操作する
 
-## 事前準備
+### 事前準備
 
-### 必要なモジュールをpipでインストールする
+#### 必要なモジュールをpipでインストールする
 
 ```cmd
 pip install selenium
