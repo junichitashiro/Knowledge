@@ -4,13 +4,13 @@
 
 ## 既存のExcelファイルへ書き込みをする
 
-### test.xlsx を開いてテキストを入力するコード
+### Excelファイルを開いてテキストを入力するコード
 
 ```powershell
 # Excelの初期処理
 $excel = New-Object -ComObject Excel.Application
 $excel.Visible = $false
-$workbook = $excel.Workbooks.Open("C:\Path\To\test.xlsx")
+$workbook = $excel.Workbooks.Open("C:\Path\To\ExcelFile.xlsx")
 $worksheet = $workbook.Worksheets.Item(1)
 
 # Excelへの書き込み処理
@@ -76,7 +76,7 @@ Remove-Variable excel, workbook, worksheet
 
 ## 新規にExcelファイルを開いて書き込みをする
 
-### 新規にExcelを開いてテキストを入力し保存するコード
+### 新規にExcelファイルを開いてテキストを入力し保存するコード
 
 ```powershell
 # Excelの初期処理
@@ -90,7 +90,7 @@ $worksheet.Cells.Item(1, 1) = "Input"
 $worksheet.Cells.Item(1, 2) = "Test"
 
 # Excelの終了処理
-$workbook.SaveAs("C:\Path\To\new_test.xlsx")
+$workbook.SaveAs("C:\Path\To\NewExcelFile.xlsx")
 $workbook.Close($false)
 $excel.Quit()
 
