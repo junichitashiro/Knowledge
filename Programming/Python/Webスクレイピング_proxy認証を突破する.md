@@ -104,7 +104,7 @@ import proxy_auth_plugin as proxy
 # ========================================
 # ChromeDriverの設定
 CHROMEDRIVER = ChromeDriverManager().install()
-chrome_service = fs.Service (executable_path=CHROMEDRIVER)
+chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
 # オプション用のパス指定
 pluginfile = 'proxy_auth_plugin.zip'
@@ -113,8 +113,8 @@ if not os.path.exists(pluginfile):
     proxy.make_plugin()
 
 # オプション設定
-chrome_options = webdriver. ChromeOptions()
+chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 chrome_options.add_experimental_option('prefs', {'download.default_directory'})
-chrome_options.add_extension (pluginfile)
+chrome_options.add_extension(pluginfile)
 ```
