@@ -91,19 +91,18 @@ def make_plugin():
 
 ```python
 import os
-import time
 
-import chromedriver_binary
+import chromedriver_binary_sync
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome import service as fs
 
 import proxy_auth_plugin as proxy
 
 # ========================================
 # 初期処理
 # ========================================
-# ChromeDriverの設定
-CHROMEDRIVER = ChromeDriverManager().install()
+# ChromeDriverをダウンロードしてパスを定数に格納する
+CHROMEDRIVER = chromedriver_binary_sync.download(download_dir='chromedriver')
 chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
 # オプション用のパス指定

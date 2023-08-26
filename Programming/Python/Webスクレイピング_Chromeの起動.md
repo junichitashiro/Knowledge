@@ -10,9 +10,7 @@
 
 ```cmd
 pip install selenium
-pip install chromedriver_binary
-pip install chromedriver-binary-auto
-pip install webdriver-manager
+pip install chromedriver_binary_sync
 ```
 
 ## サンプルコード
@@ -20,19 +18,18 @@ pip install webdriver-manager
 ```python
 import time
 
-import chromedriver_binary
+import chromedriver_binary_sync
 from selenium import webdriver
 from selenium.webdriver.chrome import service as fs
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 # ========================================
 # 初期処理
 # ========================================
-# ChromeDriverの設定
-CHROMEDRIVER = ChromeDriverManager().install()
+# ChromeDriverをダウンロードしてパスを定数に格納する
+CHROMEDRIVER = chromedriver_binary_sync.download(download_dir='chromedriver')
 chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
 
@@ -63,21 +60,23 @@ driver.quit()
 
 ## オプションと起動時の設定の説明
 
-### ChromeDriverManager().install()
+### chromedriver_binary_sync.download()
 
-* ブラウザのバージョンに合わせたChromeDriverをインストールする
+* ブラウザのバージョンに合わせたChromeDriverをダウンロードする
+* ダウンロードフォルダの指定が可能
 * 実行すると使用するChromeDriverのパスを返す
-* 下記はインストールと同時に変数 **CHROMEDRIVER** に実行ファイルパスを格納する設定
+* 以前使用していた **ChromeDriverManager().install()** から変更
+* 下記はダウンロードと同時に定数 **CHROMEDRIVER** に実行ファイルパスを格納する設定
 
   ```python
-  CHROMEDRIVER = ChromeDriverManager().install()
+  CHROMEDRIVER = chromedriver_binary_sync.download(download_dir='chromedriver')
   ```
 
 ### fs.Service(executable_path='ChromeDriverのパス')
 
 * 実行時にChromeDriverのパスを指定するのが推奨となっている
-* 指定しないと警告が表示されるので表示されないように設定する
-* 下記は **ChromeDriverManager().install()** で返ってくるパスを格納した変数を使って設定している
+* 指定しないと警告が表示されるので表示されないために設定する
+* 下記は **chromedriver_binary_sync.download()** で返ってくるパスを格納した定数を設定している
 
   ```python
   chrome_service = fs.Service(executable_path=CHROMEDRIVER)
@@ -127,7 +126,7 @@ driver.quit()
 
 #### add_experimental_option('prefs', {'download.default_directory': 'ディレクトリパス'})
 
-* ダウンロードフォルダを指定する
+* ブラウザのダウンロードフォルダを指定する
 
 #### webdriver.Chrome().implicitly_wait(XX)
 
@@ -140,19 +139,18 @@ driver.quit()
 ```python
 import time
 
-import chromedriver_binary
+import chromedriver_binary_sync
 from selenium import webdriver
 from selenium.webdriver.chrome import service as fs
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 # ========================================
 # 初期処理
 # ========================================
-# ChromeDriverの設定
-CHROMEDRIVER = ChromeDriverManager().install()
+# ChromeDriverをダウンロードしてパスを定数に格納する
+CHROMEDRIVER = chromedriver_binary_sync.download(download_dir='chromedriver')
 chrome_service = fs.Service(executable_path=CHROMEDRIVER)
 
 # オプションを設定する
