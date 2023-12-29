@@ -75,7 +75,7 @@
 
 ### ユーザーを追加する
 
-* [IAM_ユーザー追加手順](https://github.com/junichitashiro/Technical-Notes/blob/master/Cloud/AWS/IAM_ユーザー追加手順.md) に従ってユーザーグループとユーザーを追加する
+* [IAM_ユーザー追加手順](https://github.com/junichitashiro/Knowledges/blob/master/Cloud/AWS/IAM_ユーザー追加手順.md) に従ってユーザーグループとユーザーを追加する
 * 一通りの環境構築が可能な権限が必要になるので **AdministratorAccess** のポリシーをアタッチする
 
 ---

@@ -2,8 +2,7 @@
 
 * 作業アカウント：vagrant
 * 使用DB：MariaDB
-* PHPのバージョンアップを実行しておく
-* [<https://github.com/junichitashiro/Technical-Notes/blob/master/CentOS7/PHPバージョンアップ手順.md>]
+* PHPのバージョンアップを実行しておく（[PHPバージョンアップ手順](https://github.com/junichitashiro/Knowledges/blob/master/OS/Linux/PHPバージョンアップ手順.md) 参照）
 
 ---
 

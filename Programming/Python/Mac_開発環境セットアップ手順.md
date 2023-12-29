@@ -26,7 +26,7 @@
 
 ## Homebrewのインストール
 
-* [Homebrew最新化手順](https://github.com/junichitashiro/Technical-Notes/blob/master/Mac/Homebrew最新化手順.md)でHomebrewをインストール、もしくは最新化しておく
+* [Homebrew最新化手順](https://github.com/junichitashiro/Knowledges/blob/master/Mac/Homebrew最新化手順.md)でHomebrewをインストール、もしくは最新化しておく
 
 ---
 

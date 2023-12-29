@@ -6,7 +6,7 @@
 
 ## １．【IAM】での作業
 
-[IAM_ユーザー追加手順](https://github.com/junichitashiro/Technical-Notes/blob/master/Cloud/AWS/IAM_ユーザー追加手順.md) に従ってユーザーグループとユーザーを追加する
+[IAM_ユーザー追加手順](https://github.com/junichitashiro/Knowledges/blob/master/Cloud/AWS/IAM_ユーザー追加手順.md) に従ってユーザーグループとユーザーを追加する
 
 ---
 
