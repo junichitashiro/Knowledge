@@ -19,7 +19,7 @@ def main(page: ft.Page):
     def pick_file(e):
         file_picker.pick_files(allow_multiple=False, allowed_extensions=['xlsx'])
 
-    # Excelファイルが選択されたときに実行される関数
+    # ファイルが選択されたときに実行される関数
     def on_file_picked(e: ft.FilePickerResultEvent):
         if e.files:
             file_path = e.files[0].path
@@ -39,8 +39,8 @@ def main(page: ft.Page):
     file_picker = ft.FilePicker(on_result=on_file_picked)
     page.overlay.append(file_picker)
 
-  # ボタンとデータテーブルを作成
-    pick_button = ft.ElevatedButton('Excelファイルを選択', on_click=pick_file)
+    # ボタンとデータテーブルを作成
+    pick_button = ft.ElevatedButton('ファイルを選択', on_click=pick_file)
     data_table = ft.DataTable()
 
     # ページにボタンとデータテーブルを追加
@@ -75,20 +75,21 @@ def main(page: ft.Page):
     def open_file(e):
         if file_picker.result.files:
             file_path = file_picker.result.files[0].path
-            print(f'Selected file path: {file_path}')
+            print(f'選択したファイルのパス: {file_path}')
 
+            # 実行環境の判定
             try:
                 if platform.system() == 'Windows':
                     os.startfile(file_path)
-                elif platform.system() == 'Darwin':  # macOS
+                elif platform.system() == 'Darwin':  # mac
                     os.system(f'open {file_path}')
-                else:  # Linux and other
+                else:  # Linux
                     os.system(f'xdg-open {file_path}')
-            except Exception as ex:
-                print(f'Error opening file: {ex}')
+            except Exception as e:
+                print(f'ファイルの読み込み中にエラーが発生しました: {e}')
 
         else:
-            print('No file selected')
+            print('ファイルが選択されませんでした')
 
     # 選択ボタンを作成
     file_picker = ft.FilePicker(on_result=open_file)
