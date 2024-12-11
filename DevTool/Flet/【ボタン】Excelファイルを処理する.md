@@ -43,6 +43,10 @@ def main(page: ft.Page):
     pick_button = ft.ElevatedButton('ファイルを選択', on_click=pick_file)
     data_table = ft.DataTable()
 
+    # 画面サイズ
+    page.window_width = 500
+    page.window_height = 500
+
     # ページにボタンとデータテーブルを追加
     page.add(pick_button, data_table)
 
@@ -94,6 +98,10 @@ def main(page: ft.Page):
     # 選択ボタンを作成
     file_picker = ft.FilePicker(on_result=open_file)
     pick_file_button = ft.ElevatedButton('ファイルを選択', on_click=pick_file)
+
+    # 画面サイズ
+    page.window_width = 350
+    page.window_height = 350
 
     # ページにボタンを追加
     page.add(file_picker, pick_file_button)
