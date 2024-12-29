@@ -4,18 +4,18 @@
 
 ## インデックス
 
-### Cloud
+### Cloud: クラウドサービス関連
 
 * AWS
 
-### DB
+### DB: データベース関連
 
 * Oracle
 * PostgreSQL
 * SQL
 * TreasureData
 
-### DevTool
+### DevTool: 開発サービス、開発ツール関連
 
 * Docker
 * Flet
@@ -24,12 +24,12 @@
 * Vagrant
 * Zapier
 
-### OS
+### OS: OS関連
 
 * Linux
 * Mac
 
-### Programming
+### Programming: プログラミング関連
 
 * Bat
 * JavaScript
@@ -38,4 +38,3 @@
 * Regex
 * ShellScript
 * VBA
-
