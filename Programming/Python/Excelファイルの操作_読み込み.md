@@ -1,10 +1,6 @@
-# Excelファイルの操作_読み込み
+# Excelファイルの操作_openpyxl
 
----
-
-## openpyxlを使用したExcelファイルの読み込み
-
-### テストデータの内容
+## テストデータの内容
 
   | 行＼列 |   A    |   B    |   C    |
   | :----: | :----: | :----: | :----: |
@@ -17,22 +13,39 @@
 ## 基本的な読み込み処理
 
 ```python
-import openpyxl
+from openpyxl import load_workbook
 
 # Excelファイルを読み込む
-workbook = openpyxl.load_workbook('test.xlsx')
+wb = load_workbook('test.xlsx')
+
+# 存在するシートを表示する
+wb.sheetnames
+# >>> ['Sheet1']
 
 # シートを取得する
-sheet = workbook['Sheet1']
+sheet = wb['Sheet1']
 
-# セルの値を取得する
-cell_value = sheet['A1'].value
+# セルのアドレスから値を取得する
+sheet['A1'].value
+# >>> 'HEAD_A'
+
+# アドレスを「行・列」で指定して値を取得する
+sheet[1][0].value
+# >>> 'HEAD_B'
 
 # 行を取得する
-row = sheet[1]
+row = sheet[2]
+
+# 行取得後、列を指定して値を取得する
+row[1].value
+# >>> 'BB'
 
 # 列を取得する
-column = sheet['A']
+column = sheet['C']
+
+# 列取得後、行を指定して値を取得する
+column[2].value
+# >>> 'CCC'
 
 # 範囲を指定してセルを取得する
 cells = sheet['A1:C3']
@@ -41,14 +54,14 @@ cells = sheet['A1:C3']
 all_cells = sheet.values
 
 # ファイルを閉じる
-workbook.close()
+wb.close()
 ```
 
 ---
 
 ## 行ごと、列ごとの処理
 
-### 行ごと、列ごとに値を読み込む
+### 1行ずつ、1列ずつ値を読み込む
 
 ```python
 import openpyxl
