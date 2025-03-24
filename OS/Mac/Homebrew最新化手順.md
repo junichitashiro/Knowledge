@@ -1,38 +1,47 @@
 # Homebrewのインストールと最新化
 
+---
 
-### 最新のコマンドを下記から確認する
+## インストール
 
-[<https://brew.sh/index_ja.html>]
+### [Homebrew](https://brew.sh/ja/) のページからインストールコマンドを確認する
 
-### インストールの実行
+
+### インストールを実行する
 
 ```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+---
 
-### Homebrewの最新化
+## 最新化
+
+### Homebrew 本体を最新化する
 
 ```bash
 brew update
 ```
 
-### Homebrewと、Homebrewでインストールしたパッケージの最新化
+### Homebrew でインストールしたパッケージを最新化する
 
 ```bash
 brew upgrade
 ```
 
-### 実行結果を表示して確認
+---
 
-```bash
-brew doctor
-# Your system is ready to brew.
-```
+## 確認
 
-### バージョン表示して確認
+### バージョンを表示する
 
 ```bash
 brew --version
-# バージョンが表示される
 ```
+> Homebrew X.X.XX
+
+### Homebrew の状態や整合性などに問題がないか表示する
+
+```bash
+brew doctor
+```
+> Your system is ready to brew.
