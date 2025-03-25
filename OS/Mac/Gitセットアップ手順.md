@@ -52,10 +52,10 @@ Enter file in which to save the key
 
  → `Enter`（デフォルトの `~/.ssh/id_rsa` を使用する）
 
-
 ```bash
 Enter passphrase (empty for no passphrase)
-3```
+```
+
  → 任意のパスフレーズを入力するか、そのまま `Enter`
 
 ```bash
