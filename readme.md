@@ -37,4 +37,5 @@
 * Python
 * Regex
 * ShellScript
+* TypeScript
 * VBA
