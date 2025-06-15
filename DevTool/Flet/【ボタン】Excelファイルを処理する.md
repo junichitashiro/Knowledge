@@ -120,5 +120,6 @@ def main(page: ft.Page) -> None:
     page.add(pick_file_button)
 
 
+# Fletアプリケーションを実行
 ft.app(target=main)
 ```
