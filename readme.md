@@ -32,10 +32,8 @@
 ### Programming: プログラミング関連
 
 * Bat
-* JavaScript
 * PowerShell
 * Python
 * Regex
 * ShellScript
-* TypeScript
 * VBA
