@@ -1,5 +1,7 @@
 # Vagrant導入手順
 
+---
+
 ## VirtualBoxのインストール
 
 ### Windows
@@ -61,11 +63,3 @@ brew cask reinstall vagrant
 * [Box公開ページ](https://portal.cloud.hashicorp.com/vagrant/discover) へアクセスする
 * 追加したいBoxイメージを検索する
 * 検索結果よりイメージの概要と追加手順が確認できる
-
-## プラグインの最新化
-
-### Vagrant の Guest Additions を最新化する
-
-```bash
-vagrant plugin install vagrant-vbguest
-```

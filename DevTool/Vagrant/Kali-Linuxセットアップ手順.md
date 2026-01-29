@@ -1,5 +1,7 @@
 # VagrantでローカルにCentOS7環境をつくる
 
+---
+
 ## Box作成の準備
 
 コマンドプロンプト、ターミナルから作業する
@@ -33,8 +35,8 @@ vagrant box add {Box名} {BoxのURL}
 ```bash
 vagrant box add kalilinux/rolling
 ```
-* URL : https://portal.cloud.hashicorp.com/vagrant/discover/kalilinux/rolling
 
+* VagrantCloud URL : https://portal.cloud.hashicorp.com/vagrant/discover/kalilinux/rolling
 
 ### Boxを初期化する
 
@@ -43,12 +45,7 @@ vagrant box add kalilinux/rolling
 vagrant init kalilinux/rolling
 ```
 
-### 初期化すると Vagrantfile が作成される
-
-#### 補足
-
-* 下記公開ページにもBoxごとにセットアップ手順が示されている
-* https://portal.cloud.hashicorp.com/vagrant/discover
+* 初期化すると Vagrantfile が作成される
 
 ---
 
@@ -62,6 +59,8 @@ Vagrant.configure("2") do |config|
   config.vm.box_version = "20XX.X.X"
 end
 ```
+
+* 上記の[VagrantCloud](https://portal.cloud.hashicorp.com/vagrant/discover/kalilinux/rolling)にもバージョン番号を含む手順が公開されている
 
 ---
 
