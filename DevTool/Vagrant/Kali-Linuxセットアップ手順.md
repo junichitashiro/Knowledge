@@ -56,7 +56,6 @@ vagrant init kalilinux/rolling
 ```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "kalilinux/rolling"
-  config.vm.box_version = "20XX.X.X"
 end
 ```
 
