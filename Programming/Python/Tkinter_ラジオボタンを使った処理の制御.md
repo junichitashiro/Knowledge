@@ -61,6 +61,47 @@ btn.pack()
 window.mainloop()
 ```
 
+### CustomTkinter リプレイス版
+
+```python
+import customtkinter as ctk
+
+
+# 値を取得する関数
+def get_selected_value() -> None:
+    selected_value = radio_var.get()
+    print(f'取得値：{selected_value}')
+
+# CustomTkinterの基本設定
+ctk.set_appearance_mode('System')   # 'Light' / 'Dark' / 'System'
+ctk.set_default_color_theme('blue') # 'blue' / 'green' / 'dark-blue'
+
+window = ctk.CTk()
+window.title('RadioButton Sample')
+window.geometry('350x200')
+
+# ラジオボタンの値を保持する変数
+radio_var = ctk.StringVar(value='1')  # 初期値を指定する
+
+# ラジオボタンのオプション
+options = [
+    ('ラジオボタン1', '1'),
+    ('ラジオボタン2', '2'),
+    ('ラジオボタン3', '3')
+]
+
+# ラジオボタンを生成
+for text, value in options:
+    rb = ctk.CTkRadioButton(master=window, text=text, value=value, variable=radio_var)
+    rb.pack(anchor='w', padx=20, pady=5)
+
+# 値の取得を実行するボタン
+btn = ctk.CTkButton(master=window, text='値を取得する', command=get_selected_value)
+btn.pack(pady=15)
+
+window.mainloop()
+```
+
 ---
 
 ## 選択状態で処理を分岐させる
@@ -70,38 +111,90 @@ window.mainloop()
 ```python
 import tkinter as tk
 
-def check_selection():
+# 処理内容の対応表
+HANDLERS: dict[str, str] = {
+    '1': 'ラジオボタン1が選択されました',
+    '2': 'ラジオボタン2が選択されました',
+    '3': 'ラジオボタン3が選択されました',
+}
+
+DEFAULT_MESSAGE = '選択肢以外の値です'
+
+# 値を取得する関数
+def get_selected_value() -> None:
     selected_value = radio_var.get()
-    if selected_value == 1:
-        print('ラジオボタン1が選択されました')
-    elif selected_value == 2:
-        print('ラジオボタン2が選択されました')
-    elif selected_value == 3:
-        print('ラジオボタン3が選択されました')
-    else:
-        print('選択肢以外の値です')
+    print(HANDLERS.get(selected_value, DEFAULT_MESSAGE))
 
 # GUIの作成
 window = tk.Tk()
 window.title('ラジオボタンの選択による条件分岐')
 
-# ラジオボタンの値を保持する変数
-radio_var = tk.IntVar()
+# ラジオボタンの値を保持する変数（文字列）
+radio_var = tk.StringVar(value='1')
+
+# ラジオボタンのオプション
+options = [
+    ('ラジオボタン1', '1'),
+    ('ラジオボタン2', '2'),
+    ('ラジオボタン3', '3')
+]
+
+# ラジオボタンを生成
+for text, value in options:
+    rb = tk.Radiobutton(window, text=text, value=value, variable=radio_var)
+    rb.pack(anchor=tk.W)
+
+# 値の取得を実行するボタン
+btn = tk.Button(window, text='値を取得する', command=get_selected_value)
+btn.pack(pady=10)
+
+window.mainloop()
+```
+
+### CustomTkinter リプレイス版
+
+```python
+import customtkinter as ctk
+
+# 表示メッセージ
+HANDLERS: dict[int, str] = {
+    1: 'ラジオボタン1が選択されました',
+    2: 'ラジオボタン2が選択されました',
+    3: 'ラジオボタン3が選択されました',
+}
+
+DEFAULT_MESSAGE = '選択肢以外の値です'
+
+def check_selection() -> None:
+    selected_value = radio_var.get()
+    print(HANDLERS.get(selected_value, DEFAULT_MESSAGE))
+
+# CustomTkinterの基本設定
+ctk.set_appearance_mode('System')
+ctk.set_default_color_theme('blue')
+
+# GUIの作成
+window = ctk.CTk()
+window.title('ラジオボタンの選択による条件分岐')
+window.geometry('320x220')
+
+# ラジオボタンの値を保持する変数（初期値=1）
+radio_var = ctk.IntVar(value=1)
 
 # ラジオボタンの生成
-radio_button1 = tk.Radiobutton(window, text='ラジオボタン1', variable=radio_var, value=1)
-radio_button1.pack()
-radio_button1.select()
+options = [
+    ('ラジオボタン1', 1),
+    ('ラジオボタン2', 2),
+    ('ラジオボタン3', 3),
+]
 
-radio_button2 = tk.Radiobutton(window, text='ラジオボタン2', variable=radio_var, value=2)
-radio_button2.pack()
+for text, value in options:
+    rb = ctk.CTkRadioButton(master=window, text=text, variable=radio_var, value=value)
+    rb.pack(anchor='w', padx=20, pady=5)
 
-radio_button3 = tk.Radiobutton(window, text='ラジオボタン3', variable=radio_var, value=3)
-radio_button3.pack()
-
-# ボタンを作成して選択状態を確認する
-check_button = tk.Button(window, text='選択を確認', command=check_selection)
-check_button.pack()
+# 選択状態を確認するボタン
+check_button = ctk.CTkButton(master=window, text='選択を確認', command=check_selection)
+check_button.pack(pady=15)
 
 window.mainloop()
 ```
@@ -111,31 +204,88 @@ window.mainloop()
 ```python
 import tkinter as tk
 
-def get_selected_value():
+# 表示文言
+HANDLERS: dict[str, str] = {
+    'opt1': '選択肢1が選択されました',
+    'opt2': '選択肢2が選択されました',
+    'opt3': '選択肢3が選択されました',
+}
+
+DEFAULT_MESSAGE = '未定義の選択肢です'
+
+def get_selected_value() -> None:
     selected_value = radio_var.get()
-    print(f'{selected_value}が選択されました')
+    print(HANDLERS.get(selected_value, DEFAULT_MESSAGE))
 
 # GUIの作成
 window = tk.Tk()
-window.title('ラジオボタンの選択値を取得する関数')
+window.title('ラジオボタンの選択値を取得')
 
 # ラジオボタンの値を保持する変数
-radio_var = tk.StringVar()
+radio_var = tk.StringVar(value='opt1')
 
 # ラジオボタンの生成
-radio_button1 = tk.Radiobutton(window, text='ラジオボタン1', variable=radio_var, value='選択肢1')
-radio_button1.pack()
-radio_button1.select()
+options = [
+    ('ラジオボタン1', 'opt1'),
+    ('ラジオボタン2', 'opt2'),
+    ('ラジオボタン3', 'opt3'),
+]
 
-radio_button2 = tk.Radiobutton(window, text='ラジオボタン2', variable=radio_var, value='選択肢2')
-radio_button2.pack()
-
-radio_button3 = tk.Radiobutton(window, text='ラジオボタン3', variable=radio_var, value='選択肢3')
-radio_button3.pack()
+for text, value in options:
+    rb = tk.Radiobutton(window, text=text, variable=radio_var, value=value)
+    rb.pack(anchor=tk.W)
 
 # ボタンを作成して選択値を取得する
 get_value_button = tk.Button(window, text='選択値を取得', command=get_selected_value)
-get_value_button.pack()
+get_value_button.pack(pady=10)
+
+window.mainloop()
+```
+
+### CustomTkinter リプレイス版
+
+```python
+import customtkinter as ctk
+
+# 表示文言
+HANDLERS: dict[str, str] = {
+    'opt1': '選択肢1が選択されました',
+    'opt2': '選択肢2が選択されました',
+    'opt3': '選択肢3が選択されました',
+}
+
+DEFAULT_MESSAGE = '未定義の選択肢です'
+
+def get_selected_value() -> None:
+    selected_value = radio_var.get()
+    print(HANDLERS.get(selected_value, DEFAULT_MESSAGE))
+
+# CustomTkinterの基本設定
+ctk.set_appearance_mode('System')
+ctk.set_default_color_theme('blue')
+
+# GUIの作成
+window = ctk.CTk()
+window.title('ラジオボタンの選択値を取得')
+window.geometry('360x240')
+
+# ラジオボタンの値を保持する変数
+radio_var = ctk.StringVar(value='opt1')  # 初期値
+
+# ラジオボタンの生成
+options = [
+    ('ラジオボタン1', 'opt1'),
+    ('ラジオボタン2', 'opt2'),
+    ('ラジオボタン3', 'opt3'),
+]
+
+for text, value in options:
+    rb = ctk.CTkRadioButton(master=window, text=text, variable=radio_var, value=value)
+    rb.pack(anchor='w', padx=20, pady=6)
+
+# ボタンを作成して選択値を取得する
+get_value_button = ctk.CTkButton(master=window, text='選択値を取得', command=get_selected_value)
+get_value_button.pack(pady=15)
 
 window.mainloop()
 ```
