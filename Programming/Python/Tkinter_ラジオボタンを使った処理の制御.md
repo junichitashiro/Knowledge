@@ -4,11 +4,6 @@
 
 ## 値を取得する
 
-### ラジオボタンの初期値
-
-* 最初のラジオボタン生成直後に __select()__ で選択し初期値にしている
-* これはラジオボタンがいずれも未選択、もしくは選択状態になるのを防ぐために実施している
-
 ### ウィジェット変数
 
 #### ウィジェット変数とは
@@ -112,10 +107,10 @@ window.mainloop()
 import tkinter as tk
 
 # 処理内容の対応表
-HANDLERS: dict[str, str] = {
-    '1': 'ラジオボタン1が選択されました',
-    '2': 'ラジオボタン2が選択されました',
-    '3': 'ラジオボタン3が選択されました',
+HANDLERS: dict[int, str] = {
+    1: 'ラジオボタン1が選択されました',
+    2: 'ラジオボタン2が選択されました',
+    3: 'ラジオボタン3が選択されました',
 }
 
 DEFAULT_MESSAGE = '選択肢以外の値です'
@@ -129,14 +124,14 @@ def get_selected_value() -> None:
 window = tk.Tk()
 window.title('ラジオボタンの選択による条件分岐')
 
-# ラジオボタンの値を保持する変数（文字列）
-radio_var = tk.StringVar(value='1')
+# ラジオボタンの値を保持する変数（初期値=1）
+radio_var = tk.IntVar(value=1)
 
 # ラジオボタンのオプション
 options = [
-    ('ラジオボタン1', '1'),
-    ('ラジオボタン2', '2'),
-    ('ラジオボタン3', '3')
+    ('ラジオボタン1', 1),
+    ('ラジオボタン2', 2),
+    ('ラジオボタン3', 3)
 ]
 
 # ラジオボタンを生成
@@ -145,7 +140,7 @@ for text, value in options:
     rb.pack(anchor=tk.W)
 
 # 値の取得を実行するボタン
-btn = tk.Button(window, text='値を取得する', command=get_selected_value)
+btn = tk.Button(window, text='選択を確認', command=get_selected_value)
 btn.pack(pady=10)
 
 window.mainloop()
