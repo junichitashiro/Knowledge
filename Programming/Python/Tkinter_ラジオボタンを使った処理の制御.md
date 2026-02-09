@@ -29,7 +29,7 @@ def get_selected_value():
     selected_value = radio_var.get()
     print(f'取得値：{selected_value}')
 
-window = tk.Tk()
+app = tk.Tk()
 
 # ラジオボタンの値を保持する変数
 radio_var = tk.StringVar()
@@ -43,17 +43,17 @@ options = [
 
 # ラジオボタンを生成
 for text, value in options:
-    rb = tk.Radiobutton(window, text=text, value=value, variable=radio_var)
+    rb = tk.Radiobutton(app, text=text, value=value, variable=radio_var)
     rb.pack(anchor=tk.W)
     # 初期値に'1'を選択状態にしておく
     if value == '1':
         rb.select()
 
 # 値の取得を実行するボタン
-btn = tk.Button(window, text='値を取得する', command=get_selected_value)
+btn = tk.Button(app, text='値を取得する', command=get_selected_value)
 btn.pack()
 
-window.mainloop()
+app.mainloop()
 ```
 
 ### CustomTkinter リプレイス版
@@ -71,9 +71,9 @@ def get_selected_value() -> None:
 ctk.set_appearance_mode('System')   # 'Light' / 'Dark' / 'System'
 ctk.set_default_color_theme('blue') # 'blue' / 'green' / 'dark-blue'
 
-window = ctk.CTk()
-window.title('RadioButton Sample')
-window.geometry('350x200')
+app = ctk.CTk()
+app.title('RadioButton Sample')
+app.geometry('350x200')
 
 # ラジオボタンの値を保持する変数
 radio_var = ctk.StringVar(value='1')  # 初期値を指定する
@@ -87,14 +87,14 @@ options = [
 
 # ラジオボタンを生成
 for text, value in options:
-    rb = ctk.CTkRadioButton(master=window, text=text, value=value, variable=radio_var)
+    rb = ctk.CTkRadioButton(master=app, text=text, value=value, variable=radio_var)
     rb.pack(anchor='w', padx=20, pady=5)
 
 # 値の取得を実行するボタン
-btn = ctk.CTkButton(master=window, text='値を取得する', command=get_selected_value)
+btn = ctk.CTkButton(master=app, text='値を取得する', command=get_selected_value)
 btn.pack(pady=15)
 
-window.mainloop()
+app.mainloop()
 ```
 
 ---
@@ -121,8 +121,8 @@ def get_selected_value() -> None:
     print(HANDLERS.get(selected_value, DEFAULT_MESSAGE))
 
 # GUIの作成
-window = tk.Tk()
-window.title('ラジオボタンの選択による条件分岐')
+app = tk.Tk()
+app.title('ラジオボタンの選択による条件分岐')
 
 # ラジオボタンの値を保持する変数（初期値=1）
 radio_var = tk.IntVar(value=1)
@@ -136,14 +136,14 @@ options = [
 
 # ラジオボタンを生成
 for text, value in options:
-    rb = tk.Radiobutton(window, text=text, value=value, variable=radio_var)
+    rb = tk.Radiobutton(app, text=text, value=value, variable=radio_var)
     rb.pack(anchor=tk.W)
 
 # 値の取得を実行するボタン
-btn = tk.Button(window, text='選択を確認', command=get_selected_value)
+btn = tk.Button(app, text='選択を確認', command=get_selected_value)
 btn.pack(pady=10)
 
-window.mainloop()
+app.mainloop()
 ```
 
 ### CustomTkinter リプレイス版
@@ -169,9 +169,9 @@ ctk.set_appearance_mode('System')
 ctk.set_default_color_theme('blue')
 
 # GUIの作成
-window = ctk.CTk()
-window.title('ラジオボタンの選択による条件分岐')
-window.geometry('320x220')
+app = ctk.CTk()
+app.title('ラジオボタンの選択による条件分岐')
+app.geometry('320x220')
 
 # ラジオボタンの値を保持する変数（初期値=1）
 radio_var = ctk.IntVar(value=1)
@@ -184,14 +184,14 @@ options = [
 ]
 
 for text, value in options:
-    rb = ctk.CTkRadioButton(master=window, text=text, variable=radio_var, value=value)
+    rb = ctk.CTkRadioButton(master=app, text=text, variable=radio_var, value=value)
     rb.pack(anchor='w', padx=20, pady=5)
 
 # 選択状態を確認するボタン
-check_button = ctk.CTkButton(master=window, text='選択を確認', command=check_selection)
+check_button = ctk.CTkButton(master=app, text='選択を確認', command=check_selection)
 check_button.pack(pady=15)
 
-window.mainloop()
+app.mainloop()
 ```
 
 ### ラジオボタンに設定した文字列で処理を分岐させる
@@ -213,8 +213,8 @@ def get_selected_value() -> None:
     print(HANDLERS.get(selected_value, DEFAULT_MESSAGE))
 
 # GUIの作成
-window = tk.Tk()
-window.title('ラジオボタンの選択値を取得')
+app = tk.Tk()
+app.title('ラジオボタンの選択値を取得')
 
 # ラジオボタンの値を保持する変数
 radio_var = tk.StringVar(value='opt1')
@@ -227,14 +227,14 @@ options = [
 ]
 
 for text, value in options:
-    rb = tk.Radiobutton(window, text=text, variable=radio_var, value=value)
+    rb = tk.Radiobutton(app, text=text, variable=radio_var, value=value)
     rb.pack(anchor=tk.W)
 
 # ボタンを作成して選択値を取得する
-get_value_button = tk.Button(window, text='選択値を取得', command=get_selected_value)
+get_value_button = tk.Button(app, text='選択値を取得', command=get_selected_value)
 get_value_button.pack(pady=10)
 
-window.mainloop()
+app.mainloop()
 ```
 
 ### CustomTkinter リプレイス版
@@ -260,9 +260,9 @@ ctk.set_appearance_mode('System')
 ctk.set_default_color_theme('blue')
 
 # GUIの作成
-window = ctk.CTk()
-window.title('ラジオボタンの選択値を取得')
-window.geometry('360x240')
+app = ctk.CTk()
+app.title('ラジオボタンの選択値を取得')
+app.geometry('360x240')
 
 # ラジオボタンの値を保持する変数
 radio_var = ctk.StringVar(value='opt1')  # 初期値
@@ -275,12 +275,12 @@ options = [
 ]
 
 for text, value in options:
-    rb = ctk.CTkRadioButton(master=window, text=text, variable=radio_var, value=value)
+    rb = ctk.CTkRadioButton(master=app, text=text, variable=radio_var, value=value)
     rb.pack(anchor='w', padx=20, pady=6)
 
 # ボタンを作成して選択値を取得する
-get_value_button = ctk.CTkButton(master=window, text='選択値を取得', command=get_selected_value)
+get_value_button = ctk.CTkButton(master=app, text='選択値を取得', command=get_selected_value)
 get_value_button.pack(pady=15)
 
-window.mainloop()
+app.mainloop()
 ```
