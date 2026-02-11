@@ -15,12 +15,13 @@
 * SQL
 * TreasureData
 
-### DevTool: 開発サービス、開発ツール関連
+### Tools_and_Frameworks: 開発ツールやフレームワーク関連
 
 * Docker
 * Flet
 * Git
 * Glide
+* Tkinter
 * Vagrant
 * Zapier
 
