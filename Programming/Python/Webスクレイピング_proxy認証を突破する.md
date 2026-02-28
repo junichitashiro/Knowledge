@@ -93,8 +93,9 @@ def make_plugin():
 from pathlib import Path
 
 import chromedriver_binary_sync
-from selenium import webdriver
-from selenium.webdriver.chrome import service as fs
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 import proxy_auth_plugin as proxy
 
@@ -103,27 +104,27 @@ import proxy_auth_plugin as proxy
 # ========================================
 # ChromeDriverをダウンロードしてパスを定数に格納する
 CHROMEDRIVER = chromedriver_binary_sync.download(download_dir='chromedriver')
-chrome_service = fs.Service(executable_path=CHROMEDRIVER)
+chrome_service = Service(executable_path=CHROMEDRIVER)
 
 # オプション用のパス指定
-pluginfile = Path('proxy_auth_plugin.zip')
+pluginfile = Path.cwd() / 'proxy_auth_plugin.zip'
 dl_folder = 'C:\temp'
 
 if not Path.exists(pluginfile):
     proxy.make_plugin()
 
 # オプション設定
-chrome_options = webdriver.ChromeOptions()
+chrome_options = Options()
 chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 chrome_options.add_experimental_option('prefs', {'download.default_directory': dl_folder})
-chrome_options.add_extension(pluginfile)
+chrome_options.add_extension(str(pluginfile))
 
 
 # ========================================
 # メイン処理
 # ========================================
 # ブラウザを起動する
-driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+driver = WebDriver(service=chrome_service, options=chrome_options)
 
 # proxy認証が必要なURLを開く
 driver.get('proxy認証が必要なURL')
