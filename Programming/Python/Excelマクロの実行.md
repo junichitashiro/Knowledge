@@ -6,10 +6,10 @@
 
 ## 事前準備
 
-### pipからwin32comをインストールする
+### win32comをインストールする
 
 ```cmd
-pip install pywin32
+uv add pywin32
 ```
 
 ### マクロの準備

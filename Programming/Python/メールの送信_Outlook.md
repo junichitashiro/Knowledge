@@ -9,7 +9,7 @@
 #### pipからwin32comをインストールする
 
 ```cmd
-pip install pywin32
+uv add pywin32
 ```
 
 ---

@@ -11,7 +11,7 @@
 #### pipからpyautoguiをインストールする
 
 ```cmd
-pip install pyautogui
+uv add pyautogui
 ```
 
 ### カーソル移動のテストコード
