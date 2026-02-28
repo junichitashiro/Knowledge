@@ -6,11 +6,11 @@
 
 ### 事前準備
 
-#### 必要なモジュールをpipでインストールする
+#### 必要なモジュールをインストールする
 
 ```cmd
-pip install selenium
-pip install chromedriver_binary_sync
+uv add selenium
+uv add chromedriver_binary_sync
 ```
 
 ## サンプルコード
@@ -19,8 +19,8 @@ pip install chromedriver_binary_sync
 import time
 
 import chromedriver_binary_sync
-from selenium import webdriver
-from selenium.webdriver.chrome import service as fs
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -30,14 +30,14 @@ from selenium.webdriver.common.keys import Keys
 # ========================================
 # ChromeDriverをダウンロードしてパスを定数に格納する
 CHROMEDRIVER = chromedriver_binary_sync.download(download_dir='chromedriver')
-chrome_service = fs.Service(executable_path=CHROMEDRIVER)
+chrome_service = Service(executable_path=CHROMEDRIVER)
 
 
 # ========================================
 # メイン処理
 # ========================================
 # ブラウザを起動する
-driver = webdriver.Chrome(service=chrome_service)
+driver = WebDriver(service=chrome_service)
 
 # 指定するURLを開く
 driver.get('https://www.google.com/')
@@ -58,7 +58,7 @@ driver.quit()
 
 ---
 
-## オプションと起動時の設定の説明
+## 起動時の設定
 
 ### chromedriver_binary_sync.download()
 
@@ -72,17 +72,25 @@ driver.quit()
   CHROMEDRIVER = chromedriver_binary_sync.download(download_dir='chromedriver')
   ```
 
-### fs.Service(executable_path='ChromeDriverのパス')
+### selenium.webdriver.chrome.service.Service(executable_path='ChromeDriverのパス')
 
 * 実行時にChromeDriverのパスを指定するのが推奨となっている
 * 指定しないと警告が表示されるので表示されないために設定する
 * 下記は **chromedriver_binary_sync.download()** で返ってくるパスを格納した定数を設定している
 
   ```python
-  chrome_service = fs.Service(executable_path=CHROMEDRIVER)
+  chrome_service = Service(executable_path=CHROMEDRIVER)
   ```
 
-### webdriver.ChromeOptions()
+### selenium.webdriver.chrome.webdriver.WebDriver().implicitly_wait(XX)
+
+* 要素が見つかるまで指定秒数待つ
+
+---
+
+## オプション
+
+### selenium.webdriver.chrome.options.Options()
 
 * オプションを指定するためのクラス
 
@@ -128,10 +136,6 @@ driver.quit()
 
 * ブラウザのダウンロードフォルダを指定する
 
-#### webdriver.Chrome().implicitly_wait(XX)
-
-* 要素が見つかるまで指定秒数待つ
-
 ---
 
 ## 各種オプションを指定したサンプルコード
@@ -140,21 +144,21 @@ driver.quit()
 import time
 
 import chromedriver_binary_sync
-from selenium import webdriver
-from selenium.webdriver.chrome import service as fs
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-
 
 # ========================================
 # 初期処理
 # ========================================
 # ChromeDriverをダウンロードしてパスを定数に格納する
 CHROMEDRIVER = chromedriver_binary_sync.download(download_dir='chromedriver')
-chrome_service = fs.Service(executable_path=CHROMEDRIVER)
+chrome_service = Service(executable_path=CHROMEDRIVER)
 
 # オプションを設定する
-chrome_options = webdriver.ChromeOptions()
+chrome_options = Options()
 # ヘッドレスモードで起動する
 chrome_options.add_argument('--headless')
 # テスト実行警告とDevToolsのログを非表示
@@ -168,7 +172,7 @@ chrome_options.add_experimental_option('prefs', {'download.default_directory': d
 # メイン処理
 # ========================================
 # ブラウザを起動する
-driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+driver = WebDriver(service=chrome_service, options=chrome_options)
 # ブラウザを最大化する
 driver.maximize_window()
 # 要素が見つかるまで最大10秒待つ設定
