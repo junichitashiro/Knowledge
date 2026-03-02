@@ -1,7 +1,7 @@
 # MariaDBセットアップ手順
 
 * 作業アカウント：vagrant
-* 初期設定で文字コードを **utf8*### に設定する
+* 初期設定で文字コードを **utf8mb4** に設定する
 
 ---
 
@@ -35,16 +35,14 @@ sudo systemctl enable mariadb.service
 sudo vi /etc/my.cnf
 ```
 
-### 以下の内容に編集する
+### 以下のカテゴリと内容を記入する
 
 ```bash
-# 既存のカテゴリに追加する
 [mysqld]
-character-set-server=utf8
+character-set-server=utf8mb4
 
-# カテゴリを作成して追加する
-[mysql]
-default-character-set=utf8
+[client]
+default-character-set=utf8mb4
 ```
 
 ### サービスを再起動する
@@ -61,64 +59,65 @@ sudo systemctl restart mariadb.service
 
 ```bash
 sudo mysql_secure_installation
-
-# 以下のメッセージが表示される
-# NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
-#       SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
-#
-# In order to log into MariaDB to secure it, we'll need the current
-# password for the root user.  If you've just installed MariaDB, and
-# you haven't set the root password yet, the password will be blank,
-# so you should just press enter here.
 ```
 
-1. 現在のrootパスワードを入力する
+### 1. 現在のrootパスワードを入力する
 
-    ```bash
-    Enter current password for root (enter for none): # 未設定なのでそのままEnter
-    ```
+```text
+Enter current password for root (enter for none):
+```
+* 未設定なのでそのまま **[Enter]**
 
-2. rootパスワードの設定をするか選択する
+### 2. unix_socket認証にするか選択する
 
-    ```bash
-    Set root password? [Y/n] # Enter
-    ```
+```bash
+Switch to unix_socket authentication [Y/n]
+```
 
-3. 新しいrootパスワードを設定する
+* rootのログインをOSのrootユーザー限定にするかどうか
+* 安全性を高めるために **[Y]** を選択
 
-    ```bash
-    New password: # パスワードを入力してEnter
-    ```
+### 3. rootのパスワードを設定する
 
-4. パスワードの再入力
+```bash
+Change the root password? [Y/n]
+```
 
-    ```bash
-    Re-enter new password: # パスワードを再入力してEnter
-    ```
+* socket認証を選択しパスワード管理は不要になったため **[N]** を選択
 
-5. 匿名ユーザ（初期設定などのために誰でもログインできるユーザ）を削除するか選択する
+### 4. 匿名ユーザを削除するか選択する
 
-    ```bash
-    Remove anonymous users? [Y/n] # ここでは削除推奨のため Enter
-    ```
+```bash
+Remove anonymous users? [Y/n]
+```
 
-6. rootのリモートログインを禁止するか選択する
+* 匿名ユーザは初期設定などのために誰でもログインできるユーザ
+* 削除推奨のため **[Y]** を選択
 
-    ```bash
-    Disallow root login remotely? [Y/n] # Enter
-    ```
+### 5. rootのリモートログインを禁止するか選択する
 
-7. testデータベースを削除するか選択する
+```bash
+Disallow root login remotely? [Y/n]
+```
 
-    ```bash
-    Remove test database and access to it? [Y/n]  # Enter
-    ```
+* ```mysql -u root -h xxx``` を禁止するか
+* rootはサーバ内限定で十分なので **[Y]** を選択
 
-8. 権限を管理するテーブルをリロードして設定をすぐに反映するか選択する
+### 6. testデータベースを削除するか選択する
 
-    ```bash
-    Reload privilege tables now? [Y/n] # Enter
-    ```
+```bash
+Remove test database and access to it? [Y/n]
+```
+
+* 不要なので **[Y]** を選択
+
+### 7. 権限を管理するテーブルをリロードして設定をすぐに反映するか選択する
+
+```bash
+Reload privilege tables now? [Y/n]
+```
+
+* すぐに反映するように **[Y]** を選択
 
 ---
 
@@ -127,35 +126,50 @@ sudo mysql_secure_installation
 ### DBにログインして文字コードを確認する
 
 ```bash
-mysql -u root -p
-Enter password: #パスワードを入力する
-
-# Welcome to the MariaDB monitor.  Commands end with ; or \g.
-# Your MariaDB connection id is 10
-# Server version: 5.5.64-MariaDB MariaDB Server
-#
-# Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
-#
-# Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+sudo mysql
 ```
 
-### 設定を確認する
+* または ```sudo mysql```
 
-* **character_set_database** が **utf8** になっていること
+### 文字コード設定を確認する
+
+* **character_set_database** が **utf8mb4** になっていること
 
 ```sql
 show variables like 'cha%';
 
-+--------------------------+----------------------------+
-| Variable_name            | Value                      |
-+--------------------------+----------------------------+
-| character_set_client     | utf8                       |
-| character_set_connection | utf8                       |
-| character_set_database   | utf8                       |
-| character_set_filesystem | binary                     |
-| character_set_results    | utf8                       |
-| character_set_server     | utf8                       |
-| character_set_system     | utf8                       |
-| character_sets_dir       | /usr/share/mysql/charsets/ |
-+--------------------------+----------------------------+
++--------------------------+------------------------------+
+| Variable_name            | Value                        |
++--------------------------+------------------------------+
+| character_set_client     | utf8mb4                      |
+| character_set_connection | utf8mb4                      |
+| character_set_database   | utf8mb4                      |
+| character_set_filesystem | binary                       |
+| character_set_results    | utf8mb4                      |
+| character_set_server     | utf8mb4                      |
+| character_set_system     | utf8                         |
+| character_sets_dir       | /usr/share/mariadb/charsets/ |
++--------------------------+------------------------------+
+```
+
+---
+
+## アンインストール手順
+
+### 1. MariaDBサービスを停止
+
+```bash
+sudo systemctl stop mariadb
+```
+### 2. パッケージをアンインストール
+
+```bash
+sudo dnf remove mariadb-server mariadb
+```
+
+### データと設定ファイルの削除
+
+```bash
+sudo rm -rf /var/lib/mysql
+sudo rm -rf /etc/my.cnf*
 ```
