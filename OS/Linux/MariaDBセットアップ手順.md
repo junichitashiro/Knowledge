@@ -70,7 +70,7 @@ Enter current password for root (enter for none):
 
 ### 2. unix_socket認証にするか選択する
 
-```bash
+```text
 Switch to unix_socket authentication [Y/n]
 ```
 
@@ -79,7 +79,7 @@ Switch to unix_socket authentication [Y/n]
 
 ### 3. rootのパスワードを設定する
 
-```bash
+```text
 Change the root password? [Y/n]
 ```
 
@@ -87,7 +87,7 @@ Change the root password? [Y/n]
 
 ### 4. 匿名ユーザを削除するか選択する
 
-```bash
+```text
 Remove anonymous users? [Y/n]
 ```
 
@@ -96,7 +96,7 @@ Remove anonymous users? [Y/n]
 
 ### 5. rootのリモートログインを禁止するか選択する
 
-```bash
+```text
 Disallow root login remotely? [Y/n]
 ```
 
@@ -105,7 +105,7 @@ Disallow root login remotely? [Y/n]
 
 ### 6. testデータベースを削除するか選択する
 
-```bash
+```text
 Remove test database and access to it? [Y/n]
 ```
 
@@ -113,7 +113,7 @@ Remove test database and access to it? [Y/n]
 
 ### 7. 権限を管理するテーブルをリロードして設定をすぐに反映するか選択する
 
-```bash
+```text
 Reload privilege tables now? [Y/n]
 ```
 
