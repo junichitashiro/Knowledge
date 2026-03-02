@@ -1,7 +1,7 @@
 # PostgreSQLのセットアップ手順
 
-* 作業アカウント：root
-* インストールバージョン：10
+* 作業アカウント：vagrant
+* インストールバージョン：16
 
 ---
 
@@ -16,7 +16,7 @@ rpm -qa | grep postgres
 ### 存在した場合は削除する
 
 ```bash
-yum -y remove postgresql
+sudo dnf -y remove postgresql
 ```
 
 ---
@@ -24,37 +24,37 @@ yum -y remove postgresql
 ## インストール
 
 * 指定するリポジトリのURLはパッケージごとに異なり、下記サイトで確認できる。
-* [<https://yum.postgresql.org/repopackages.php#pg10>]
+* [<https://yum.postgresql.org/repopackages.php#pg16>]
 
-### 公式リポジトリの追加
+### 公式リポジトリパッケージの追加
 
 ```bash
-yum -y localinstall https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+sudo dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 ```
 
 ### PostgreSQLの本体をインストールする
 
 ```bash
-yum -y install postgresql10-server
+sudo dnf -y install postgresql16-server
 ```
 
-### バージョンを表示して確認する
+### OSからバージョンを表示して確認する
 
 ```bash
-/usr/pgsql-10/bin/postgres --version
+/usr/pgsql-16/bin/postgres --version
 ```
 
-> postgres (PostgreSQL) 10.13
+> postgres (PostgreSQL) 16.13
 
 ### 作成されるディレクトリで確認する
 
 ```bash
-ls -l /usr/pgsql-10/
+ls -l /usr/pgsql-16/
 ```
 
-> drwxr-xr-x 2 root root 4096  1月 23 09:00 bin  
-  drwxr-xr-x 2 root root 4096  1月 23 09:00 lib  
-  drwxr-xr-x 7 root root 4096  1月 23 09:00 share
+> drwxr-xr-x. 2 root root 4096  3月  2 21:23 bin  
+> drwxr-xr-x. 3 root root 4096  3月  2 21:23 lib  
+> drwxr-xr-x. 7 root root 4096  3月  2 21:23 share
 
 ---
 
@@ -63,7 +63,7 @@ ls -l /usr/pgsql-10/
 ### データベースを初期化する
 
 ```bash
-/usr/pgsql-10/bin/postgresql-10-setup initdb
+sudo /usr/pgsql-16/bin/postgresql-16-setup initdb
 ```
 
 > Initializing database ... OK
@@ -71,7 +71,7 @@ ls -l /usr/pgsql-10/
 ### 初期化をやり直す場合は関連ファイルを削除してから行う
 
 ```bash
-rm -fr /var/lib/pgsql
+sudo rm -fr /var/lib/pgsql
 ```
 
 ---
@@ -81,16 +81,16 @@ rm -fr /var/lib/pgsql
 ### サービスを起動する
 
 ```bash
-systemctl start postgresql-10.service
+sudo systemctl start postgresql-16.service
 ```
 
 ### 自動起動の設定をする
 
 ```bash
-systemctl enable postgresql-10.service
+sudo systemctl enable postgresql-16.service
 ```
 
-> Created symlink from /etc/systemd/system/multi-user.target.wants/postgresql-10.service to /usr/lib/systemd/system/postgresql-10.service.
+> Created symlink /etc/systemd/system/multi-user.target.wants/postgresql-16.service → /usr/lib/systemd/system/postgresql-16.service.
 
 ---
 
@@ -98,29 +98,59 @@ systemctl enable postgresql-10.service
 
 PostgreSQLインストール時にpostgresユーザーがOSに追加されるので、追加されたユーザーで動作確認を行う。
 
-### postgresに切り替える
+### DBにログイン
 
 ```bash
-su - postgres
+sudo -u postgres psql
 ```
 
-> プロンプトの表示が root から -bash-4.2 に変わる
+### 接続確認
 
-### テーブル一覧を表示する
-
-```bash
-psql -l
+```sql
+SELECT current_user AS user, current_database() AS db;
 ```
 
-> デフォルトのテーブル一覧が表示される
+>  postgres | postgres
 
-### バージョンを表示する
+### バージョン確認
 
-```bash
-psql --version
+```sql
+SELECT version();
 ```
 
-> psql (PostgreSQL) 10.13
+> PostgreSQL 16.13 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-11), 64-bit
+
+### ポート・データディレクトリ・ソケット配置確認
+
+```sql
+SHOW port;
+SHOW data_directory;
+SHOW unix_socket_directories;
+```
+
+> 5432
+> /var/lib/pgsql/16/data
+> /run/postgresql, /tmp
+
+### 文字コード確認
+
+```sql
+SHOW server_encoding;
+```
+
+> UTF8
+
+### DB一覧確認
+
+```sql
+SELECT datname, datdba::regrole AS owner
+FROM pg_database
+ORDER BY datname;
+```
+
+> postgres  | postgres  
+> template0 | postgres  
+> template1 | postgres
 
 ---
 
@@ -138,14 +168,14 @@ psql --version
 passwd postgres
 ```
 
-> ユーザー postgres のパスワードを変更。
+> Changing password for user postgres.
 
 ```bash
-新しいパスワード: # パスワードを入力
-新しいパスワードを再入力してください: # パスワードを再入力
+New password: # パスワードを入力
+Retype new password: # パスワードを再入力
 ```
 
-> passwd: すべての認証トークンが正しく更新できました。
+> passwd: all authentication tokens updated successfully.
 
 ---
 
@@ -157,21 +187,18 @@ passwd postgres
 su - postgres
 ```
 
-> -bash-4.2$
-
 ### データベースにログインする
 
 ```bash
 psql
 ```
 
-> postgres  
-  psql (10.13)  
-  "help" でヘルプを表示します。
+> psql (16.13)  
+> "help"でヘルプを表示します。
 
 ### ユーザーpostgresにパスワード'postgres'を設定する
 
-```bash
+```sql
 alter role postgres with password 'postgres';
 ```
 
@@ -182,38 +209,36 @@ alter role postgres with password 'postgres';
 ```bash
 \q
 ```
-
-> postgres-#  
-  → -bash-4.2$
+> postgres
+  → OSのpostgresユーザに戻る
 
 ```bash
 exit
 ```
 
-> ログアウト  
-  -bash-4.2$  
-  → root
+> logout
+  → OSのrootに戻る
 
 ### 設定ファイルを編集する
 
 ```bash
-vi /var/lib/pgsql/10/data/pg_hba.conf
+vi /var/lib/pgsql/16/data/pg_hba.conf
 ```
 
 ### 以下のように編集してパスワード認証を有効にする
 
-```bash
+```text
 local   all    all                    password # peerから変更する箇所
 # IPv4 local connections:
-host    all    all    127.0.0.1/32    password # peerから変更する箇所
+host    all    all    127.0.0.1/32    password # scram-sha-256から変更する箇所
 # IPv6 local connections:
-host    all    all    ::1/128         password # peerから変更する箇所
+host    all    all    ::1/128         password # scram-sha-256から変更する箇所
 ```
 
 ### 再起動して設定を反映する
 
 ```bash
-systemctl restart postgresql-10.service
+systemctl restart postgresql-16.service
 ```
 
 ### パスワード認証でログインできることを確認する
@@ -221,7 +246,7 @@ systemctl restart postgresql-10.service
 ```bash
 psql -U postgres
 Password for user postgres: # 設定したパスワードを入力
-psql (10.13)
+psql (16.13)
 Type "help" for help.
 ```
 
@@ -234,13 +259,13 @@ Type "help" for help.
 ### postgresqlの削除
 
 ```bash
-yum -y remove postgresql
+sudo dnf -y remove postgresql
 ```
 
 ### 関連ライブラリの削除
 
 ```bash
-yum -y remove postgresql-libs
+sudo dnf -y remove postgresql-libs
 ```
 
 ### postgresユーザーの削除
@@ -248,5 +273,5 @@ yum -y remove postgresql-libs
 * **-r** はユーザーの作成データを削除するオプション
 
 ```bash
-userdel -r postgres
+sudo userdel -r postgres
 ```
