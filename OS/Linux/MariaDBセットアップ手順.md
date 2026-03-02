@@ -7,10 +7,10 @@
 
 ## MariaDBをインストールする
 
-### yum からインストールする
+### dnf からインストールする
 
 ```bash
-sudo yum -y install mariadb mariadb-server
+sudo dnf -y install mariadb mariadb-server
 ```
 
 ### サービスを起動する
