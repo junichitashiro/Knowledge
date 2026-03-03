@@ -1,4 +1,4 @@
-# Vagrant上のCentOS7にWordPressをインストールする手順
+# Vagrant上のAlmalinux9にWordPressをインストールする手順
 
 * 作業アカウント：vagrant
 * 使用DB：MariaDB
@@ -6,12 +6,13 @@
 
 ---
 
-## unzipのインストール
+## インストール事前準備
 
-### zipファイルを展開する必要があるので **unzip** をインストールする
+### ファイルの取得と展開に必要なコマンドをインストールする
 
 ```bash
-sudo yum -y install unzip
+sudo dnf -y install wget
+sudo dnf -y install unzip
 ```
 
 ---
@@ -24,7 +25,7 @@ sudo yum -y install unzip
 view /etc/httpd/conf/httpd.conf
 ```
 
-### 以下の内容であること
+以下の内容であること
 
 ```bash
 #
@@ -80,7 +81,7 @@ sudo unzip latest-ja.zip
 ### MariaDBをインストールする
 
 ```bash
-sudo yum -y install mariadb-server
+sudo dnf -y install mariadb-server
 ```
 
 ### サービスを起動する
@@ -95,21 +96,15 @@ sudo systemctl start mariadb.service
 sudo systemctl enable mariadb
 ```
 
-> Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
+> Created symlink /etc/systemd/system/multi-user.target.wants/mariadb.service → /usr/lib/systemd/system/mariadb.service.
 
 ### MariaDBにログインする
 
 ログインするとプロンプトの表示が **MariaDB [(none)]>** に変わる
 
 ```bash
-mysql -uroot
+sudo mysql
 ```
-
-> Welcome to the MariaDB monitor.  Commands end with ; or \g.  
-Your MariaDB connection id is 2  
-Server version: 5.5.64-MariaDB MariaDB Server  
-Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.  
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 ### 以下の設定のデータベースを作成する
 
@@ -258,3 +253,64 @@ define('NONCE_SALT',       'ランダムな文字列');
 ## WordPressのインストール
 
 ### ブラウザから [<http://192.168.33.10/wordpress/>] にアクセスしインストールを実行する
+
+---
+
+## 補足
+
+インストール画面に映らなかった場合の確認と対応
+
+### PHPがApacheに認識されているか
+
+```bash
+php -v
+```
+
+### ApacheにPHPモジュールが入っているか
+
+```bash
+httpd -M | grep php
+```
+
+### 必要パッケージ確認
+
+```bash
+sudo dnf install php php-fpm php-mysqlnd
+```
+
+### php-fpm 起動
+
+```bash
+sudo systemctl enable php-fpm
+sudo systemctl start php-fpm
+```
+
+### 起動確認
+
+```bash
+sudo systemctl status php-fpm
+```
+
+### Apacheにphp-fpm設定があるか確認
+
+```bash
+ls /etc/httpd/conf.d/
+```
+
+> php.conf
+があるか
+
+### 設定ファイルの確認
+
+```bash
+cat /etc/httpd/conf.d/php.conf
+```
+
+> SetHandler "proxy:unix:/run/php-fpm/www.sock|fcgi://localhost"
+があるか
+
+### Apache再起動
+
+```bash
+sudo systemctl restart httpd
+```
