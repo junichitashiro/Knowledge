@@ -79,6 +79,33 @@ sudo systemctl enable php-fpm
 sudo systemctl start php-fpm
 ```
 
+### 起動を確認する
+
+```bash
+sudo systemctl status php-fpm
+```
+
+```
+● php-fpm.service - The PHP FastCGI Process Manager
+     Loaded: loaded (/usr/lib/systemd/system/php-fpm.service; enabled; preset: disabled)
+     Active: active (running) since Tue 2026-03-03 20:37:01 JST; 35min ago
+   Main PID: 5350 (php-fpm)
+     Status: "Processes active: 0, idle: 5, Requests: 0, slow: 0, Traffic: 0req/sec"
+      Tasks: 6 (limit: 11914)
+     Memory: 14.3M (peak: 14.8M)
+        CPU: 190ms
+     CGroup: /system.slice/php-fpm.service
+             ├─5350 "php-fpm: master process (/etc/php-fpm.conf)"
+             ├─5352 "php-fpm: pool www"
+             ├─5356 "php-fpm: pool www"
+             ├─5357 "php-fpm: pool www"
+             ├─5358 "php-fpm: pool www"
+             └─5359 "php-fpm: pool www"
+
+ 3月 03 20:37:01 dev-alma9 systemd[1]: Starting The PHP FastCGI Process Manager...
+ 3月 03 20:37:01 dev-alma9 systemd[1]: Started The PHP FastCGI Process Manager.
+```
+
 ---
 
 ## 補足：関連性の高いMySQLの拡張機能をインストールしておく
