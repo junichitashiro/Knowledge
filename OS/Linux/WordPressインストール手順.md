@@ -1,4 +1,4 @@
-# Vagrant上のAlmalinux9にWordPressをインストールする手順
+# Vagrant上のAlmaLinux9にWordPressをインストールする手順
 
 * 作業アカウント：vagrant
 * 使用DB：MariaDB
