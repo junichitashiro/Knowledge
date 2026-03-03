@@ -1,6 +1,6 @@
 # 既存のPHPを削除してバージョンアップする手順
 
-* 作業アカウント：root
+* 作業アカウント：vagrant
 * wordpressインストール用の手順として作成
 * Zabbixのインストールに都合が悪いため共存させない
 
@@ -11,73 +11,106 @@
 ### EPELのリポジトリを追加する
 
 ```bash
-yum -y install epel-release
+sudo dnf -y install epel-release
 ```
 
 ### REMIのリポジトリを追加する
 
 ```bash
-rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 ```
 
-## 既存のPHPを削除する
+---
 
-### PHPのバージョンを確認して古い場合は削除する
+## 既存のPHPをリセットする
+
+### すでにPHPがある場合は削除する
+
+```bash
+sudo dnf module reset php -y
+```
+
+---
+
+## 新しいバージョンのPHPをインストールする
+
+### 利用可能なPHPバージョンを確認する
+
+```bash
+sudo dnf module list php
+```
+
+* 一覧が表示されるので確認する（[d]はデフォルト）
+
+```
+Name  Stream   Profiles        Summary
+php   remi-8.2 common [d]      PHP scripting language
+php   remi-8.3 common
+php   remi-8.4 common
+```
+
+### 特定のバージョンを指定して有効化する（ここでは8.1）
+
+```bash
+sudo dnf module enable php:remi-8.1 -y
+```
+
+### PHPをインストールする
+
+```bash
+sudo dnf install -y php php-cli php-fpm
+```
+
+### バージョンを確認する
 
 ```bash
 php -v
 ```
 
-> PHP X.X.X (cli) (built: Jul  9 2020 08:57:23) ( NTS )
+> PHP 8.1.34 (cli) (built: Dec 16 2025 18:33:34) (NTS gcc x86_64)  
+> Copyright (c) The PHP Group  
+> Zend Engine v4.1.34, Copyright (c) Zend Technologies  
+> with Zend OPcache v8.1.34, Copyright (c), by Zend Technologies  
 
-### 既存のPHPを削除するコマンド
-
-```bash
-yum -y remove php-*
-```
-
-## 新しいバージョンのPHPをインストールする
-
-### 7.4を指定してインストール
+### PHP-FPMを起動する
 
 ```bash
-yum -y install --disablerepo=* --enablerepo=epel,remi,remi-safe,remi-php74 php
+sudo systemctl enable php-fpm
+sudo systemctl start php-fpm
 ```
 
 ---
 
 ## 補足：関連性の高いMySQLの拡張機能をインストールしておく
 
-### MySQLネイティブドライバのインストール
+### WordPressに必要な最小PHPパッケージのインストール
 
 ```bash
-yum -y install yum-utils
-yum-config-manager --enable remi-php74
-yum -y install php-mysqlnd
+sudo dnf install php php-fpm php-mysqlnd php-gd php-mbstring php-xml php-json php-opcache
 ```
 
 ### PHPモジュールを表示して確認する
 
 ```bash
-php -m | grep mysql
+php -m | grep -E 'mysqli|pdo_mysql'
 ```
 
 > mysqli  
-mysqlnd  
-pdo_mysql
+> pdo_mysql
 
-### バージョンを表示して確認する
+### Apacheと連携する場合の対応
 
 ```bash
-php -v
+sudo dnf install -y httpd
+sudo systemctl enable httpd
+sudo systemctl start httpd
 ```
 
-> PHP 7.4.8 (cli) (built: Jul  9 2020 08:57:23) ( NTS )  
-Copyright (c) The PHP Group  
-Zend Engine v3.4.0, Copyright (c) Zend Technologies
+---
 
-### Apacheを再起動する
+## アンインストール方法
 
 ```bash
-systemctl restart httpd.service
+sudo dnf remove php*
+sudo dnf module reset php
 ```
