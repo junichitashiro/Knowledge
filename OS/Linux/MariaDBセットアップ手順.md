@@ -13,6 +13,14 @@
 sudo dnf -y install mariadb mariadb-server
 ```
 
+### インストールバージョンを確認する
+
+```bash
+mariadb -V
+```
+
+> mariadb  Ver 15.1 Distrib 10.5.29-MariaDB, for Linux (x86_64) using  EditLine wrapper
+
 ### サービスを起動する
 
 ```bash
@@ -40,7 +48,6 @@ sudo vi /etc/my.cnf
 ```bash
 [mysqld]
 character-set-server=utf8mb4
-
 [client]
 default-character-set=utf8mb4
 ```
@@ -100,8 +107,8 @@ Remove anonymous users? [Y/n]
 Disallow root login remotely? [Y/n]
 ```
 
-* ```mysql -u root -h xxx``` を禁止するか
-* rootはサーバ内限定で十分なので **[Y]** を選択
+* rootは同一サーバ内部からのみ接続させたいため **[Y]** を選択
+* 別PCからの ```mysql -h 192.168.XXX.XXX -u root -p``` を禁止する
 
 ### 6. testデータベースを削除するか選択する
 
@@ -110,6 +117,7 @@ Remove test database and access to it? [Y/n]
 ```
 
 * 不要なので **[Y]** を選択
+* [N] を選択してもバージョンによって作成されない
 
 ### 7. 権限を管理するテーブルをリロードして設定をすぐに反映するか選択する
 
@@ -129,7 +137,7 @@ Reload privilege tables now? [Y/n]
 sudo mysql
 ```
 
-* または ```sudo mysql```
+* または ```sudo mariadb```
 
 ### 文字コード設定を確認する
 
@@ -137,7 +145,9 @@ sudo mysql
 
 ```sql
 show variables like 'cha%';
+```
 
+```
 +--------------------------+------------------------------+
 | Variable_name            | Value                        |
 +--------------------------+------------------------------+
@@ -151,6 +161,56 @@ show variables like 'cha%';
 | character_sets_dir       | /usr/share/mariadb/charsets/ |
 +--------------------------+------------------------------+
 ```
+
+---
+
+## OSのコマンドラインからSQLを実行する
+
+### 基本構文
+
+```bash
+mysql [データベース名] -u [ユーザ名] -p[パスワード] -e "SQL"
+```
+
+### データベース一覧を表示するsql
+
+```bash
+sudo mysql -e "SHOW DATABASES;"
+```
+
+* ソケット認証で root から実行する場合はパスワード不要
+
+```
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+```
+
+### データベース mysql の User テーブルから Host を取得する
+
+```bash
+sudo mysql mysql -e "select host from user where user='mysql';"
+```
+
+```
++-----------+
+| Host      |
++-----------+
+| localhost |
++-----------+
+```
+
+### 複数SQLを実行する場合の構文
+
+```bash
+mysql [データベース名] -u [ユーザ名] -p[パスワード] -e "SQL1;SQL2;SQL3"
+```
+
+* ; で区切ることで複数のSQLを実行可能
 
 ---
 

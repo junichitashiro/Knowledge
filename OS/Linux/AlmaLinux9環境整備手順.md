@@ -5,13 +5,19 @@
 
 ---
 
+## 既存システムの最新化
+
+```bash
+sudo dnf update -y
+```
+
 ## 基本パッケージのインストール
 
 ```bash
 sudo dnf -y install glibc-langpack-ja firewalld httpd
 ```
-* 本作業で必要となるパッケージがない前提でインストールする
 
+* 本作業で必要となるパッケージがない前提でインストールする
 
 ---
 
@@ -28,6 +34,8 @@ sudo hostnamectl set-hostname dev-alma9
 ```bash
 hostnamectl
 ```
+
+>  Static hostname: dev-alma9
 
 ---
 
@@ -47,6 +55,8 @@ localectl status
 
 * 反映は 再ログインか再起動後
 
+> System Locale: LANG=ja_JP.UTF-8
+
 ---
 
 ## タイムゾーンの設定
@@ -63,13 +73,13 @@ sudo timedatectl set-timezone Asia/Tokyo
 timedatectl
 ```
 
+>  Time zone: Asia/Tokyo (JST, +0900)
+
 ---
 
 ## ファイアウォールの設定
 
 ### ファイアウォールを有効化する
-
-* 初期設定がON/OFFのどちらでも対応できるよう **restart** を指定している
 
 ```bash
 sudo systemctl enable --now firewalld
@@ -83,7 +93,7 @@ sudo firewall-cmd --zone=public --add-service=ssh  --permanent
 sudo firewall-cmd --reload
 ```
 
-* ログインしている時点で **ssh** は有効なのでエラーになる想定
+* ログインしている時点で ssh は有効なのでエラーになる想定
 
 ---
 
@@ -102,7 +112,11 @@ sudo systemctl enable httpd.service
 systemctl status httpd
 ```
 
-またはブラウザから **192.168.33.10** にアクセスすると "Web Server Test Page" が表示される
+> ● httpd.service - The Apache HTTP Server  
+> Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; preset: disabled)  
+> Active: active (running) since Wed 2026-03-04 22:48:14 JST; 17min ago  
+
+* ブラウザから **192.168.33.10** にアクセスすると "Web Server Test Page" が表示されることでも確認できる
 
 ---
 
