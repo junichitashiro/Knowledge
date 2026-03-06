@@ -68,7 +68,7 @@ sudo /usr/pgsql-16/bin/postgresql-16-setup initdb
 
 > Initializing database ... OK
 
-### 初期化をやり直す場合は関連ファイルを削除してから行う
+* 初期化をやり直す場合は関連ファイルを削除してから行う
 
 ```bash
 sudo rm -fr /var/lib/pgsql
@@ -110,7 +110,11 @@ sudo -u postgres psql
 SELECT current_user AS user, current_database() AS db;
 ```
 
->  postgres | postgres
+```
+   user   |    db
+----------+----------
+ postgres | postgres
+```
 
 ### バージョン確認
 
@@ -118,7 +122,11 @@ SELECT current_user AS user, current_database() AS db;
 SELECT version();
 ```
 
-> PostgreSQL 16.13 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-11), 64-bit
+```
+                                                  version
+------------------------------------------------------------------------------------------------------------
+ PostgreSQL 16.13 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-11), 64-bit
+```
 
 ### ポート・データディレクトリ・ソケット配置確認
 
@@ -143,14 +151,16 @@ SHOW server_encoding;
 ### DB一覧確認
 
 ```sql
-SELECT datname, datdba::regrole AS owner
-FROM pg_database
-ORDER BY datname;
+SELECT datname, datdba::regrole AS owner FROM pg_database ORDER BY datname;
 ```
 
-> postgres  | postgres  
-> template0 | postgres  
-> template1 | postgres
+```
+  datname  |  owner
+-----------+----------
+ postgres  | postgres
+ template0 | postgres
+ template1 | postgres
+```
 
 ---
 
@@ -165,7 +175,7 @@ ORDER BY datname;
 * rootで実行する
 
 ```bash
-passwd postgres
+sudo passwd postgres
 ```
 
 > Changing password for user postgres.
@@ -181,7 +191,7 @@ Retype new password: # パスワードを再入力
 
 ## PostgreSQLのpostgresユーザーにパスワードを設定する
 
-### postgresユーザーに切り替える
+### OSのpostgresユーザーに切り替える
 
 ```bash
 su - postgres
@@ -204,7 +214,7 @@ alter role postgres with password 'postgres';
 
 > ALTER ROLE
 
-### データベースからログアウトして **root** に戻る
+### データベースからログアウトして通常ユーザーに戻る
 
 ```bash
 \q
@@ -217,12 +227,11 @@ exit
 ```
 
 > logout
-  → OSのrootに戻る
 
 ### 設定ファイルを編集する
 
 ```bash
-vi /var/lib/pgsql/16/data/pg_hba.conf
+sudo vi /var/lib/pgsql/16/data/pg_hba.conf
 ```
 
 ### 以下のように編集してパスワード認証を有効にする
@@ -238,7 +247,7 @@ host    all    all    ::1/128         password # scram-sha-256から変更する
 ### 再起動して設定を反映する
 
 ```bash
-systemctl restart postgresql-16.service
+sudo systemctl restart postgresql-16.service
 ```
 
 ### パスワード認証でログインできることを確認する
@@ -246,9 +255,10 @@ systemctl restart postgresql-16.service
 ```bash
 psql -U postgres
 Password for user postgres: # 設定したパスワードを入力
-psql (16.13)
-Type "help" for help.
 ```
+
+> psql (16.13)  
+> Type "help" for help.
 
 ---
 

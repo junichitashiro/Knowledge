@@ -25,6 +25,8 @@ sudo dnf -y install glibc-langpack-ja firewalld httpd
 
 ### 任意のホスト名（dev-alma9）に変更する
 
+* **Vagrantfile** で指定している場合は不要
+
 ```bash
 sudo hostnamectl set-hostname dev-alma9
 ```
@@ -53,9 +55,13 @@ sudo localectl set-locale LANG=ja_JP.UTF-8
 localectl status
 ```
 
-* 反映は 再ログインか再起動後
+* 反映に再ログインか再起動が必要になる場合がある
 
-> System Locale: LANG=ja_JP.UTF-8
+```
+System Locale: LANG=ja_JP.UTF-8
+    VC Keymap: us
+   X11 Layout: us
+```
 
 ---
 
@@ -73,7 +79,15 @@ sudo timedatectl set-timezone Asia/Tokyo
 timedatectl
 ```
 
->  Time zone: Asia/Tokyo (JST, +0900)
+```
+               Local time: Fri YYYY-MM-DD hh:mm:ss JST
+           Universal time: Fri YYYY-MM-DD hh:mm:ss UTC
+                 RTC time: Fri YYYY-MM-DD hh:mm:ss
+                Time zone: Asia/Tokyo (JST, +0900)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+```
 
 ---
 
@@ -89,11 +103,24 @@ sudo systemctl enable --now firewalld
 
 ```bash
 sudo firewall-cmd --zone=public --add-service=http --permanent
+```
+
+> success
+
+```bash
 sudo firewall-cmd --zone=public --add-service=ssh  --permanent
+```
+
+> Warning: ALREADY_ENABLED: ssh
+
+* ログインしている時点で ssh は有効なのでエラーになる想定
+
+```bash
 sudo firewall-cmd --reload
 ```
 
-* ログインしている時点で ssh は有効なのでエラーになる想定
+> success
+
 
 ---
 
@@ -103,8 +130,13 @@ sudo firewall-cmd --reload
 
 ```bash
 sudo systemctl start httpd.service
+```
+
+```bash
 sudo systemctl enable httpd.service
 ```
+
+> Created symlink /etc/systemd/system/multi-user.target.wants/httpd.service → /usr/lib/systemd/system/httpd.service.
 
 ### 確認
 
@@ -112,9 +144,23 @@ sudo systemctl enable httpd.service
 systemctl status httpd
 ```
 
-> ● httpd.service - The Apache HTTP Server  
-> Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; preset: disabled)  
-> Active: active (running) since Wed 2026-03-04 22:48:14 JST; 17min ago  
+```
+● httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; preset: disabled)
+     Active: active (running) since Fri YYYY-MM-DD hh:mm:ss JST; 26s ago
+       Docs: man:httpd.service(8)
+   Main PID: 82767 (httpd)
+     Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
+      Tasks: 177 (limit: 24383)
+     Memory: 14.1M (peak: 14.4M)
+        CPU: 111ms
+     CGroup: /system.slice/httpd.service
+             ├─82767 /usr/sbin/httpd -DFOREGROUND
+             ├─82768 /usr/sbin/httpd -DFOREGROUND
+             ├─82769 /usr/sbin/httpd -DFOREGROUND
+             ├─82770 /usr/sbin/httpd -DFOREGROUND
+             └─82771 /usr/sbin/httpd -DFOREGROUND
+```
 
 * ブラウザから **192.168.33.10** にアクセスすると "Web Server Test Page" が表示されることでも確認できる
 

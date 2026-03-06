@@ -21,6 +21,7 @@ cd AlmaLinux
 ```
 
 * このディレクトリ名がVirtualBoxの仮想マシン名に割り当てられる
+* **Vagrantfile** で指定した場合はそちらが割り当てられる
 
 ---
 
@@ -56,12 +57,25 @@ vagrant init almalinux/9
 ### 作成された **Vagrantfile** の下記の行をコメントインして保存する
 
 ```ruby
-Vagrant.configure("2") do |config|
-  config.vm.box = "almalinux/9"
-  config.vm.network "private_network", ip: "192.168.33.10"
-  config.vm.synced_folder "./share", "/vagrant", create: true
+Vagrant.configure('2') do |config|
+  config.vm.box = 'almalinux/9'
+  config.vm.hostname = 'dev-alma9'
+  config.vm.network 'private_network', ip: '192.168.33.10'
+
+  # デフォルト共有(プロジェクトルート -> /vagrant)を無効化
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+  # 明示的に share フォルダだけを /vagrant に共有
+  config.vm.synced_folder './share', '/vagrant', create: true
+
+  # VirtualBoxの設定
+  config.vm.provider 'virtualbox' do |vb|
+    vb.name = 'dev-alma9-vagrant'
+    vb.memory = 4096
+    vb.cpus = 2
+  end
 end
 ```
+
 * ブラウザからのWebサービス利用をするためIPアドレスを有効化
 * ホストとゲスト間で利用する共有フォルダを有効化
 * 上記の[VagrantCloud](https://portal.cloud.hashicorp.com/vagrant/discover/kalilinux/rolling)にもバージョン番号を含む手順が公開されている
@@ -88,3 +102,11 @@ vagrant ssh
 
 * ログインユーザ：vagrant
 * パスワード：vagrant
+
+
+### ホスト・ゲスト間のファイル共有に必要なカーネルモジュールをインストールする
+
+```bash
+sudo dnf -y install epel-release
+sudo dnf -y install gcc make perl kernel-devel kernel-headers dkms elfutils-libelf-devel bzip2
+```
